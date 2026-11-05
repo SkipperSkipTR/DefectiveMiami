@@ -163,20 +163,34 @@ IF shit_counter = 1
 			ENDIF
 		ELSE
 			IF crap_created = 1 
-				DELETE_OBJECT flamer
-				DELETE_OBJECT trophys
-				DELETE_OBJECT helibox
-				DELETE_OBJECT rubbish1
-				DELETE_OBJECT shovel1
-				DELETE_OBJECT gundocs
-				DELETE_OBJECT gash_bag1
-				DELETE_OBJECT gash_bag2
-				DELETE_OBJECT pizzmess1
-				DELETE_OBJECT pizzmess2
-				DELETE_OBJECT pizzbox
-				DELETE_OBJECT photos
-				DELETE_OBJECT initial_painting
-				DELETE_OBJECT new_painting
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -373.306 -593.374 25.369 1.0 Flame_tins -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -408.907 -560.001 20.23 1.0 Trophies -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -401.955 -566.672 19.234 1.0 Heli_box -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -379.201 -568.813 20.695 1.0 Man_rubbish03 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -375.566 -555.54 19.15 1.0 Shovel -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -381.008 -594.382 25.389 1.0 Gun_docs -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -408.239 -563.1 19.054 1.0 Gash_bags1 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -383.019 -596.235 25.037 1.0 gashbags2 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -383.088 -556.169 18.95 1.0 Pizza_mess -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -385.024 -570.197 21.58 1.0 pizza_mess2 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -406.211 -559.996 18.654 1.0 pizza_box1 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -374.306 -593.35 26.475 1.0 Poloroids -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -378.394 -583.35 27.078 1.0 Frame1 -42
+				SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE -378.374 -583.35 27.078 1.0 Frame1Damaged -42
+				flamer = -1
+				trophys = -1
+				helibox = -1
+				rubbish1 = -1
+				shovel1 = -1
+				gundocs = -1
+				gash_bag1 = -1
+				gash_bag2 = -1
+				pizzmess1 = -1
+				pizzmess2 = -1
+				pizzbox = -1
+				photos = -1
+				initial_painting = -1
+				new_painting = -1
 				crap_created = 0
 			ENDIF
 		ENDIF

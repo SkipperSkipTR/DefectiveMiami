@@ -15,6 +15,8 @@ skip_flag = 0
 WAIT 0
 
 {
+LVAR_INT skip_scripted_flag intro_car intro_bike lawyer_intro play_audio_intro car_in_position_intro lawyer_running_intro flag_moved_camera_intro
+skip_scripted_flag = 0
 
 DO_FADE 0 FADE_OUT
 
@@ -2049,13 +2051,6 @@ WAIT 0
 RELEASE_WEATHER
 SET_TIME_OF_DAY 21 00
 
-LVAR_INT intro_car
-LVAR_INT intro_bike
-LVAR_INT lawyer_intro
-LVAR_INT play_audio_intro
-LVAR_INT car_in_position_intro
-LVAR_INT lawyer_running_intro
-LVAR_INT flag_moved_camera_intro
 play_audio_intro = 0
 car_in_position_intro = 0
 lawyer_running_intro = 0
@@ -2147,6 +2142,11 @@ OR NOT car_in_position_intro = 4
 	IF IS_CAR_DEAD intro_car
 
 	ELSE
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+			skip_scripted_flag = 1
+			CLEAR_PRINTS
+			GOTO skip_scripted_cut
+		ENDIF
 		 
 		IF car_in_position_intro = 1
 			
@@ -2296,6 +2296,10 @@ ENDWHILE
 WHILE timera < 300
 	
 	WAIT 0
+	IF IS_BUTTON_PRESSED PAD1 CROSS
+		skip_scripted_flag = 1
+		GOTO skip_scripted_cut
+	ENDIF
 
 	IF IS_CAR_DEAD intro_car
 	ENDIF
@@ -2319,6 +2323,10 @@ ENDIF
 WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 
 	WAIT 0
+	IF IS_BUTTON_PRESSED PAD1 CROSS
+		skip_scripted_flag = 1
+		GOTO skip_scripted_cut
+	ENDIF
 
 	IF IS_CAR_DEAD intro_car
 	ENDIF
@@ -2341,6 +2349,10 @@ ENDIF
 IF NOT IS_CHAR_DEAD lawyer_intro
 
 	WHILE IS_CHAR_IN_ANY_CAR lawyer_intro
+		IF IS_BUTTON_PRESSED PAD1 CROSS
+			skip_scripted_flag = 1
+			GOTO skip_scripted_cut
+		ENDIF
 
 		WAIT 0
 
@@ -2367,8 +2379,17 @@ WHILE timera < 1500
 
 	IF NOT IS_CHAR_DEAD lawyer_intro
 	ENDIF
-	
 ENDWHILE
+skip_scripted_cut:
+IF skip_scripted_flag = 1
+	DO_FADE 1000 FADE_OUT
+	CLEAR_MISSION_AUDIO 1
+	CLEAR_MISSION_AUDIO 2
+	WHILE GET_FADING_STATUS
+		WAIT 0
+	ENDWHILE
+ENDIF
+	
 
 CLEAR_AREA 113.655 -815.814 11.029 1.0 FALSE
 SET_FIXED_CAMERA_POSITION 113.655 -815.814 11.029 0.0 0.0 0.0
@@ -2436,12 +2457,25 @@ RESTORE_CAMERA_JUMPCUT
 CLEAR_THIS_PRINT ( INTRO4 )
 
 SET_RADIO_CHANNEL FLASH_FM -1
+IF skip_scripted_flag = 1
+	GET_GROUND_Z_FOR_3D_COORD 136.36 -820.76 19.31 intro_warp_car_ground_z
+	intro_warp_car_ground_z -= 0.2
+	SET_CAR_COORDINATES intro_car 136.3 -820.4 intro_warp_car_ground_z
+	SET_CAR_HEADING intro_car 190.0
+ENDIF
 
 SET_EVERYONE_IGNORE_PLAYER player1 OFF
 SET_POLICE_IGNORE_PLAYER player1 OFF
 SWITCH_RUBBISH ON
-SET_PLAYER_CONTROL player1 ON
 SWITCH_WIDESCREEN OFF
+IF skip_scripted_flag = 1
+	DO_FADE 1000 FADE_IN
+	CLEAR_PRINTS
+	WHILE GET_FADING_STATUS
+		WAIT 0
+	ENDWHILE
+ENDIF
+SET_PLAYER_CONTROL player1 ON
 MARK_CAR_AS_NO_LONGER_NEEDED intro_car
 MARK_CAR_AS_NO_LONGER_NEEDED intro_bike
 SWITCH_CAR_GENERATOR gen_car83 101

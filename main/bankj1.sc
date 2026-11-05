@@ -2635,13 +2635,11 @@ IF kill_player_flag_bankjob1 = 1
 			
 			IF flag_cop5_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop5_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop5_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop5_bankjob1 player1 
 				flag_cop5_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-				CHAR_FOLLOW_PATH cop5_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop5_bankjob1 player1
 			ENDIF
 
@@ -2815,13 +2813,11 @@ IF kill_player_flag_bankjob1 = 1
 			
 			IF flag_cop7_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop7_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop7_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop7_bankjob1 player1 
 				flag_cop7_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-				CHAR_FOLLOW_PATH cop7_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop7_bankjob1 player1
 			ENDIF
 
@@ -2840,13 +2836,11 @@ IF kill_player_flag_bankjob1 = 1
 			
 			IF flag_cop8_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop8_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop8_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop8_bankjob1 player1 
 				flag_cop8_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-				CHAR_FOLLOW_PATH cop8_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop8_bankjob1 player1
 			ENDIF
 
@@ -2865,13 +2859,11 @@ IF kill_player_flag_bankjob1 = 1
 
 			IF flag_cop9_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop9_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop9_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop9_bankjob1 player1 
 				flag_cop9_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-			  	CHAR_FOLLOW_PATH cop9_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop9_bankjob1 player1
 			ENDIF
 
@@ -2890,13 +2882,11 @@ IF kill_player_flag_bankjob1 = 1
 
 			IF flag_cop10_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop10_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop10_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop10_bankjob1 player1 
 				flag_cop10_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-				CHAR_FOLLOW_PATH cop10_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop10_bankjob1 player1
 			ENDIF
 
@@ -2915,13 +2905,11 @@ IF kill_player_flag_bankjob1 = 1
 				
 			IF flag_cop11_got_gun_bankjob1 = 0
 				GIVE_WEAPON_TO_CHAR cop11_bankjob1 WEAPONTYPE_PISTOL 30000 // Unlimited ammo
-				CHAR_FOLLOW_PATH cop11_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop11_bankjob1 player1 
 				flag_cop11_got_gun_bankjob1 = 1	
 			ENDIF
 
 			IF timer_guards_react_bank1 = 2
-				CHAR_FOLLOW_PATH cop11_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop11_bankjob1 player1
 			ENDIF
 
@@ -3740,7 +3728,6 @@ IF flag_created_bloke_in_area_bankjob1 = 1
 
 		IF LOCATE_CHAR_ON_FOOT_3D guard_number_bankjob1 381.53 -490.91 11.35 1.0 1.0 2.0 FALSE
 			GIVE_WEAPON_TO_CHAR guard_number_bankjob1 WEAPONTYPE_UZI 30000 // Set to infinate ammo
-			CHAR_FOLLOW_PATH guard_number_bankjob1 player_x_bankjob1 player_y_bankjob1 player_z_bankjob1 0.5 RUN
 			SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard_number_bankjob1 player1
 			flag_created_bloke_in_area_bankjob1 = 2
 		ENDIF
@@ -3760,7 +3747,6 @@ alarm_guard_death_check_bankjob1:
 IF flag_guard1_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard1_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard1_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard1_state_bankjob1 = 2
 	ELSE
@@ -3777,7 +3763,6 @@ ENDIF
 IF flag_guard2_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard2_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard2_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard2_state_bankjob1 = 2
 	ELSE
@@ -3794,7 +3779,6 @@ ENDIF
 IF flag_guard3_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard3_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard3_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard3_state_bankjob1 = 2
 	ELSE
@@ -3811,7 +3795,6 @@ ENDIF
 IF flag_guard4_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard4_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard4_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard4_state_bankjob1 = 2
 	ELSE
@@ -3828,7 +3811,6 @@ ENDIF
 IF flag_guard5_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard5_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard5_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard5_state_bankjob1 = 2
 	ELSE
@@ -3845,7 +3827,6 @@ ENDIF
 IF flag_guard6_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard6_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard6_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard6_state_bankjob1 = 2
 	ELSE
@@ -3862,7 +3843,6 @@ ENDIF
 IF flag_guard7_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard7_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard7_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard7_state_bankjob1 = 2
 	ELSE
@@ -3879,7 +3859,6 @@ ENDIF
 IF flag_guard8_state_bankjob1 = 1
 
 	IF IS_CHAR_DEAD created_guard8_bankjob1
-		REMOVE_CHAR_ELEGANTLY created_guard8_bankjob1
 		-- counter_blokes_alive_bankjob1
 		flag_guard8_state_bankjob1 = 2
 	ELSE

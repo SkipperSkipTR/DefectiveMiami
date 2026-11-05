@@ -258,7 +258,7 @@ dealcary_g3 = -461.31783//-485.388//-594.175
 dealcarz_g3 = 9.486246//-100.0 //10.724
 dealcar_heading = 178.791
 
-meetingx_s3	= 457.6495//445.954//461.059//461.33
+meetingx_s3 = 456.3	//445.954//461.059//461.33
 meetingy_s3 = -512.88//-516.658752//-498.815//-501.022
 meetingz_s3 = 9.899857//9.61792//10.062503//10.019
 
@@ -938,8 +938,8 @@ ENDIF
 //player meets the coke baron
 IF protect_deal_flag = 2
 	IF NOT IS_CHAR_DEAD buddy_g3
-		IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 meetingx_s3 meetingy_s3 meetingz_s3 3.0 3.0 1.5 TRUE
-			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 1.5 1.5 1.5 FALSE
+		IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 meetingx_s3 meetingy_s3 meetingz_s3 2.0 2.0 1.0 TRUE
+			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 1.0 1.0 1.0 FALSE
 						
 						MARK_MODEL_AS_NO_LONGER_NEEDED INFERNUS
 						MARK_CAR_AS_NO_LONGER_NEEDED buddyscar_g3 

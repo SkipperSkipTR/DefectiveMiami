@@ -55,7 +55,7 @@ VAR_INT boarder_3_flag boarder_4_flag cs_time_limit	heli1_timer	heli_audio_count
 VAR_INT barricade_boat01_flag barricade_boat02_flag barricade_boat05_flag created_bridge_scene
 VAR_INT played_bridge_dialogue played_this_dialogue played_this_dialogue2 played_this_dialogue3	
 VAR_INT clear_route_flag played_audio_7_dialogue played_audio_9_dialogue played_audio_15_dialogue
-VAR_INT got_hunter_message cutscene_timer cutscene_counter barricade_boat03_flag next_text text_timer
+VAR_INT got_hunter_message cutscene_timer cutscene_counter barricade_boat03_flag next_text text_timer cutscene_fade_time cutscene_fade
 VAR_INT heli1_death_counter heli2_death_counter killer_heli_death_counter
 //COORD MATHS
 
@@ -178,6 +178,8 @@ got_hunter_message = 0
 
 cutscene_timer = 0
 cutscene_counter = 0
+cutscene_fade_time = 0
+cutscene_fade = 100
 
 created_bridge_scene = 0
 
@@ -510,6 +512,8 @@ SET_ALL_CARS_CAN_BE_DAMAGED FALSE
 SET_FIXED_CAMERA_POSITION -410.4125 -1320.8638 12.1604 0.0 0.0 0.0//SHOT OF YACHT PULLING AWAY
 POINT_CAMERA_AT_POINT -409.6047 -1320.2751 12.1915 JUMP_CUT
 cutscene_timer = game_timer + 6100
+cutscene_fade_time = game_timer + 6100
+cutscene_fade_time -= cutscene_fade
 
 WAIT 100
 DO_FADE 5000 FADE_IN
@@ -600,6 +604,10 @@ IF cutscene_counter = 0
 		SET_FIXED_CAMERA_POSITION -381.3522 -1363.9183 18.9859 0.0 0.0 0.0//2ND SHOT OF YACHT PULLING AWAY
 		POINT_CAMERA_AT_POINT -381.1456 -1362.9531 18.8254 JUMP_CUT
 		cutscene_counter = 1
+	ELSE
+		IF cutscene_fade_time < game_timer
+			cutscene_fade_time = car01_timer - cutscene_fade
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -610,8 +618,15 @@ IF cutscene_counter = 1
 		IF NOT IS_CAR_DEAD car01
 			POINT_CAMERA_AT_CAR	car01 FIXED JUMP_CUT
 		ENDIF
+		WAIT 250
+		DO_FADE cutscene_fade FADE_IN
 		cutscene_timer = game_timer + 5500
 		cutscene_counter = 2
+	ELSE
+		IF cutscene_fade_time < game_timer
+			DO_FADE cutscene_fade FADE_OUT
+			cutscene_fade_time = game_timer + 5500
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -621,6 +636,10 @@ IF cutscene_counter = 2
 		POINT_CAMERA_AT_POINT -233.9623 -1220.9071 9.3547 JUMP_CUT
 		cutscene_timer = game_timer + 4000
 		cutscene_counter = 3
+	ELSE
+		IF cutscene_fade_time < game_timer
+			cutscene_fade_time = game_timer + 4000
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -630,6 +649,10 @@ IF cutscene_counter = 3
 		POINT_CAMERA_AT_POINT -268.5739 -1219.9662 10.2809 JUMP_CUT
 		cutscene_timer = game_timer + 4000
 		cutscene_counter = 4
+	ELSE
+		IF cutscene_fade_time < game_timer
+			cutscene_fade_time = game_timer + 4000
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -638,11 +661,22 @@ IF cutscene_counter = 4
 		SET_FIXED_CAMERA_POSITION -351.4564 -1232.3345 10.4296 0.0 0.0 0.0//3RD SHOT OF GUYS RUNNING UP JETTY
 		POINT_CAMERA_AT_POINT -350.6927 -1231.6893 10.4065 JUMP_CUT
 		cutscene_timer = game_timer + 4000
+		cutscene_fade_time = 0
 		cutscene_counter = 5
+	ELSE
+		IF cutscene_fade_time < game_timer
+			cutscene_fade_time = game_timer + 4000
+		ENDIF
 	ENDIF
 ENDIF
 
 IF cutscene_counter = 5
+	IF cutscene_fade_time < game_timer
+		IF cutscene_fade_time > 0
+			DO_FADE cutscene_fade FADE_OUT
+			cutscene_fade_time = 0
+		ENDIF
+	ENDIF
 	
 	IF game_timer > cutscene_timer
 			IF NOT IS_CHAR_DEAD car01_goon1 
@@ -677,6 +711,8 @@ IF cutscene_counter = 5
 		SET_ALL_CARS_CAN_BE_DAMAGED TRUE
 		SET_CAMERA_BEHIND_PLAYER
 		RESTORE_CAMERA_JUMPCUT
+		WAIT 100
+		DO_FADE cutscene_fade FADE_IN
 		IF next_text = 1
 			PRINT_NOW COL5_B2 5000 1//~g~Get up front and clear the route for the Colonel's yacht.
 			text_timer = game_timer + 4000
@@ -720,7 +756,17 @@ IF cutscene_counter = 10
 		POINT_CAMERA_AT_POINT 222.8153 975.4747 11.2115  JUMP_CUT
 		LOAD_SCENE 222.8153 975.4747 11.2115
 		cutscene_timer = game_timer + 4000
+		cutscene_fade_time = cutscene_timer - cutscene_fade
 		cutscene_counter = 5
+		WAIT 200
+		DO_FADE cutscene_fade FADE_IN
+	ELSE
+		IF cutscene_fade_time < game_timer
+			IF cutscene_fade_time > 0
+				DO_FADE cutscene_fade FADE_OUT
+				cutscene_fade_time = 0
+			ENDIF
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -961,6 +1007,7 @@ IF first_boats_dead = 3
 	SET_FIXED_CAMERA_POSITION 160.3909 797.2673 7.6438 0.0 0.0 0.0//SHOT OF YACHT INFRONT OF MAINLAND
 	POINT_CAMERA_AT_POINT 159.4485 797.5592 7.8072 JUMP_CUT
 	cutscene_timer = game_timer + 8500
+	cutscene_fade_time = cutscene_timer - cutscene_fade
 	cutscene_counter = 10
 	WAIT 500
 	SET_FADING_COLOUR 0 0 1

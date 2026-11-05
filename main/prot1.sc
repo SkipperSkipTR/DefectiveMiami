@@ -1278,6 +1278,7 @@ RETURN
 mission_cleanup_protec1:
 flag_player_on_mission = 0
 SET_PLAYER_AUTO_AIM player1 TRUE
+REMOVE_BLIP prot1_mall_blip
 REMOVE_BLIP weapon_shop2_blip
 REMOVE_BLIP hardware_shop2
 ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD 364.8 1051.5 21.0 RADAR_SPRITE_GUN weapon_shop2_blip

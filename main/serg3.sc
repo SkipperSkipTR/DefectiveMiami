@@ -235,6 +235,7 @@ VAR_INT security2_s3attacked
 mission_start_serg2:
 
 REGISTER_MISSION_GIVEN
+SWAP_NEAREST_BUILDING_MODEL 117.991 -362.461 10.179 80.0 bldngst2meshdam bldngst2mesh
 
 flag_player_on_mission = 1
 flag_player_on_rc_mission = 1 //PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX PC FIX
@@ -1001,6 +1002,10 @@ IF NOT IS_CAR_DEAD van_s3
 end_of_demolition_cutscene:
 
 		   WAIT 0	
+		   DO_FADE 500 FADE_OUT
+		   WHILE GET_FADING_STATUS
+		   	WAIT 0
+		   ENDWHILE
 		   
 		   CLEAR_PRINTS 
 		   SWITCH_WIDESCREEN OFF
@@ -1011,6 +1016,11 @@ end_of_demolition_cutscene:
 			   	WAIT 0
 				SET_CAMERA_ZOOM 0
 		   ENDIF
+		   WAIT 25
+		   DO_FADE 500 FADE_IN
+		   WHILE GET_FADING_STATUS
+		   	WAIT 0
+		   ENDWHILE
 
 		   DISPLAY_ONSCREEN_COUNTER_WITH_STRING targets_to_go COUNTER_DISPLAY_NUMBER ( TEX3_11 )
 		   //PRINT NOW use your copter etc. to bomb and then CUT TO BUILDING SITE AND SHOW BOMB LOCATIONS

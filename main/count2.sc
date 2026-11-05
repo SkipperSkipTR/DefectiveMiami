@@ -1288,6 +1288,7 @@ IF frame_counter = 1
 							courier_flag = 5
 							PRINT_NOW CNT2_08 5000 1 //The courier with the plates has arrived at the docks.
 							REMOVE_BLIP docks_blip
+							DISPLAY_RADAR 2
 						ELSE
 							IF NOT IS_CAR_DEAD courier_heli
 								HELI_GOTO_COORDS courier_heli -679.1260 -1569.7916 17.7605 60
@@ -1541,6 +1542,7 @@ IF courier_in_car = 3
 	REMOVE_BLIP mission_blip
 	ADD_ONE_OFF_SOUND 0.0 0.0 0.0 SOUND_PART_MISSION_COMPLETE
 	PRINT_NOW CNT2_05 5000 1 //"You have the countfeit plates."
+	DISPLAY_RADAR 3
 	ADD_BLIP_FOR_COORD counterX counterY counterZ mission_blip
 	courier_in_car = 4
 ENDIF
@@ -2493,6 +2495,7 @@ RETURN
 mission_cleanup_counter2:
 
 flag_player_on_mission = 0
+DISPLAY_RADAR 3
 
 REMOVE_BLIP	mission_blip
 REMOVE_BLIP	docks_blip
