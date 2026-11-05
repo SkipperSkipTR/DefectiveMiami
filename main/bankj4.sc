@@ -3563,6 +3563,7 @@ ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD bankbuyx bankbuyy bankbuyz the_bankjob_bli
 CREATE_PROTECTION_PICKUP bankbuyX bankbuyY bankbuyZ malibu_revenue malibu_revenue malibu_cash_pickup
 
 SET_TIME_OF_DAY 21 30
+WAIT 2500
 
 DO_FADE 1000 FADE_IN
 

@@ -412,7 +412,7 @@ PRINT_NOW ( CUB3_07 ) 11000 1 //Go meet Rico.  He'll drive you to the meet locat
 
 //getting into boat and setting boat to drive to deal
 
-WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 -725.4 -1166.8 9.7 1.0 1.0 2.0 TRUE
+WHILE NOT LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 -725.4 -1166.8 9.7 1.5 1.5 2.0 TRUE
 	WAIT 0 
 	IF IS_CHAR_DEAD boat_driver 
 		PRINT_NOW ( CUB2_10 ) 5000 1 //You are supposed to be killing Haitians, not Cubans.
@@ -555,6 +555,9 @@ ENDIF
 WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
+SET_FIXED_CAMERA_POSITION -743.5 -318.2 11.0 0.0 0.0 0.0
+POINT_CAMERA_AT_CAR playrs_boat FIXED JUMP_CUT
+SWITCH_WIDESCREEN ON
 
 DELETE_CHAR boat_driver 
 IF NOT IS_CAR_DEAD playrs_boat
@@ -693,11 +696,9 @@ SET_CAR_COORDINATES playrs_boat -754.0 -425.7 5.5
 
 // ******************************************START OF PLAYER PULLING UP TO BATTLE****************************************
 SET_PLAYER_CONTROL player1 OFF
-SWITCH_WIDESCREEN ON
+WAIT 100
 
-SET_FIXED_CAMERA_POSITION -743.5 -318.2 11.0 0.0 0.0 0.0 
 
-POINT_CAMERA_AT_CAR playrs_boat FIXED JUMP_CUT
 
 //FADE IN
 DO_FADE 1500 FADE_IN
@@ -727,8 +728,17 @@ IF NOT IS_CAR_DEAD playrs_boat
 		ENDIF
 		IF LOCATE_CAR_2D playrs_boat -705.8 -304.5 5.0 5.0 FALSE
 			IF NOT IS_CAR_DEAD haitian_big_boat2
+				DO_FADE 250 FADE_OUT
+				WHILE GET_FADING_STATUS
+					WAIT 0
+				ENDWHILE
 				SET_FIXED_CAMERA_POSITION -645.2 -269.7 11.0 0.0 0.0 0.0 
 				POINT_CAMERA_AT_POINT -650.9 -269.9 9.2 JUMP_CUT
+				WAIT 10
+				DO_FADE 250 FADE_IN
+				WHILE GET_FADING_STATUS
+					WAIT 0
+				ENDWHILE
 			ENDIF
 			BOAT_GOTO_COORDS playrs_boat -670.8 -263.8 6.6
 			boat_location = 2

@@ -689,7 +689,6 @@ ANCHOR_BOAT fake_reefer TRUE
 SET_CHARS_CHATTING fake_golfer1 fake_golfer2 86400000 
 SET_CHARS_CHATTING fake_golfer3 fake_golfer4 86400000 
 
-DO_FADE 1500 FADE_IN
 // ******************************************START OF PLAYER GETTING INTO BOAT*******************************************
 SET_PLAYER_CONTROL player1 OFF
 
@@ -698,6 +697,7 @@ SET_FIXED_CAMERA_POSITION -67.34 85.31 10.02 0.0 0.0 0.0
 POINT_CAMERA_AT_POINT -86.40 117.01 13.04 JUMP_CUT
 
 WAIT 100
+DO_FADE 1500 FADE_IN
 
 IF NOT IS_CHAR_DEAD rico_passenger
 	SET_CHAR_OBJ_GOTO_CHAR_ON_FOOT scplayer rico_passenger

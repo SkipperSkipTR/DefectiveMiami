@@ -386,6 +386,7 @@ phil2_car_health2 /= 10
 
 timera = 0
 timerb = 0
+WAIT 250
 DO_FADE 1500 FADE_IN
 PRINT_NOW ( PHI2_01 ) 5000 1 //Quick, get Phil to the hospital.
 
@@ -908,6 +909,7 @@ IF NOT IS_CAR_DEAD phil2_car
 					LOAD_SCENE -1038.4 309.7 20.9
 					SET_FIXED_CAMERA_POSITION -1038.4 309.7 20.9 0.0 0.0 0.0 
 					POINT_CAMERA_AT_POINT -1065.6 322.1 21.7 JUMP_CUT
+					WAIT 100
 
 					DO_FADE 500 FADE_IN
 					WHILE GET_FADING_STATUS
