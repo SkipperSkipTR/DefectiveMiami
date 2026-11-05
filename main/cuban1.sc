@@ -389,6 +389,7 @@ GET_CUTSCENE_TIME cs_time
 WHILE cs_time < 2145  //FIRST CUTSCENE TIME GOES HERE
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
  
 PRINT_NOW CUB1_A 10000 1 // Si, men?
@@ -396,6 +397,7 @@ PRINT_NOW CUB1_A 10000 1 // Si, men?
 WHILE cs_time < 3036
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_B 10000 1 // Hey, easy poppa, this man for me. You, you the boy?  
@@ -403,6 +405,7 @@ PRINT_NOW CUB1_B 10000 1 // Hey, easy poppa, this man for me. You, you the boy?
 WHILE cs_time < 10501
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_C 10000 1 // Oh yeh. You the boy. I think so, you know?
@@ -410,6 +413,7 @@ PRINT_NOW CUB1_C 10000 1 // Oh yeh. You the boy. I think so, you know?
 WHILE cs_time < 14480
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_D 10000 1 // No. I don't think I do.
@@ -417,6 +421,7 @@ PRINT_NOW CUB1_D 10000 1 // No. I don't think I do.
 WHILE cs_time < 16593
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_E 10000 1 // Oh yeah? You come here, tough guy. 
@@ -424,6 +429,7 @@ PRINT_NOW CUB1_E 10000 1 // Oh yeah? You come here, tough guy.
 WHILE cs_time < 19202
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_F 10000 1 // You think you can a take me on? 
@@ -431,6 +437,7 @@ PRINT_NOW CUB1_F 10000 1 // You think you can a take me on?
 WHILE cs_time < 20637
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_G 10000 1 // You think you can play stupid with me?
@@ -438,6 +445,7 @@ PRINT_NOW CUB1_G 10000 1 // You think you can play stupid with me?
 WHILE cs_time < 22441
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_H 10000 1 // No, I think you're playing plenty stupid enough for the both of us.
@@ -445,6 +453,7 @@ PRINT_NOW CUB1_H 10000 1 // No, I think you're playing plenty stupid enough for 
 WHILE cs_time < 24775
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_I 10000 1 // Hey, he call you dumb, son.
@@ -452,6 +461,7 @@ PRINT_NOW CUB1_I 10000 1 // Hey, he call you dumb, son.
 WHILE cs_time < 27472
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_J 10000 1 // And I call him a little girl, poppa.
@@ -459,6 +469,7 @@ PRINT_NOW CUB1_J 10000 1 // And I call him a little girl, poppa.
 WHILE cs_time < 30348
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_K 10000 1 // Look at him, all dressed up like that.
@@ -466,6 +477,7 @@ PRINT_NOW CUB1_K 10000 1 // Look at him, all dressed up like that.
 WHILE cs_time < 33133
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_L 10000 1 // What is this, ladies night?
@@ -473,6 +485,7 @@ PRINT_NOW CUB1_L 10000 1 // What is this, ladies night?
 WHILE cs_time < 35329
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_M 10000 1 // You some big tough guy, you dress like a woman?
@@ -480,6 +493,7 @@ PRINT_NOW CUB1_M 10000 1 // You some big tough guy, you dress like a woman?
 WHILE cs_time < 38022
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_N 10000 1 // You got panties like a woman too, huh?
@@ -487,6 +501,7 @@ PRINT_NOW CUB1_N 10000 1 // You got panties like a woman too, huh?
 WHILE cs_time < 40251
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_O 10000 1 // What you got against women? You prefer men, big boy?
@@ -494,6 +509,7 @@ PRINT_NOW CUB1_O 10000 1 // What you got against women? You prefer men, big boy?
 WHILE cs_time < 42742
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_P 10000 1 // I like women! I like all women! I love my mother, Chico.
@@ -501,6 +517,7 @@ PRINT_NOW CUB1_P 10000 1 // I like women! I like all women! I love my mother, Ch
 WHILE cs_time < 46831
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_Q 10000 1 // Alright, I'll take your word for it.
@@ -508,6 +525,7 @@ PRINT_NOW CUB1_Q 10000 1 // Alright, I'll take your word for it.
 WHILE cs_time < 51281
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_R 10000 1 // Can you drive, amigo?
@@ -515,6 +533,7 @@ PRINT_NOW CUB1_R 10000 1 // Can you drive, amigo?
 WHILE cs_time < 53403
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_S 10000 1 // Yeah... like a woman.
@@ -522,6 +541,7 @@ PRINT_NOW CUB1_S 10000 1 // Yeah... like a woman.
 WHILE cs_time < 57539
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_T 10000 1 // Very funny. I like you, big boy. Maybe you can help.
@@ -529,6 +549,7 @@ PRINT_NOW CUB1_T 10000 1 // Very funny. I like you, big boy. Maybe you can help.
 WHILE cs_time < 62464
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_U 10000 1 // Maybe you can prove you a man.
@@ -536,6 +557,7 @@ PRINT_NOW CUB1_U 10000 1 // Maybe you can prove you a man.
 WHILE cs_time < 65377
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE											   
 
 PRINT_NOW CUB1_V 10000 1 // Take out the boat.
@@ -543,6 +565,7 @@ PRINT_NOW CUB1_V 10000 1 // Take out the boat.
 WHILE cs_time < 68974
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_W 10000 1 // Show me you got some big cajones,
@@ -550,6 +573,7 @@ PRINT_NOW CUB1_W 10000 1 // Show me you got some big cajones,
 WHILE cs_time < 71656
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 PRINT_NOW CUB1_X 10000 1 // and not some little Chiquita ones.
@@ -564,6 +588,7 @@ CLEAR_PRINTS
 WHILE cs_time < 75392
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
+	CLEAR_AREA_OF_CHARS -1174.8 -609.0 10.4 -116.3 -632.5 15.3
 ENDWHILE
 
 DO_FADE 1500 FADE_OUT

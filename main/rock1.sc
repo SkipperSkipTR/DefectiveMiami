@@ -468,6 +468,7 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 
 ENDWHILE
+DISPLAY_RADAR 2
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
 
@@ -843,6 +844,7 @@ SET_EVERYONE_IGNORE_PLAYER player1 OFF
 // ********************************* Player is sent to get Mercecdes ***********************
 
 PRINT_NOW ( RBM1_1 ) 5000 1 //"Go and collect Mercedes from the strip club!"
+DISPLAY_RADAR 3
 
 CREATE_CHAR PEDTYPE_CIVFEMALE SPECIAL06 297.849 289.728 16.64 mercedes_rock1
 CLEAR_CHAR_THREAT_SEARCH mercedes_rock1
@@ -1389,6 +1391,7 @@ RETURN
 mission_cleanup_rock1:
 
 flag_player_on_mission = 0
+DISPLAY_RADAR 3
 
 SET_CAR_DENSITY_MULTIPLIER 1.0
 

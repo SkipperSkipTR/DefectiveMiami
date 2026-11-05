@@ -242,7 +242,7 @@ IF firetruck_level < 5
 	GET_CLOSEST_CAR_NODE car1_x car1_y 10.0 car1_x car1_y car1_z
 ELSE
 	IF firetruck_level < 9
-		GET_CLOSEST_STRAIGHT_ROAD car1_x car1_y 10.0 12.0 500.0 car1_x car1_y car1_z car2_x car2_y car2_z z
+		GET_CLOSEST_STRAIGHT_ROAD car1_x car1_y 10.0 12.0 800.0 car1_x car1_y car1_z car2_x car2_y car2_z z
 		IF car1_x = 0.0
 		AND	car1_y = 0.0
 		AND	car2_x = 0.0
@@ -266,7 +266,7 @@ ELSE
 		car1_z += 0.5
 		car2_z += 0.5
 	ELSE
-		GET_CLOSEST_STRAIGHT_ROAD car1_x car1_y 10.0 18.0 500.0 car2_x car2_y car2_z car3_x car3_y car3_z z
+		GET_CLOSEST_STRAIGHT_ROAD car1_x car1_y 10.0 15.0 800.0 car2_x car2_y car2_z car3_x car3_y car3_z z
 		IF car2_x = 0.0
 		AND	car2_y = 0.0
 		AND	car3_x = 0.0

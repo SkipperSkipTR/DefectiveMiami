@@ -530,7 +530,6 @@ VAR_INT gosub_death_check_bloke_hait3
 mission_start_haitian3:
 
 
-FORCE_WEATHER_NOW WEATHER_SUNNY
 
 //reset pickup if it has aleady been collected
 IF HAS_PICKUP_BEEN_COLLECTED main_adrn6
@@ -1098,7 +1097,6 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-RELEASE_WEATHER
 
 SET_AREA_VISIBLE VIS_MAIN_MAP
 

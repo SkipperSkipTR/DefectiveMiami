@@ -295,6 +295,7 @@ ENDIF
 
 SET_PLAYER_CONTROL player1 ON
 SWITCH_WIDESCREEN OFF
+DISPLAY_RADAR 2
 RESTORE_CAMERA
 
 IF NOT IS_CAR_DEAD players_cab
@@ -449,6 +450,7 @@ WHILE NOT LOCATE_STOPPED_CHAR_ANY_MEANS_3D theVIP -1438.1 -833.6 11.3 5.0 5.0 5.
 								PRINT_NOW ( TAX1_5 ) 4000 1
 								WAIT 4000
 								PRINT_NOW ( TAXW1_6 ) 8000 1 //Take to the airport.
+								DISPLAY_RADAR 3
 								played_taxiwar1_samp = 1
 							ENDIF
 						ENDIF

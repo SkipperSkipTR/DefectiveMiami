@@ -359,7 +359,6 @@ VAR_INT timer_cops_case3_act_hait1
 
 mission_start_haitian1:
 
-FORCE_WEATHER_NOW WEATHER_SUNNY
 REGISTER_MISSION_GIVEN
 
 flag_player_on_mission = 1
@@ -878,7 +877,6 @@ WHILE GET_FADING_STATUS
 	WAIT 0
 ENDWHILE
 
-RELEASE_WEATHER
 
 CLEAR_EXTRA_COLOURS FALSE
 

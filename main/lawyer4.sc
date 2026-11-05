@@ -42,9 +42,6 @@ VAR_INT dead_rioter16 dead_rioter17 dead_rioter18 dead_rioter19 dead_rioter20
 VAR_INT dead_rioter21 dead_securi_guard1_drop dead_securi_guard2_drop			
 VAR_FLOAT guard_PickupX guard_PickupY guard_PickupZ
 
-VAR_INT VanTarget1
-VAR_INT VanTarget2
-VAR_INT VanTarget3	
 			
 // ***************************************Mission Start*************************************
 
@@ -620,9 +617,6 @@ SET_CHAR_HEALTH securi_guard3 70
 GIVE_WEAPON_TO_CHAR securi_guard3 WEAPONTYPE_PISTOL 300
 SET_CHAR_STAY_IN_SAME_PLACE securi_guard3 TRUE
 
-CREATE_OBJECT_NO_OFFSET faketarget 286.7 -302.1 10.9 VanTarget1  // Create objects for auto-aim to lock onto in the vans.
-CREATE_OBJECT_NO_OFFSET faketarget 312.2 -304.7 10.9 VanTarget2
-CREATE_OBJECT_NO_OFFSET faketarget 312.2 -300.7 10.9 VanTarget3
 
 CREATE_CAR spand 286.7 -302.1 10.9 company_van1
 SET_CAR_HEADING company_van1 270.0
@@ -643,17 +637,8 @@ OR NOT IS_CAR_DEAD company_van2
 OR NOT IS_CAR_DEAD company_van3
 	WAIT 0
 
-    IF NOT IS_CAR_DEAD company_van1
-        PLACE_OBJECT_RELATIVE_TO_CAR VanTarget1 company_van1 0.0 0.0 0.0  // Move the auto-aim targets with the van in case they start driving it.
-	ENDIF
 	
-	IF NOT IS_CAR_DEAD company_van2
-	    PLACE_OBJECT_RELATIVE_TO_CAR VanTarget2 company_van2 0.0 0.0 0.0
-	ENDIF
 
-	IF NOT IS_CAR_DEAD company_van3
-	    PLACE_OBJECT_RELATIVE_TO_CAR VanTarget3 company_van3 0.0 0.0 0.0
-    ENDIF	
 
 
 	IF NOT IS_CHAR_DEAD	rioter1
@@ -1150,13 +1135,7 @@ OR NOT IS_CAR_DEAD company_van3
             MAKE_OBJECT_TARGETTABLE	law4_barrel2
 			MAKE_OBJECT_TARGETTABLE law4_barrel1
 			
-			SET_OBJECT_COLLISION VanTarget1 FALSE  // Remove the collision...they have reported that this causes physics shape jittering 
-			SET_OBJECT_COLLISION VanTarget2 FALSE  // and also disallows the player from driving the vans.
-			SET_OBJECT_COLLISION VanTarget3 FALSE
 			
-			MAKE_OBJECT_TARGETTABLE VanTarget1  // Add targetable objects to make auto-aim work.
-			MAKE_OBJECT_TARGETTABLE VanTarget2  
-			MAKE_OBJECT_TARGETTABLE VanTarget3  
 			
 			SET_CHAR_NEVER_TARGETTED securi_guard1 2  // GTA_MOBILE TARGETING set all security guards in this mission as "high priority targets". 
             SET_CHAR_NEVER_TARGETTED securi_guard2 2  
@@ -1397,9 +1376,6 @@ RETURN
 
 mission_cleanup_lawyer4:
 
-DELETE_OBJECT VanTarget1
-DELETE_OBJECT VanTarget2
-DELETE_OBJECT VanTarget3
 
 DELETE_OBJECT law4_barrel2
 DELETE_OBJECT law4_barrel1
@@ -1808,17 +1784,14 @@ check_company_vans:
 	
 	IF IS_CAR_DEAD company_van1
 		REMOVE_BLIP	company_van_blip1
-		DELETE_OBJECT VanTarget1
 	ENDIF
 
 	IF IS_CAR_DEAD company_van2
 		REMOVE_BLIP	company_van_blip2
-		DELETE_OBJECT VanTarget2
 	ENDIF
 
 	IF IS_CAR_DEAD company_van3
 		REMOVE_BLIP	company_van_blip3
-		DELETE_OBJECT VanTarget3
 	ENDIF
 	
 

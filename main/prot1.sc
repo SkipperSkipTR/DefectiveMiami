@@ -1191,7 +1191,7 @@ IF ram_raid_goals = 1
 	SET_FIXED_CAMERA_POSITION 524.9 -88.8 15.6 0.0 0.0 0.0 
 	POINT_CAMERA_AT_POINT 498.2 -74.0 13.6 JUMP_CUT
 
-	WAIT 10
+	WAIT 500
 	DO_FADE 1500 FADE_IN
 
 	TIMERB = 0
@@ -1238,6 +1238,7 @@ IF ram_raid_goals = 1
 	SWITCH_WIDESCREEN OFF
 	SET_POLICE_IGNORE_PLAYER player1 OFF
 	SET_EVERYONE_IGNORE_PLAYER player1 OFF
+	WAIT 100
 	DO_FADE 1000 FADE_IN
 	CLEAR_WANTED_LEVEL player1
 // ******************************************END OF CUTSCENE********************************

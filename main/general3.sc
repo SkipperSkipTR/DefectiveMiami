@@ -939,7 +939,7 @@ ENDIF
 IF protect_deal_flag = 2
 	IF NOT IS_CHAR_DEAD buddy_g3
 		IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 meetingx_s3 meetingy_s3 meetingz_s3 3.0 3.0 1.5 TRUE
-			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 3.0 3.0 1.5 FALSE
+			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 1.5 1.5 1.5 FALSE
 						
 						MARK_MODEL_AS_NO_LONGER_NEEDED INFERNUS
 						MARK_CAR_AS_NO_LONGER_NEEDED buddyscar_g3 
@@ -1759,7 +1759,7 @@ ENDIF
 IF protect_deal_flag = 7
 	IF NOT IS_CHAR_DEAD coke_baron_g3
 		IF NOT IS_CHAR_DEAD buddy_g3
-			IF LOCATE_PLAYER_ON_FOOT_3D player1 roofposx roofposy roofposz 1.0 1.0 2.0 TRUE
+			IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 roofposx roofposy roofposz 1.0 1.0 2.0 TRUE
 				IF LOCATE_CHAR_ON_FOOT_3D buddy_g3 lanceposx lanceposy lanceposz 2.0 2.0 2.0 FALSE
 					
 					SET_PLAYER_CONTROL player1 OFF
@@ -3244,6 +3244,7 @@ IF protect_deal_flag = 16
 
 					PRINT_NOW GEN3_53 5000 1
 					PLAY_MISSION_AUDIO 2 //////////////////////////////	MY MONEY
+					DISPLAY_RADAR 2
 					WHILE NOT HAS_MISSION_AUDIO_FINISHED 2
 						AND NOT IS_CHAR_DEAD coke_baron_g3 
 					WAIT 0
@@ -3533,6 +3534,7 @@ ENDIF
 IF you_got_the_case_back_g3 = 1
 	IF HAS_PICKUP_BEEN_COLLECTED briefcase_g3
 		REMOVE_BLIP briefcase_g3blip
+		DISPLAY_RADAR 3
 		PRINT_NOW ( GEN3_28 ) 7000 2 //Take case back to Diaz
 		ADD_BLIP_FOR_COORD 461.1141 -483.7427 10.0225 finaldiazblip
 		you_got_the_case_back_g3 = 2
@@ -3946,6 +3948,7 @@ RETURN
 mission_cleanup_general3:
 
 flag_player_on_mission = 0
+DISPLAY_RADAR 3
 REMOVE_BLIP gun_g3_blip
 REMOVE_BLIP meeting_blip_s3
 REMOVE_BLIP roof_blip_g3

@@ -1766,6 +1766,7 @@ SET_PLAYER_CONTROL player1 ON
 SET_POLICE_IGNORE_PLAYER player1 OFF
 SET_EVERYONE_IGNORE_PLAYER player1 OFF
 SET_MAX_WANTED_LEVEL 6
+DISPLAY_RADAR 2
 // waiting for the player to kill the psycho 
 
 WHILE flag_nutter_dead_rock2 = 0
