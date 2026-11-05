@@ -78,7 +78,7 @@ VAR_INT player_had_reload_award // Used to give the player the fast reload award
 
 VAR_INT flag_played_bank2_before // Used for the player to be able to skip the text bit
 
-VAR_INT button_pressed_missionskip  //Used for mission script skip at start
+VAR_INT button_pressed_missionskip control_result	//Used for mission script skip at start
 
 button_pressed_missionskip = 0
 
@@ -412,7 +412,7 @@ VAR_INT been_in_a_garbage_truck_before, flag_player_on_garbage_mission // Garbag
 VAR_INT	flag_just_done_carbomb_mission
 VAR_INT	flag_just_done_speed_mission
 VAR_INT flag_icecream_mission1_passed
-VAR_INT flag_icecut_mission1_passed
+VAR_INT flag_icecut_mission1_passed flag_cokerun_passed
 
 // 4x4/carpark Missions
 VAR_INT	flag_4x4_mission1_passed flag_4x4_mission2_passed flag_4x4_mission3_passed
@@ -5032,7 +5032,6 @@ SCRIPT_NAME o4x4_1
 			
 			IF flag_launch_4x4_1_ok = 1
 				PRINT_BIG (T4X4_1) 15000 2
-				WAIT 0
 				LOAD_AND_LAUNCH_MISSION miami_4x4_1.sc	//	ask James about the fades in this one?
 			ENDIF
 			
@@ -5071,7 +5070,6 @@ carpark1_loop_inner:
 			IF IS_PLAYER_IN_MODEL player1 STALLION
 			AND flag_carpark1_trigger = 0
 				PRINT_BIG ( MM_1 ) 15000 2
-				WAIT 0
 				LOAD_AND_LAUNCH_MISSION carpark_1.sc	//	ask James about the fades in this one?
 			ENDIF
 
@@ -6144,6 +6142,7 @@ game_help_loop_inner:
 		IF flag_intro_passed = 1
 
 			IF print_first_help = 0
+				PRINT_HELP ( HELP_42 )
 				WAIT 500
 				
 				PRINT_HELP ( HELP2 )  //Touch anywhere on the left side of the screen to move.
@@ -6181,9 +6180,15 @@ game_help_loop_inner:
 						IF IS_PLAYER_IN_ANY_CAR player1
 							WAIT 1000
 							
-							PRINT_HELP ( HELP4_A ) //Press the / button to accelerate
+							GET_CONTROLLER_MODE control_result
+							IF control_result = 13
+								PRINT_HELP ( HELP4A )
+							ELSE
+								PRINT_HELP ( HELP4_A ) //Press the / button to accelerate
+							ENDIF
 
 							WAIT 4000
+							PRINT_HELP ( HELP35 )
 															
 							//PRINT_HELP ( HELP35 ) // icons can be moved and resized in the options menu.
 
@@ -6208,7 +6213,12 @@ game_help_loop_inner:
 										WAIT 2000
 										IF IS_PLAYER_PLAYING player1
 											
-											PRINT_HELP ( HELP27 ) //Double tap ~h~::ACCEL::~w~ on a bike to Pop a Wheelie. Shift your weight forward while braking on a bike to do a Stoppie.
+											GET_CONTROLLER_MODE control_result
+											IF control_result = 13
+												PRINT_HELP ( HELP27A )
+											ELSE
+												PRINT_HELP ( DYNG102 )
+											ENDIF
 											
 										ENDIF
 										bike_help = 1
@@ -6223,7 +6233,12 @@ game_help_loop_inner:
 											OR IS_CURRENT_PLAYER_WEAPON Player1 WEAPONTYPE_SILENCED_INGRAM 
 											OR IS_CURRENT_PLAYER_WEAPON Player1 WEAPONTYPE_MP5
 
-												PRINT_HELP ( HELP31 ) // "To do a drive-by, first look left or right using ~m~~widget_look_left~ or ~m~~widget_look_right~. Then fire using ~m~~widget_attack~.";
+												GET_CONTROLLER_MODE control_result
+												IF control_result = 13
+													PRINT_HELP ( HELP31M )
+												ELSE
+													PRINT_HELP ( HELP31 ) // "To do a drive-by, first look left or right using ~m~~widget_look_left~ or ~m~~widget_look_right~. Then fire using ~m~~widget_attack~.";
+												ENDIF
 											   												
 												WAIT 5000
 
@@ -6385,7 +6400,12 @@ game_help_loop_inner:
 					IF camera_help_played = 0
 						WAIT 4000
 						
-						PRINT_HELP ( HELP56 )	// Press the ~h~select~w~ button to change camera modes.
+						GET_CONTROLLER_MODE control_result
+						IF control_result = 13
+							PRINT_HELP ( ADPT56 )
+						ELSE
+							PRINT_HELP ( HELP56 )	// Press the ~h~select~w~ button to change camera modes.
+						ENDIF
 
 						camera_help_played = 1
 					ENDIF
@@ -6551,7 +6571,12 @@ game_help_loop_inner:
 	    OR IS_PLAYER_IN_MODEL player1 MRWHOOP
 			IF got_siren_help_before = 0
 				
-				PRINT_HELP ( SIREN_1 ) //"To turn on this vehicles sirens tap the ~h~L1 button~w~."
+				GET_CONTROLLER_MODE control_result
+				IF control_result = 13
+					PRINT_HELP ( SIREN1A )
+				ELSE
+					PRINT_HELP ( SIREN_1 ) //"To turn on this vehicles sirens tap the ~h~L1 button~w~."
+				ENDIF
 
 				got_siren_help_before = 1
 				WAIT 5000

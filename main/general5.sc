@@ -791,7 +791,7 @@ IF killer_chopper_created = 2
 		cutscene_timer = game_timer + 4000
 		cutscene_counter = 5
 		killer_chopper_created = 3
-		WAIT 1000
+		WAIT 1500
 		DO_FADE 1500 FADE_IN
 	ENDIF
 ENDIF
@@ -1095,39 +1095,51 @@ IF clear_route_flag = 0
 ENDIF
 IF barricade_death_check = 1
 	IF IS_CHAR_DEAD barricade_boat01_dr
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat01_dr
 		REMOVE_BLIP barricade_boat01_dr_blip  
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat01_sh
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat01_sh
 		REMOVE_BLIP barricade_boat01_sh_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat02_dr
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat02_dr
 		REMOVE_BLIP barricade_boat02_dr_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat02_sh
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat02_sh
 		REMOVE_BLIP barricade_boat02_sh_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat03_dr
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat03_dr
 		REMOVE_BLIP barricade_boat03_dr_blip 
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat03_sh
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat03_sh
 		REMOVE_BLIP barricade_boat03_sh_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat05_dr
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat05_dr
 		REMOVE_BLIP barricade_boat05_dr_blip  
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat05_sh
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat05_sh
 		REMOVE_BLIP barricade_boat05_sh_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat06_sh1
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat06_sh1
 		REMOVE_BLIP barricade_boat06_sh1_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat06_sh2
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat06_sh2
 		REMOVE_BLIP barricade_boat06_sh2_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat06_sh3
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat06_sh3
 		REMOVE_BLIP barricade_boat06_sh3_blip
 	ENDIF
 	IF IS_CHAR_DEAD barricade_boat09_dr
+		MARK_CHAR_AS_NO_LONGER_NEEDED barricade_boat09_dr
 		REMOVE_BLIP barricade_boat09_dr_blip  
 	ENDIF
 
@@ -1221,18 +1233,22 @@ ENDIF
 // 3master - deferring REMOVE_CHAR_ELEGANTLY until the end in some cases
 
 IF IS_CHAR_DEAD colonel_goon1
+	MARK_CHAR_AS_NO_LONGER_NEEDED colonel_goon1
 	//REMOVE_CHAR_ELEGANTLY colonel_goon1
 ENDIF
 
 IF IS_CHAR_DEAD colonel_goon2
+	MARK_CHAR_AS_NO_LONGER_NEEDED colonel_goon2
 	//REMOVE_CHAR_ELEGANTLY colonel_goon2
 ENDIF
 
 IF IS_CHAR_DEAD colonel_goon3
+	MARK_CHAR_AS_NO_LONGER_NEEDED colonel_goon3
 	//REMOVE_CHAR_ELEGANTLY colonel_goon3
 ENDIF
 
 IF IS_CHAR_DEAD colonel_goon4
+	MARK_CHAR_AS_NO_LONGER_NEEDED colonel_goon4
 	//REMOVE_CHAR_ELEGANTLY colonel_goon4
 ENDIF
 
@@ -1469,6 +1485,7 @@ IF NOT IS_CHAR_DEAD	boarder_1
 		SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT boarder_1 player1
 	ENDIF
 ELSE
+	MARK_CHAR_AS_NO_LONGER_NEEDED boarder_1
 	//REMOVE_CHAR_ELEGANTLY boarder_1
 	REMOVE_BLIP boarder_1_blip
 	boarder_1_flag = 0
@@ -1562,6 +1579,7 @@ IF NOT IS_CHAR_DEAD	boarder_2
 		SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT boarder_2 player1
 	ENDIF
 ELSE
+	MARK_CHAR_AS_NO_LONGER_NEEDED boarder_2
 	//REMOVE_CHAR_ELEGANTLY boarder_2
 	REMOVE_BLIP boarder_2_blip
 	boarder_2_flag = 0
@@ -1661,6 +1679,7 @@ IF NOT IS_CHAR_DEAD	boarder_3
 		SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT boarder_3 player1
 	ENDIF
 ELSE
+	MARK_CHAR_AS_NO_LONGER_NEEDED boarder_3
 	//REMOVE_CHAR_ELEGANTLY boarder_3
 	REMOVE_BLIP boarder_3_blip
 	boarder_3_flag = 0
@@ -1754,6 +1773,7 @@ IF NOT IS_CHAR_DEAD	boarder_4
 		SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT boarder_4 player1
 	ENDIF
 ELSE
+	MARK_CHAR_AS_NO_LONGER_NEEDED boarder_4
 	//REMOVE_CHAR_ELEGANTLY boarder_4
 	REMOVE_BLIP boarder_4_blip
 	boarder_4_flag = 0
@@ -1809,16 +1829,20 @@ ENDIF
 IF heli1_counter > 0
 	IF IS_CHAR_DEAD heli1_passenger1
 		REMOVE_BLIP heli1_passenger1_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger1
 	ENDIF
 	IF IS_CHAR_DEAD heli1_passenger2
 		REMOVE_BLIP heli1_passenger2_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger2
 	ENDIF
 	IF IS_CHAR_DEAD heli1_passenger3
 		REMOVE_BLIP heli1_passenger3_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger3
 	ENDIF
 
 	IF IS_CHAR_DEAD heli1_pilot
 		REMOVE_BLIP heli1_pilot_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_pilot
 	ENDIF
 
 	IF NOT IS_CAR_DEAD heli1
@@ -1960,14 +1984,17 @@ IF heli1_counter > 0
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli1_passenger1
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger1
 		//REMOVE_CHAR_ELEGANTLY heli1_passenger1
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli1_passenger2
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger2
 		//REMOVE_CHAR_ELEGANTLY heli1_passenger2
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli1_passenger3
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli1_passenger3
 		//REMOVE_CHAR_ELEGANTLY heli1_passenger3
 	ENDIF
 ENDIF
@@ -2028,15 +2055,19 @@ ENDIF
 IF heli2_counter > 0
 	IF IS_CHAR_DEAD heli2_passenger1
 		REMOVE_BLIP heli2_passenger1_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger1
 	ENDIF
 	IF IS_CHAR_DEAD heli2_passenger2
 		REMOVE_BLIP heli2_passenger2_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger2
 	ENDIF
 	IF IS_CHAR_DEAD heli2_passenger3
 		REMOVE_BLIP heli2_passenger3_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger3
 	ENDIF
 	IF IS_CHAR_DEAD heli2_pilot
 		REMOVE_BLIP heli2_pilot_blip
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_pilot
 	ENDIF
 	IF NOT IS_CAR_DEAD heli2
 		IF NOT IS_CHAR_DEAD	heli2_pilot
@@ -2172,14 +2203,17 @@ IF heli2_counter > 0
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli2_passenger1
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger1
 		//REMOVE_CHAR_ELEGANTLY heli2_passenger1
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli2_passenger2
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger2
 		//REMOVE_CHAR_ELEGANTLY heli2_passenger2
 	ENDIF
 
 	IF IS_CHAR_DEAD	heli2_passenger3
+		MARK_CHAR_AS_NO_LONGER_NEEDED heli2_passenger3
 		//REMOVE_CHAR_ELEGANTLY heli2_passenger3
 	ENDIF
 ENDIF

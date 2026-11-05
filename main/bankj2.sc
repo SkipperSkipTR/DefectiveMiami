@@ -3177,7 +3177,7 @@ REMOVE_BLIP radar_blip_coord3_bankjob2
 SET_PLAYER_CONTROL player1 OFF
 
 IF NOT IS_CHAR_DEAD gunner1_bankjob2
-	MARK_CHAR_AS_NO_LONGER_NEEDED gunner1_bankjob2 
+	DELETE_CHAR gunner1_bankjob2
 ENDIF
 
 IF NOT IS_CHAR_DEAD phil_bankjob2

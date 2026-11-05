@@ -1389,7 +1389,7 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 		   			
 				IF alarm_sound_added_bankjob1 = 0 
 					ADD_CONTINUOUS_SOUND 385.49 -509.0 9.6 SOUND_BANK_ALARM_LOOP alarm_bankjob1
-					ALTER_WANTED_LEVEL_NO_DROP player1 3
+					ALTER_WANTED_LEVEL_NO_DROP player1 4
 					alarm_sound_added_bankjob1 = 1
 				ENDIF
 
@@ -1452,7 +1452,7 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 			REMOVE_BLIP radar_blip_ped1_bankjob1
 
 			IF IS_PLAYER_IN_ANGLED_AREA_ON_FOOT_3D player1 376.66 -453.85 9.00 328.91 -504.02 20.0 50.0 FALSE
-				ALTER_WANTED_LEVEL_NO_DROP player1 3
+				ALTER_WANTED_LEVEL_NO_DROP player1 4
 			ENDIF
 
 			GOTO mission_bankjob1_failed
@@ -1507,8 +1507,6 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 						ENDIF
 
 						IF had_cop_audio_bankjob1 = 4
-							ADD_BLIP_FOR_CONTACT_POINT -3.8 -1265.8 12.0 spray_shop_blip_bank1 
-							flag_had_cops_message_bankjob1 = 1
 							had_cop_audio_1sttime_bankjob1 = 1
 							flag_bloke_in_group_bankjob1 = 1
 							had_cop_audio_bankjob1 = 5
@@ -1537,7 +1535,8 @@ OR IS_WANTED_LEVEL_GREATER player1 0
 						IF flag_had_cops_message_bankjob1 = 0
 							PRINT_NOW ( WANTED1 ) 5000 1 //"You have a wanted level loose the cops "
 							//ADD_BLIP_FOR_COORD -3.8 -1265.8 12.0 spray_shop_blip_bank1  
-							DISPLAY_RADAR 6 // PATHING PAY AND SPRAY
+							ADD_SPRITE_BLIP_FOR_COORD -3.8 -1265.8 12.0 RADAR_SPRITE_SPRAY spray_shop_blip_bank1
+							DISPLAY_RADAR 2
 							blob_flag = 0
 							flag_had_cops_message_bankjob1 = 1
 						ENDIF

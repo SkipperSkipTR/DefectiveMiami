@@ -92,23 +92,24 @@ shop_ammu1_inner:
 						
 					time_difference1 = current_time - time_since_murdering_shopkeeper1
 
-					CREATE_OBJECT colt45 -60.793 -1488.141 12.24 ammu_gun1
+					CREATE_OBJECT colt45 -60.793 -1488.614 12.24 ammu_gun1
 					SET_OBJECT_DYNAMIC ammu_gun1 FALSE
-					SET_OBJECT_ROTATION ammu_gun1 0.0 8.0 0.0
+					SET_OBJECT_ROTATION ammu_gun1 0.0 7.9 -10.0
+					CREATE_OBJECT ingramsl -62.293 -1488.4979 12.24 ammu_gun2
 
-					CREATE_OBJECT ingramsl -62.293 -1488.241 12.223 ammu_gun2
 					SET_OBJECT_DYNAMIC ammu_gun2 FALSE
-					SET_OBJECT_ROTATION ammu_gun2 0.0 2.0 0.0
+					SET_OBJECT_ROTATION ammu_gun2 0.0 1.9 -5.0
+					CREATE_OBJECT chromegun -63.993 -1488.351 12.24 ammu_gun3
 
-					CREATE_OBJECT chromegun -63.993 -1488.241 12.24 ammu_gun3
 					SET_OBJECT_DYNAMIC ammu_gun3 FALSE
-					SET_OBJECT_ROTATION ammu_gun3 0.0 7.0 0.0
+					SET_OBJECT_ROTATION ammu_gun3 0.0 7.0 2.0
+					CREATE_OBJECT ruger -65.393 -1488.22 12.24 ammu_gun4
 
-					CREATE_OBJECT ruger -65.393 -1488.221 12.18 ammu_gun4
 					SET_OBJECT_DYNAMIC ammu_gun4 FALSE
 
-					CREATE_OBJECT bodyarmour -66.629 -1487.8 12.113 ammu_gun5
+					CREATE_OBJECT bodyarmour -66.629 -1487.9 12.113 ammu_gun5
 					SET_OBJECT_DYNAMIC ammu_gun5 FALSE
+					SET_OBJECT_ROTATION ammu_gun5 1.29 -4.829 15.05
 
 					IF time_difference1 > 30000 
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL21 -62.5 -1485.1 9.6 ammu_shop_bloke1
@@ -543,30 +544,31 @@ shop_ammu2_inner:
 
 					time_difference1 = current_time - time_since_murdering_shopkeeper1
 
-					CREATE_OBJECT colt45 367.0 1049.5 21.09 ammu_gun1
+					CREATE_OBJECT colt45 367.0 1049.22 21.09 ammu_gun1
 					SET_OBJECT_DYNAMIC ammu_gun1 FALSE
-					SET_OBJECT_ROTATION ammu_gun1 0.0 8.0 0.0
+					SET_OBJECT_ROTATION ammu_gun1 0.0 8.0 -5.0
+					CREATE_OBJECT uzi 366.0 1049.22 21.05 ammu_gun2
 
-					CREATE_OBJECT uzi 366.0 1049.5 21.05 ammu_gun2
 					SET_OBJECT_DYNAMIC ammu_gun2 FALSE
-					SET_OBJECT_ROTATION ammu_gun2 0.0 4.0 0.0
+					SET_OBJECT_ROTATION ammu_gun2 0.0 4.0 5.0
+					CREATE_OBJECT buddyshot 364.9 1049.199 21.067 ammu_gun3
 
-					CREATE_OBJECT buddyshot 364.9 1049.5 21.067 ammu_gun3
 					SET_OBJECT_DYNAMIC ammu_gun3 FALSE
-					SET_OBJECT_ROTATION ammu_gun3 0.0 9.0 0.0
+					SET_OBJECT_ROTATION ammu_gun3 0.0 9.0 6.3
+					CREATE_OBJECT sniper 363.9 1049.211 21.05 ammu_gun4
 
-					CREATE_OBJECT sniper 363.9 1049.5 21.05 ammu_gun4
 					SET_OBJECT_DYNAMIC ammu_gun4 FALSE
-					SET_OBJECT_ROTATION ammu_gun4 0.0 5.0 0.0
+					SET_OBJECT_ROTATION ammu_gun4 0.0 5.0 5.0
+					CREATE_OBJECT grenade 363.1 1049.226 20.76 ammu_gun5
 
-					CREATE_OBJECT grenade 363.1 1049.5 20.76 ammu_gun5
 					SET_OBJECT_DYNAMIC ammu_gun5 FALSE
 
-					CREATE_OBJECT grenade 363.0 1049.5 20.72 ammu_gun6
+					CREATE_OBJECT grenade 363.0 1049.226 20.72 ammu_gun6
 					SET_OBJECT_DYNAMIC ammu_gun6 FALSE
 
-					CREATE_OBJECT bodyarmour 362.1 1049.5 20.9 ammu_gun7
+					CREATE_OBJECT bodyarmour 362.16 1049.408 20.9 ammu_gun7
 					SET_OBJECT_DYNAMIC ammu_gun7 FALSE
+					SET_OBJECT_ROTATION ammu_gun7 1.74 -5.02 19.14
 
 					IF time_difference1 > 30000 
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL21 366.1 1052.2 18.2 ammu_shop_bloke1
@@ -1066,29 +1068,29 @@ shop_ammu3_inner:
 
 					time_difference1 = current_time - time_since_murdering_shopkeeper1
 
-					CREATE_OBJECT python -683.6 1200.549 12.93 ammu_gun1
+					CREATE_OBJECT python -683.797 1200.549 12.93 ammu_gun1
 					SET_OBJECT_DYNAMIC ammu_gun1 FALSE
 					SET_OBJECT_ROTATION ammu_gun1 0.0 4.0 90.0
 
-					CREATE_OBJECT mp5lng -683.6 1202.049 12.86 ammu_gun2
+					CREATE_OBJECT mp5lng -683.8 1202.049 12.86 ammu_gun2
 					SET_OBJECT_DYNAMIC ammu_gun2 FALSE
 					SET_OBJECT_ROTATION ammu_gun2 0.0 8.0 95.0
 
-					CREATE_OBJECT shotgspa -683.6 1203.449 12.91 ammu_gun3
+					CREATE_OBJECT shotgspa -683.785 1203.449 12.91 ammu_gun3
 					SET_OBJECT_DYNAMIC ammu_gun3 FALSE
 					SET_OBJECT_ROTATION ammu_gun3 0.0 9.0 95.0
 
-					CREATE_OBJECT m4 -683.6 1205.049 12.88 ammu_gun4
+					CREATE_OBJECT m4 -683.795 1205.049 12.88 ammu_gun4
 					SET_OBJECT_DYNAMIC ammu_gun4 FALSE
 					SET_OBJECT_ROTATION ammu_gun4 0.0 3.0 95.0
 
-					CREATE_OBJECT laser -683.6 1206.549 12.81 ammu_gun5
+					CREATE_OBJECT laser -683.791 1206.549 12.81 ammu_gun5
 					SET_OBJECT_DYNAMIC ammu_gun5 FALSE
 					SET_OBJECT_ROTATION ammu_gun5 0.0 2.0 95.0
 
-					CREATE_OBJECT bodyarmour -683.5 1208.189 12.809 ammu_gun6
+					CREATE_OBJECT bodyarmour -683.67 1208.189 12.809 ammu_gun6
 					SET_OBJECT_DYNAMIC ammu_gun6 FALSE
-					SET_OBJECT_HEADING ammu_gun6 90.0
+					SET_OBJECT_ROTATION ammu_gun6 1.71 -4.69 290.07
 
 					//IF flag_player_on_bank_2 = 0
 					IF time_difference1 > 30000 
@@ -1615,21 +1617,22 @@ shop_hardware_inner1:
 
 					time_difference2 = current_time - time_since_murdering_shopkeeper2
 
-					CREATE_OBJECT screwdriver 201.508 -469.297 13.79 hard_weapon1
+					CREATE_OBJECT screwdriver 201.508 -469.22 13.79 hard_weapon1
 					SET_OBJECT_DYNAMIC hard_weapon1 FALSE
 
-					CREATE_OBJECT hammer 202.508 -469.297 13.73 hard_weapon2
+					SET_OBJECT_ROTATION hard_weapon1 -9.4 3.94 24.04
+					CREATE_OBJECT hammer 202.508 -469.176 13.73 hard_weapon2
 					SET_OBJECT_DYNAMIC hard_weapon2 FALSE
 					SET_OBJECT_ROTATION hard_weapon2 0.0 4.0 0.0
 
-					CREATE_OBJECT cleaver 203.508 -469.297 13.77 hard_weapon3
+					CREATE_OBJECT cleaver 203.508 -469.167 13.77 hard_weapon3
 					SET_OBJECT_DYNAMIC hard_weapon3 FALSE
 
-					CREATE_OBJECT bat 204.606 -469.297 13.91 hard_weapon4
+					CREATE_OBJECT bat 204.606 -469.225 13.91 hard_weapon4
 					SET_OBJECT_DYNAMIC hard_weapon4 FALSE
 					SET_OBJECT_ROTATION hard_weapon4 85.0 0.0 90.0
 
-					CREATE_OBJECT machete 205.858 -469.297 14.0 hard_weapon5
+					CREATE_OBJECT machete 205.858 -469.146 14.0 hard_weapon5
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
 					SET_OBJECT_ROTATION hard_weapon5 0.0 90.0 0.0
 
@@ -2017,22 +2020,22 @@ shop_hardware2_inner:
 
 					time_difference2 = current_time - time_since_murdering_shopkeeper2
 
-					CREATE_OBJECT screwdriver 365.960 1072.8 20.68 hard_weapon1
+					CREATE_OBJECT screwdriver 365.96 1072.51 20.68 hard_weapon1
 					SET_OBJECT_DYNAMIC hard_weapon1 FALSE
 
-					CREATE_OBJECT hammer 364.960 1072.8 20.669 hard_weapon2
+					SET_OBJECT_ROTATION hard_weapon1 9.15 -0.14 29.49
+					CREATE_OBJECT hammer 364.96 1072.51 20.669 hard_weapon2
 					SET_OBJECT_DYNAMIC hard_weapon2 FALSE
-					SET_OBJECT_ROTATION hard_weapon2 0.0 4.0 0.0
+					CREATE_OBJECT cleaver 363.96 1072.52 20.729 hard_weapon3
 
-					CREATE_OBJECT cleaver 363.960 1072.8 20.729 hard_weapon3
 					SET_OBJECT_DYNAMIC hard_weapon3 FALSE
 
-					CREATE_OBJECT knifecur 362.920 1072.8 20.639 hard_weapon4
+					CREATE_OBJECT knifecur 362.92 1072.51 20.639 hard_weapon4
 					SET_OBJECT_DYNAMIC hard_weapon4 FALSE
 
-					CREATE_OBJECT katana 362.0 1072.8 20.75 hard_weapon5
+					CREATE_OBJECT katana 362.0 1072.53 20.75 hard_weapon5
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
-					SET_OBJECT_ROTATION hard_weapon5 0.0 -20.0 0.0
+					SET_OBJECT_ROTATION hard_weapon5 1.89 -19.87 -12.48
 
 					IF time_difference2 > 60000 
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 364.5 1074.3 18.0 hard_shop_bloke1
@@ -2405,25 +2408,25 @@ shop_hardware3_inner:
 					
 					time_difference2 = current_time - time_since_murdering_shopkeeper2
 
-					CREATE_OBJECT screwdriver -961.0 -689.87 14.080 hard_weapon1
+					CREATE_OBJECT screwdriver -961.07 -689.87 14.08 hard_weapon1
 					SET_OBJECT_DYNAMIC hard_weapon1 FALSE
-					SET_OBJECT_HEADING hard_weapon1 270.0
+					SET_OBJECT_ROTATION hard_weapon1 12.03 0.0 -32.39
+					CREATE_OBJECT hammer -960.914 -690.88 14.032 hard_weapon2
 
-					CREATE_OBJECT hammer -960.95 -690.88 14.032 hard_weapon2
 					SET_OBJECT_DYNAMIC hard_weapon2 FALSE
-					SET_OBJECT_ROTATION hard_weapon2 0.0 4.0 270.0
+					SET_OBJECT_ROTATION hard_weapon2 0.0 4.0 -80.0
+					CREATE_OBJECT cleaver -960.76 -691.9 14.08 hard_weapon3
 
-					CREATE_OBJECT cleaver -960.95 -691.9 14.08 hard_weapon3
 					SET_OBJECT_DYNAMIC hard_weapon3 FALSE
-					SET_OBJECT_HEADING hard_weapon3 270.0
+					SET_OBJECT_ROTATION hard_weapon3 0.0 0.0 -80.0
+					CREATE_OBJECT machete -960.6 -693.0 14.08 hard_weapon4
 
-					CREATE_OBJECT machete -960.8 -693.0 14.08 hard_weapon4
 					SET_OBJECT_DYNAMIC hard_weapon4 FALSE
-					SET_OBJECT_HEADING hard_weapon4 270.0
+					SET_OBJECT_ROTATION hard_weapon4 0.0 0.0 -80.0
+					CREATE_OBJECT chnsaw -960.61 -694.0 14.162 hard_weapon5
 
-					CREATE_OBJECT chnsaw -960.8 -694.0 14.162 hard_weapon5
 					SET_OBJECT_DYNAMIC hard_weapon5 FALSE
-					SET_OBJECT_HEADING hard_weapon5 270.0
+					SET_OBJECT_ROTATION hard_weapon5 0.0 0.0 -81.0
 
 					IF time_difference2 > 60000 			 
 						CREATE_CHAR PEDTYPE_CIVMALE SPECIAL16 -963.8 -692.3 10.3 hard_shop_bloke1
@@ -2910,7 +2913,7 @@ RETURN
 check_dpad_state1:
 
 	//PRINT_HELP ( GUN_H1 )
-	PRINT_HELP_FOREVER GUN_H1
+	PRINT_HELP ( GUN_H1 )
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
@@ -2964,7 +2967,7 @@ RETURN
 check_dpad_state1_2:
 
 	//PRINT_HELP ( GUN_H1 )
-	PRINT_HELP_FOREVER GUN_H1
+	PRINT_HELP ( GUN_H1 )
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
@@ -3024,7 +3027,7 @@ RETURN
 check_dpad_state2:
 
 	//PRINT_HELP ( GUN_H1 )
-	PRINT_HELP_FOREVER GUN_H1
+	PRINT_HELP ( GUN_H1 )
 
 	GET_POSITION_OF_ANALOGUE_STICKS PAD1 LStickX LStickY RStickX RStickY
 
@@ -3164,7 +3167,10 @@ not_in_big_ammu_zone:
 	ammu_bloke_kill_player = 0	
 	camera_ammu1 = 0
 	hands_up_before = 0
-	REMOVE_SOUND shop_alarm
+	IF shop_alarm_played = 1
+		shop_alarm_played = 0
+		REMOVE_SOUND shop_alarm
+	ENDIF
 	
 	IF NOT IS_PLAYER_PLAYING player1
 		time_since_murdering_shopkeeper1 = -30000
@@ -3220,8 +3226,10 @@ not_in_big_hard_zone:
 	hard_bloke_hide = 0	
 	camera_hard1 = 0
 	hands_up_before = 0
-	shop_alarm_played = 0
-	REMOVE_SOUND shop_alarm
+	IF shop_alarm_played = 1
+		shop_alarm_played = 0
+		REMOVE_SOUND shop_alarm
+	ENDIF
 	
 	IF NOT IS_PLAYER_PLAYING player1
 		time_since_murdering_shopkeeper2 = -60000

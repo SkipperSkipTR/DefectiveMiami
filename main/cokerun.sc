@@ -22,7 +22,7 @@ MISSION_END
 LVAR_INT counter_cokerun cokerun_bigboat blipcoke_1 coke_ramp1 coke_ramp2 coke_ramp3  
 LVAR_INT create_coke_pickup	cokerun_boat coke_pickup
 
-VAR_INT countdown_boat countdown_boat_seconds flag_cokerun_passed start_countdown_boat
+VAR_INT countdown_boat countdown_boat_seconds start_countdown_boat
 
 mission_start_cokerun:
 
@@ -617,7 +617,7 @@ IF flag_cokerun_passed = 0
 	SET_FIXED_CAMERA_POSITION -631.643 -1495.598 26.104 0.0 0.0 0.0
 	POINT_CAMERA_AT_POINT -632.270 -1495.064 25.537 JUMP_CUT
 	
-	WAIT 500
+	WAIT 1500
 
 	SET_FADING_COLOUR 0 0 0
 	DO_FADE 1000 FADE_IN

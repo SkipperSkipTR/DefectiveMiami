@@ -628,7 +628,7 @@ CREATE_CAR spand 312.2 -300.7 10.9 company_van3
 SET_CAR_HEADING company_van3 90.0
 
 CREATE_OBJECT barrel4 309.3 -298.6 10.9 law4_barrel1
-CREATE_OBJECT barrel4 284.3 -305.4 10.9 law4_barrel2
+CREATE_OBJECT barrel4 285.05 -312.36 10.9 law4_barrel2
 
 TIMERB = 0
 
@@ -1257,7 +1257,13 @@ OR NOT IS_CAR_DEAD company_van3
 			PRINT_HELP ( HELP39 ) //You can target and shoot explosive barrels but keep your distance
 		    			                
                                    // Redirects for modern/classic and free aim. 
-            PRINT_HELP ( TARGET )  // Hold ~h~::LOCKON::~w~ to ~h~aim~w~. Press ~h~::FIRE::~w~ to fire. 
+            GET_CONTROLLER_MODE control_result
+            IF control_result = 12
+            OR control_result = 13
+            	PRINT_HELP ( TARGETM )
+            ELSE
+            	PRINT_HELP ( TARGET )  // Hold ~h~::LOCKON::~w~ to ~h~aim~w~. Press ~h~::FIRE::~w~ to fire.
+            ENDIF
 
 
 			WHILE NOT TIMERA > 3500

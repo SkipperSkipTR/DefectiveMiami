@@ -1377,49 +1377,12 @@ PRINT_WITH_NUMBER_BIG ( M_PASS ) 5000 5000 1 //"Mission Passed!"
 ADD_SCORE player1 5000
 CLEAR_WANTED_LEVEL player1
 REMOVE_BLIP haitian_contact_blip
-RETURN
 		
 
 
 // ********************************** mission cleanup **************************************
 
-mission_cleanup_haitian3:
 
-flag_player_on_mission = 0
-SWITCH_PED_ROADS_ON -957.0 13.2 9.3 -862.5 136.5 10.9
-REMOVE_BLIP cuban1_blip_hait3
-REMOVE_BLIP cuban2_blip_hait3
-REMOVE_BLIP cuban3_blip_hait3
-REMOVE_BLIP cuban4_blip_hait3
-REMOVE_BLIP cuban5_blip_hait3
-REMOVE_BLIP cuban6_blip_hait3
-REMOVE_BLIP cuban7_blip_hait3
-REMOVE_BLIP cuban8_blip_hait3 
-REMOVE_BLIP cuban9_blip_hait3
-REMOVE_BLIP cuban10_blip_hait3
-REMOVE_BLIP ambush_driver1_blip_hait3
-REMOVE_BLIP ambush_cuban1_blip_hait3
-REMOVE_BLIP ambush_cuban2_blip_hait3
-REMOVE_BLIP ambush_cuban3_blip_hait3
-REMOVE_BLIP ambush_cuban4_blip_hait3
-REMOVE_BLIP ambush_cuban5_blip_hait3
-REMOVE_BLIP ambush_cuban6_blip_hait3
-REMOVE_BLIP ambush_cuban7_blip_hait3
-REMOVE_BLIP ambush_cuban8_blip_hait3
-REMOVE_BLIP ambush_cuban9_blip_hait3
-SHUT_PLAYER_UP player1 FALSE
-SET_WANTED_MULTIPLIER 1.0
-REMOVE_SPHERE sphere1_hait3
-REMOVE_BLIP radar_blip_coord1_hait3
-MARK_MODEL_AS_NO_LONGER_NEEDED HNa
-MARK_MODEL_AS_NO_LONGER_NEEDED CBa
-MARK_MODEL_AS_NO_LONGER_NEEDED SNIPER
-MARK_MODEL_AS_NO_LONGER_NEEDED HNb
-MARK_MODEL_AS_NO_LONGER_NEEDED CBb
-MARK_MODEL_AS_NO_LONGER_NEEDED BURRITO
-MARK_MODEL_AS_NO_LONGER_NEEDED KATANA
-GET_GAME_TIMER timer_mobile_start
-MISSION_HAS_FINISHED
 RETURN
 
 // ped ai stuff
@@ -2729,6 +2692,7 @@ IF flag_ambush1_created_hait3 = 0
 	ADD_BLIP_FOR_CHAR ambush_driver1_hait3 ambush_driver1_blip_hait3
 	SET_CHAR_PERSONALITY ambush_driver1_hait3 PEDSTAT_TOUGH_GUY
 	CAR_SET_IDLE truck1_hait3
+	LOCK_CAR_DOORS truck1_hait3 CARLOCK_LOCKED
 	
 	CREATE_CHAR_AS_PASSENGER truck1_hait3 PEDTYPE_CIVMALE CBb 0 ambush_cuban1_hait3 
 	CLEAR_CHAR_THREAT_SEARCH ambush_cuban1_hait3
@@ -3038,7 +3002,7 @@ IF truck1_dead_hait3 = 0
 		
 		IF flag_truck1_in_position_hait3 = 0
 			
-			IF LOCATE_CAR_3D truck1_hait3 truck1_dest_x_hait3 truck1_dest_y_hait3 truck1_dest_z_hait3 3.0 3.0 3.0 FALSE
+			IF LOCATE_CAR_3D truck1_hait3 truck1_dest_x_hait3 truck1_dest_y_hait3 truck1_dest_z_hait3 5.0 5.0 5.0 FALSE
 				SET_CAR_CRUISE_SPEED truck1_hait3 0.0
 				CAR_SET_IDLE truck1_hait3
 				flag_truck1_in_position_hait3 = 1
@@ -4341,6 +4305,46 @@ IF flag_ambush2_created_hait3 = 1
 
 ENDIF
 
+RETURN
+mission_cleanup_haitian3:
+IF NOT IS_CAR_DEAD truck1_hait3
+	LOCK_CAR_DOORS truck1_hait3 CARLOCK_UNLOCKED
+ENDIF
+flag_player_on_mission = 0
+SWITCH_PED_ROADS_ON -957.0 13.2 9.3 -862.5 136.5 10.9
+REMOVE_BLIP cuban1_blip_hait3
+REMOVE_BLIP cuban2_blip_hait3
+REMOVE_BLIP cuban3_blip_hait3
+REMOVE_BLIP cuban4_blip_hait3
+REMOVE_BLIP cuban5_blip_hait3
+REMOVE_BLIP cuban6_blip_hait3
+REMOVE_BLIP cuban7_blip_hait3
+REMOVE_BLIP cuban8_blip_hait3
+REMOVE_BLIP cuban9_blip_hait3
+REMOVE_BLIP cuban10_blip_hait3
+REMOVE_BLIP ambush_driver1_blip_hait3
+REMOVE_BLIP ambush_cuban1_blip_hait3
+REMOVE_BLIP ambush_cuban2_blip_hait3
+REMOVE_BLIP ambush_cuban3_blip_hait3
+REMOVE_BLIP ambush_cuban4_blip_hait3
+REMOVE_BLIP ambush_cuban5_blip_hait3
+REMOVE_BLIP ambush_cuban6_blip_hait3
+REMOVE_BLIP ambush_cuban7_blip_hait3
+REMOVE_BLIP ambush_cuban8_blip_hait3
+REMOVE_BLIP ambush_cuban9_blip_hait3
+SHUT_PLAYER_UP player1 FALSE
+SET_WANTED_MULTIPLIER 1.0
+REMOVE_SPHERE sphere1_hait3
+REMOVE_BLIP radar_blip_coord1_hait3
+MARK_MODEL_AS_NO_LONGER_NEEDED HNa
+MARK_MODEL_AS_NO_LONGER_NEEDED CBa
+MARK_MODEL_AS_NO_LONGER_NEEDED SNIPER
+MARK_MODEL_AS_NO_LONGER_NEEDED HNb
+MARK_MODEL_AS_NO_LONGER_NEEDED CBb
+MARK_MODEL_AS_NO_LONGER_NEEDED burrito
+MARK_MODEL_AS_NO_LONGER_NEEDED KATANA
+GET_GAME_TIMER timer_mobile_start
+MISSION_HAS_FINISHED
 RETURN
 
 

@@ -14,6 +14,7 @@ IF HAS_DEATHARREST_BEEN_EXECUTED
 	IF hotel_california_flag = 1 
 		SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 od_wtsign od_chariot
 		SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 LODd_buildnew LODchariot 
+		hotel_california_flag = 0
 	ENDIF
 	GOSUB mission_failed_porn3
 ENDIF
@@ -1317,14 +1318,15 @@ REMOVE_ROUTE 2
 REMOVE_ROUTE 3
 SWITCH_PED_ROADS_ON 479.9 -1.4 11.0 450.3 59.5 40.0  //test 
 SET_PLAYER_AMMO player1 WEAPONTYPE_CAMERA 0 
+IF hotel_california_flag = 1
+	SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 od_wtsign od_chariot
+	SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 LODd_buildnew LODchariot
+	hotel_california_flag = 0
+ENDIF
 
 IF IS_PLAYER_IN_AREA_2D player1 585.7 52.8 555.9 8.1 FALSE
 	DO_FADE 400 FADE_OUT
 		SET_PLAYER_COORDINATES player1 568.7 55.2 13.3
-		IF hotel_california_flag = 1 
-			SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 od_wtsign od_chariot
-			SWAP_NEAREST_BUILDING_MODEL 568.54 -4.801 13.264 80.0 LODd_buildnew LODchariot 
-		ENDIF
 		DELETE_OBJECT photobuilding_open
 		CREATE_OBJECT_NO_OFFSET ph_build_dr_closed 569.925 52.00 14.616 photobuilding_closed
 		DONT_REMOVE_OBJECT photobuilding_closed

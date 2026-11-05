@@ -885,6 +885,7 @@ IF NOT IS_CHAR_DEAD buddy_g3
 				PRINT_NOW ( GEN3_44 ) 10000 2
 				SET_RADIO_CHANNEL FEVER -1
 				protect_deal_flag = 2
+				DISPLAY_RADAR 5
 
 			ENDIF	
 		ENDIF
@@ -917,7 +918,13 @@ IF protect_deal_flag = 2
 	IF rugerhelp_g3 = 2
 		IF TIMERA > 9500
 			
-			PRINT_HELP ( GEN3_60 ) // Then fire using the circle button 
+			GET_CONTROLLER_MODE control_result
+			IF control_result = 12
+			OR control_result = 13
+				PRINT_HELP ( GEN360A )
+			ELSE
+				PRINT_HELP ( GEN3_60 ) // Then fire using the circle button
+			ENDIF
 			TIMERA = 0
 			rugerhelp_g3 = 3
 
@@ -939,7 +946,9 @@ ENDIF
 IF protect_deal_flag = 2
 	IF NOT IS_CHAR_DEAD buddy_g3
 		IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 meetingx_s3 meetingy_s3 meetingz_s3 2.0 2.0 1.0 TRUE
-			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 1.0 1.0 1.0 FALSE
+		OR LOCATE_PLAYER_ON_FOOT_2D player1 meetingx_s3 meetingy_s3 2.0 2.0 FALSE
+			IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D buddy_g3 meetingx_s3 meetingy_s3 meetingz_s3 3.0 3.0 3.0 FALSE
+			OR LOCATE_CHAR_ON_FOOT_2D buddy_g3 meetingx_s3 meetingy_s3 5.0 5.0 FALSE
 						
 						MARK_MODEL_AS_NO_LONGER_NEEDED INFERNUS
 						MARK_CAR_AS_NO_LONGER_NEEDED buddyscar_g3 
@@ -2145,7 +2154,7 @@ IF protect_deal_flag = 12
 				SET_CHAR_THREAT_SEARCH haiti_bust_guy1 THREAT_GANG_DIAZ 
 				SET_CHAR_THREAT_SEARCH haiti_bust_guy1 THREAT_GANG_CUBAN
 				SET_CHAR_PERSONALITY haiti_bust_guy1 PEDSTAT_TOUGH_GUY
-				ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy1 YELLOW BLIP_ONLY haiti_bust_guy1blip
+				ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy1 YELLOW 3 haiti_bust_guy1blip
 				CHANGE_BLIP_SCALE haiti_bust_guy1blip 2
 				SET_CHAR_HEALTH haiti_bust_guy1 150
 								
@@ -2156,7 +2165,7 @@ IF protect_deal_flag = 12
 				SET_CHAR_THREAT_SEARCH haiti_bust_guy2 THREAT_GANG_DIAZ 
 				SET_CHAR_THREAT_SEARCH haiti_bust_guy2 THREAT_GANG_CUBAN 
 				SET_CHAR_PERSONALITY haiti_bust_guy2 PEDSTAT_TOUGH_GUY
-				ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy2 YELLOW BLIP_ONLY haiti_bust_guy2blip
+				ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy2 YELLOW 3 haiti_bust_guy2blip
 				CHANGE_BLIP_SCALE haiti_bust_guy2blip 2	
 				SET_CHAR_HEALTH haiti_bust_guy2 150
 			
@@ -2279,7 +2288,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy3 THREAT_GANG_CUBAN 
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy3 THREAT_GANG_PLAYER 
 						SET_CHAR_PERSONALITY haiti_bust_guy3 PEDSTAT_TOUGH_GUY
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy3 YELLOW BLIP_ONLY haiti_bust_guy3blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy3 YELLOW 3 haiti_bust_guy3blip
 						CHANGE_BLIP_SCALE haiti_bust_guy3blip 2
 						SET_CHAR_HEALTH haiti_bust_guy3 130
 						
@@ -2290,7 +2299,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy4 THREAT_GANG_DIAZ 
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy4 THREAT_GANG_CUBAN 
 						SET_CHAR_PERSONALITY haiti_bust_guy4 PEDSTAT_TOUGH_GUY
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy4 YELLOW BLIP_ONLY haiti_bust_guy4blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy4 YELLOW 3 haiti_bust_guy4blip
 						CHANGE_BLIP_SCALE haiti_bust_guy4blip 2
 						SET_CHAR_HEALTH haiti_bust_guy4 130
 						
@@ -2387,7 +2396,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy5 THREAT_GANG_CUBAN 
 						SET_CHAR_PERSONALITY haiti_bust_guy5 PEDSTAT_TOUGH_GUY
 						SET_CHAR_HEALTH haiti_bust_guy5 150
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy5 YELLOW BLIP_ONLY haiti_bust_guy5blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy5 YELLOW 3 haiti_bust_guy5blip
 						CHANGE_BLIP_SCALE haiti_bust_guy5blip 2
 										
 						CREATE_CHAR_AS_PASSENGER hncar3 PEDTYPE_GANG_HAITIAN HNb 0 haiti_bust_guy6
@@ -2397,7 +2406,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy6 THREAT_GANG_DIAZ 
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy6 THREAT_GANG_CUBAN 
 						SET_CHAR_PERSONALITY haiti_bust_guy6 PEDSTAT_TOUGH_GUY
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy6 YELLOW BLIP_ONLY haiti_bust_guy6blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy6 YELLOW 3 haiti_bust_guy6blip
 						CHANGE_BLIP_SCALE haiti_bust_guy6blip 2
 												
 						CREATE_CHAR_AS_PASSENGER hncar3 PEDTYPE_GANG_HAITIAN HNb 1 haiti_bust_guy7
@@ -2406,7 +2415,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy7 THREAT_GANG_DIAZ 
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy7 THREAT_GANG_CUBAN 
 						SET_CHAR_PERSONALITY haiti_bust_guy7 PEDSTAT_TOUGH_GUY
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy7 YELLOW BLIP_ONLY haiti_bust_guy7blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy7 YELLOW 3 haiti_bust_guy7blip
 						CHANGE_BLIP_SCALE haiti_bust_guy7blip 2	
 						
 						CREATE_CHAR_AS_PASSENGER hncar3 PEDTYPE_GANG_HAITIAN HNa 2 haiti_bust_guy8
@@ -2416,7 +2425,7 @@ IF protect_deal_flag = 12
 						SET_CHAR_THREAT_SEARCH haiti_bust_guy8 THREAT_GANG_CUBAN
 						//SET_CHAR_THREAT_SEARCH haiti_bust_guy8 THREAT_PLAYER1
 						SET_CHAR_PERSONALITY haiti_bust_guy8 PEDSTAT_TOUGH_GUY
-						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy8 YELLOW BLIP_ONLY haiti_bust_guy8blip
+						ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy8 YELLOW 3 haiti_bust_guy8blip
 						CHANGE_BLIP_SCALE haiti_bust_guy8blip 2	
 											
 						CAR_SET_IDLE hncar3
@@ -2590,7 +2599,7 @@ IF protect_deal_flag = 12
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy11 THREAT_GANG_DIAZ 
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy11 THREAT_GANG_CUBAN 
 					SET_CHAR_PERSONALITY haiti_bust_guy11 PEDSTAT_TOUGH_GUY
-					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy11 YELLOW BLIP_ONLY haiti_bust_guy11blip
+					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy11 YELLOW 3 haiti_bust_guy11blip
 					CHANGE_BLIP_SCALE haiti_bust_guy11blip 2	
 									
 					CREATE_CHAR_AS_PASSENGER hncar4 PEDTYPE_GANG_HAITIAN HNa 0 haiti_bust_guy12
@@ -2601,7 +2610,7 @@ IF protect_deal_flag = 12
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy12 THREAT_GANG_CUBAN 
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy12 THREAT_PLAYER1
 					SET_CHAR_PERSONALITY haiti_bust_guy12 PEDSTAT_TOUGH_GUY
-					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy12 YELLOW BLIP_ONLY haiti_bust_guy12blip
+					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy12 YELLOW 3 haiti_bust_guy12blip
 					SET_CHAR_HEALTH haiti_bust_guy12 130 
 					CHANGE_BLIP_SCALE haiti_bust_guy12blip 2	
 
@@ -2612,7 +2621,7 @@ IF protect_deal_flag = 12
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy13 THREAT_GANG_DIAZ 
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy13 THREAT_GANG_CUBAN 
 					SET_CHAR_PERSONALITY haiti_bust_guy13 PEDSTAT_TOUGH_GUY
-					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy13 YELLOW BLIP_ONLY haiti_bust_guy13blip
+					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy13 YELLOW 3 haiti_bust_guy13blip
 					SET_CHAR_HEALTH haiti_bust_guy13 130 
 					CHANGE_BLIP_SCALE haiti_bust_guy13blip 2	
 									
@@ -2623,7 +2632,7 @@ IF protect_deal_flag = 12
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy14 THREAT_GANG_CUBAN 
 					SET_CHAR_THREAT_SEARCH haiti_bust_guy14 THREAT_PLAYER1
 					SET_CHAR_PERSONALITY haiti_bust_guy14 PEDSTAT_TOUGH_GUY
-					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy14 YELLOW BLIP_ONLY haiti_bust_guy14blip
+					ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy14 YELLOW 3 haiti_bust_guy14blip
 				   	CHANGE_BLIP_SCALE haiti_bust_guy14blip 2
 										
 					CAR_SET_IDLE hncar4
@@ -2809,7 +2818,7 @@ IF protect_deal_flag = 12
 							SET_CHAR_THREAT_SEARCH haiti_bust_guy17 THREAT_GANG_CUBAN 
 							SET_CHAR_THREAT_SEARCH haiti_bust_guy17 THREAT_PLAYER1
 							SET_CHAR_PERSONALITY haiti_bust_guy17 PEDSTAT_TOUGH_GUY
-							ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy17 YELLOW BLIP_ONLY haiti_bust_guy17blip
+							ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy17 YELLOW 3 haiti_bust_guy17blip
 							CHANGE_BLIP_SCALE haiti_bust_guy17blip 2
 													
 							CREATE_CHAR_AS_PASSENGER hncar5 PEDTYPE_GANG_HAITIAN HNa 0 haiti_bust_guy18
@@ -2821,7 +2830,7 @@ IF protect_deal_flag = 12
 							SET_CHAR_THREAT_SEARCH haiti_bust_guy18 THREAT_GANG_CUBAN 
 							SET_CHAR_THREAT_SEARCH haiti_bust_guy18 THREAT_PLAYER1
 							SET_CHAR_PERSONALITY haiti_bust_guy18 PEDSTAT_TOUGH_GUY
-							ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy18 YELLOW BLIP_ONLY haiti_bust_guy18blip
+							ADD_BLIP_FOR_CHAR_OLD haiti_bust_guy18 YELLOW 3 haiti_bust_guy18blip
 							CHANGE_BLIP_SCALE haiti_bust_guy18blip 2	
 
 							CAR_SET_IDLE hncar5
@@ -3535,6 +3544,7 @@ IF you_got_the_case_back_g3 = 1
 	IF HAS_PICKUP_BEEN_COLLECTED briefcase_g3
 		REMOVE_BLIP briefcase_g3blip
 		DISPLAY_RADAR 3
+		DISPLAY_RADAR 5
 		PRINT_NOW ( GEN3_28 ) 7000 2 //Take case back to Diaz
 		ADD_BLIP_FOR_COORD 461.1141 -483.7427 10.0225 finaldiazblip
 		you_got_the_case_back_g3 = 2

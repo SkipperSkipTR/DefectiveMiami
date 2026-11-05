@@ -1212,7 +1212,6 @@ boat_cut_scenes:
 		SET_CHAR_PERSONALITY boat_guard8 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard8 WEAPONTYPE_TEC9 500
 		SET_CHAR_STAY_IN_SAME_PLACE boat_guard8 TRUE
-		SET_CHAR_ACCURACY boat_guard8 200 // 3master HACKED - attack player despite police chasing
 
 		CREATE_CHAR PEDTYPE_GANG_CUBAN HMYST -652.5 -1497.5 -100.0 boat_guard9	
 		SET_CHAR_HEADING boat_guard9 245.0
@@ -1221,7 +1220,6 @@ boat_cut_scenes:
 		SET_CHAR_PERSONALITY boat_guard9 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard9 WEAPONTYPE_TEC9 500
 		SET_CHAR_STAY_IN_SAME_PLACE boat_guard9 TRUE
-		SET_CHAR_ACCURACY boat_guard9 200 // 3master HACKED - attack player despite police chasing
 
 		CREATE_CHAR PEDTYPE_GANG_CUBAN HMYST -632.5 -1476.1 -100.0 boat_guard10	
 		SET_CHAR_HEADING boat_guard10 165.9
@@ -1229,7 +1227,6 @@ boat_cut_scenes:
 		SET_CHAR_THREAT_SEARCH boat_guard10 THREAT_PLAYER1
 		SET_CHAR_PERSONALITY boat_guard10 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard10 WEAPONTYPE_TEC9 500
-		SET_CHAR_ACCURACY boat_guard10 200 // 3master HACKED - attack player despite police chasing
 
 		CREATE_CHAR PEDTYPE_GANG_CUBAN HMYST -643.2 -1467.1 -100.0 boat_guard11	
 		SET_CHAR_HEADING boat_guard11 252.0
@@ -1237,7 +1234,6 @@ boat_cut_scenes:
 		SET_CHAR_THREAT_SEARCH boat_guard11 THREAT_PLAYER1
 		SET_CHAR_PERSONALITY boat_guard11 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard11 WEAPONTYPE_TEC9 500
-		SET_CHAR_ACCURACY boat_guard11 200 // 3master HACKED - attack player despite police chasing
 
 		CREATE_CHAR PEDTYPE_GANG_CUBAN HMYST -666.5 -1458.0 -100.0 boat_guard12	
 		SET_CHAR_HEADING boat_guard12 245.0
@@ -1245,7 +1241,6 @@ boat_cut_scenes:
 		SET_CHAR_THREAT_SEARCH boat_guard12 THREAT_PLAYER1
 		SET_CHAR_PERSONALITY boat_guard12 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard12 WEAPONTYPE_TEC9 500
-		SET_CHAR_ACCURACY boat_guard12 200 // 3master HACKED - attack player despite police chasing
 
 		CREATE_CHAR PEDTYPE_GANG_CUBAN HMYST -678.8 -1486.3 -100.0 boat_guard13	
 		SET_CHAR_HEADING boat_guard13 252.0
@@ -1253,7 +1248,6 @@ boat_cut_scenes:
 		SET_CHAR_THREAT_SEARCH boat_guard13 THREAT_PLAYER1
 		SET_CHAR_PERSONALITY boat_guard13 PEDSTAT_TOUGH_GUY
 		GIVE_WEAPON_TO_CHAR boat_guard13 WEAPONTYPE_TEC9 500
-		SET_CHAR_ACCURACY boat_guard13 200 // 3master HACKED - attack player despite police chasing
 
 		raise_the_alarm = 1
 

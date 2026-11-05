@@ -427,6 +427,10 @@ interiors_inner:
 									GOTO interiors_inner
 								ENDIF
 								PRINT_BIG ( HOTEL ) 3000 2 //"The Malibu1"
+								REMOVE_PICKUP hotel_save_pickup
+								IF flag_player_on_mission = 0
+									CREATE_PICKUP pickupsave PICKUP_ONCE 219.3 -1273.5 11.5 hotel_save_pickup
+								ENDIF
 								GOSUB transition_1
 								IF IS_PLAYER_PLAYING player1
 									IF IS_PLAYER_ON_ANY_BIKE player1
@@ -443,6 +447,10 @@ interiors_inner:
 									SET_PLAYER_COORDINATES player1 223.2 -1277.3 11.4  // WDTOM moved a couple steps forward; the farthest camera zoom is blocked by the door here (and off to the side in 3Master).
 									SET_PLAYER_HEADING player1 80.0
 									SET_EXTRA_COLOURS 3 FALSE
+									REMOVE_PICKUP hotel_save_pickup
+									IF flag_player_on_mission = 0
+										CREATE_PICKUP pickupsave PICKUP_ONCE 219.3 -1273.5 11.5 hotel_save_pickup
+									ENDIF
 									//SET_CAMERA_IN_FRONT_OF_PLAYER
 								ELSE
 									GOTO interiors_inner
@@ -1923,6 +1931,9 @@ transition_2:
 			SET_FADING_COLOUR 0 0 0
 			DO_FADE 1500 FADE_IN
 		ELSE
+			IF flag_player_in_hotel = 1
+				WAIT 100
+			ENDIF
 			DO_FADE 500 FADE_IN
 		ENDIF
 	ENDIF
@@ -2713,6 +2724,7 @@ IF IS_PLAYER_PLAYING player1
 	ENDWHILE
 	
 	PRINT_NOW (STRIP_1) 5000 1 // Not ehough cash, you cheap sleezebag.
+	WAIT 3000
 	GOTO prude_2
 	prude:
 	WHILE IS_BUTTON_PRESSED PAD1 CROSS

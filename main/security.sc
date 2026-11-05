@@ -59,7 +59,7 @@ VAR_FLOAT cent_x cent_y theta_security theta_mod
 
 VAR_INT sec_counter
 
-VAR_INT msgforweapons
+VAR_INT msgforweapons amountofammo
 
 flag_player_been_frisked = 0
 flag_zone = 0
@@ -81,6 +81,7 @@ cent_y = -805.0
 
 sec_counter = 0
 msgforweapons = 0
+amountofammo = 0
 
 SCRIPT_NAME	SECURE
 
@@ -516,7 +517,11 @@ security_pickups:
 			
 			REMOVE_PICKUP slot1_pickup_security
 			GOSUB quick_stepping
-			CREATE_PICKUP_WITH_AMMO weapon_model_slot_1 PICKUP_ONCE ammo_slot_1 pickup_x pickup_y pickup_z slot1_pickup_security
+			amountofammo = ammo_slot_1
+			IF amountofammo = 0
+				amountofammo = -1
+			ENDIF
+			CREATE_PICKUP_WITH_AMMO weapon_model_slot_1 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot1_pickup_security
 		    
 			IF msgforweapons = 0
 			    msgforweapons = 1
@@ -527,7 +532,11 @@ security_pickups:
 			
 			REMOVE_PICKUP slot2_pickup_security
 			GOSUB quick_stepping
-			CREATE_PICKUP_WITH_AMMO weapon_model_slot_2 PICKUP_ONCE ammo_slot_2 pickup_x pickup_y pickup_z slot2_pickup_security
+			amountofammo = ammo_slot_2
+			IF amountofammo = 0
+				amountofammo = -1
+			ENDIF
+			CREATE_PICKUP_WITH_AMMO weapon_model_slot_2 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot2_pickup_security
 			
 			IF msgforweapons = 0
 			    msgforweapons = 1
@@ -540,7 +549,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot3_pickup_security
 		GOSUB quick_stepping																		
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_3 PICKUP_ONCE ammo_slot_3 pickup_x pickup_y pickup_z slot3_pickup_security
+		amountofammo = ammo_slot_3
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_3 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot3_pickup_security
 		
 		IF msgforweapons = 0
 			msgforweapons = 1
@@ -551,7 +564,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot4_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_4 PICKUP_ONCE ammo_slot_4 pickup_x pickup_y pickup_z slot4_pickup_security
+		amountofammo = ammo_slot_4
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_4 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot4_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1
@@ -562,7 +579,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot5_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_5 PICKUP_ONCE ammo_slot_5 pickup_x pickup_y pickup_z slot5_pickup_security
+		amountofammo = ammo_slot_5
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_5 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot5_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1
@@ -574,7 +595,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot6_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_6 PICKUP_ONCE ammo_slot_6 pickup_x pickup_y pickup_z slot6_pickup_security
+		amountofammo = ammo_slot_6
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_6 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot6_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1
@@ -586,7 +611,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot7_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_7 PICKUP_ONCE ammo_slot_7 pickup_x pickup_y pickup_z slot7_pickup_security
+		amountofammo = ammo_slot_7
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_7 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot7_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1
@@ -597,7 +626,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot8_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_8 PICKUP_ONCE ammo_slot_8 pickup_x pickup_y pickup_z slot8_pickup_security
+		amountofammo = ammo_slot_8
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_8 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot8_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1
@@ -609,7 +642,11 @@ security_pickups:
 		
 		REMOVE_PICKUP slot9_pickup_security
 		GOSUB quick_stepping
-		CREATE_PICKUP_WITH_AMMO weapon_model_slot_9 PICKUP_ONCE ammo_slot_9 pickup_x pickup_y pickup_z slot9_pickup_security
+		amountofammo = ammo_slot_9
+		IF amountofammo = 0
+			amountofammo = -1
+		ENDIF
+		CREATE_PICKUP_WITH_AMMO weapon_model_slot_9 PICKUP_ONCE amountofammo pickup_x pickup_y pickup_z slot9_pickup_security
 		
 		IF msgforweapons = 0
 		    msgforweapons = 1

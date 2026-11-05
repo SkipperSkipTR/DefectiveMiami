@@ -14,6 +14,7 @@ GOSUB mission_start_taxi1
 GOSUB mission_cleanup_taxi1
 
 MISSION_END			
+GET_RANDOM_CHAR_IN_ZONE VICE_C TRUE TRUE TRUE taxi_ped1
 
 
 // Variables for mission
@@ -23,7 +24,7 @@ VAR_INT taxi_car1 taxi_countdown_already_started
 VAR_INT taxi_ped1 taxi_passed_this_shot taxi_fucked_flag
 VAR_INT taxi_countdown taxi_score WMOCAistance_int WMOCAistance_int_old
 VAR_INT taxi_finish_time taxi_start_time total_taxi_time_taken 
-VAR_INT score_for_this_fare	speedbonus in_a_row_cash in_a_row_number
+VAR_INT score_for_this_fare speedbonus in_a_row_cash in_a_row_number taxi_control_result
 
 VAR_FLOAT WMOCAestx1 WMOCAesty1 WMOCAestz1
 VAR_FLOAT taxi_blipx taxi_blipy taxi_blipz 
@@ -120,6 +121,9 @@ ENDIF
 		//PRINT_NOW ( TAXI2 ) 5000 2 //You SUCK!
 		GOTO mission_taxi1_failed
 	ENDIF
+	IF NOT taxi_ped1 = -1
+		MARK_CHAR_AS_NO_LONGER_NEEDED taxi_ped1
+	ENDIF
 
 
 GET_RANDOM_CHAR_IN_ZONE VICE_C TRUE TRUE TRUE taxi_ped1
@@ -144,6 +148,11 @@ GET_DISTANCE_BETWEEN_COORDS_2D taxi_ped_x taxi_ped_y player_taxi_x player_taxi_y
 
 IF passenger_distance < 30.0
 	passenger_distance = 0.0
+	WAIT 0
+	GOTO Start_taxi_mission
+ENDIF
+IF NOT LOCATE_PLAYER_IN_CAR_CHAR_3D player1 taxi_ped1 88.0 88.0 20.0 FALSE
+	WAIT 0
 	GOTO start_taxi_mission
 ENDIF
 
@@ -151,6 +160,7 @@ IF taxi_ped_x > -1117.8
 AND taxi_ped_x < -1054.2
 AND taxi_ped_y > 1271.3
 AND taxi_ped_y < 1402.7
+	WAIT 0
 	GOTO start_taxi_mission  // random_ped_grabber
 ENDIF
 
@@ -159,6 +169,14 @@ IF taxi_ped_x > -48.4
 AND taxi_ped_x < 192.4
 AND taxi_ped_y > 0.0
 AND taxi_ped_y < 335.9
+	WAIT 0
+	GOTO Start_taxi_mission
+ENDIF
+IF taxi_ped_x > -52.5
+AND taxi_ped_x < 170.2
+AND taxi_ped_y > -640.9
+AND taxi_ped_y < -463.4
+	WAIT 0
 	GOTO start_taxi_mission  // random_ped_grabber
 ENDIF
 // START OF TAXI MISSION
@@ -924,7 +942,12 @@ score:
 		REGISTER_MISSION_GIVEN
 		REGISTER_ODDJOB_MISSION_PASSED
 		SET_ALL_TAXIS_HAVE_NITRO TRUE
-		PRINT_HELP NITRO
+		GET_CONTROLLER_MODE taxi_control_result
+		IF taxi_control_result = 13
+			PRINT_HELP ( NITROM )
+		ELSE
+			PRINT_HELP NITRO
+		ENDIF
 		PLAYER_MADE_PROGRESS 1
 		new_taxi_created_before = 1 							
 	ENDIF

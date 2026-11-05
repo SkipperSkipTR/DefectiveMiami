@@ -292,7 +292,8 @@ rcp_plane3_locate_size  = 4.0
 	POINT_CAMERA_AT_POINT 322.70871 1238.806763 26.85948 JUMP_CUT
 	
 		
-	DO_FADE 3000 FADE_IN
+	WAIT 650
+	DO_FADE 2000 FADE_IN
 
 	WHILE GET_FADING_STATUS
 	 	WAIT 0
@@ -387,7 +388,12 @@ rcp_total_checkpoints_minus1 = rcp_total_checkpoints - 1
 	SET_EVERYONE_IGNORE_PLAYER player1 FALSE
 	SET_ALL_CARS_CAN_BE_DAMAGED TRUE
 
-PRINT_HELP ( PLANE_H )
+GET_CONTROLLER_MODE control_result
+IF control_result = 13
+	PRINT_HELP ( PLANEHA )
+ELSE
+	PRINT_HELP ( PLANE_H )
+ENDIF
 
 IF IS_CAR_DEAD rcp_race_plane1
 	GOTO mission_rcplane_failed

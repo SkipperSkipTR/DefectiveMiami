@@ -27,7 +27,7 @@ VAR_INT icecreamped1 icecreamped1_return
 VAR_INT icecreamped2 icecreamped2_return
 VAR_INT icecreamped3 icecreamped3_return
 VAR_INT icecreamped4 icecreamped4_return
-VAR_INT wantedlevel_icecream 
+VAR_INT wantedlevel_icecream icecream_control_result
 
 ////////////////////////////////////////////////////	flags	/////////////////////////////////////
 VAR_INT ganghateflag
@@ -151,7 +151,12 @@ WHILE TIMERA < 5000
 			   
 	WAIT 0
 
-	PRINT_NOW ( ICC1_8 ) 5000 2 
+	GET_CONTROLLER_MODE icecream_control_result
+	IF icecream_control_result = 13
+		PRINT_NOW ( ICC1_8A ) 5000 2
+	ELSE
+		PRINT_NOW ( ICC1_8 ) 5000 2
+	ENDIF
 		
 	IF IS_BUTTON_PRESSED PAD1 cross
 		GOTO end_of_icecream_cutscene

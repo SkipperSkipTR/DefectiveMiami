@@ -675,7 +675,13 @@ ENDIF
 
 IF got_cannon_help_before = 0
 	
-	PRINT_HELP SPRAY_1 //Use the ~o~| ~w~button to fire the water cannon.
+	GET_CONTROLLER_MODE control_result
+	IF control_result = 12
+	OR control_result = 13
+		PRINT_HELP ( SPRAY1M )
+	ELSE
+		PRINT_HELP SPRAY_1 //Use the ~o~| ~w~button to fire the water cannon.
+	ENDIF
 
 	got_cannon_help_before = 1
 	WAIT 4000

@@ -905,6 +905,14 @@ IF gun_runner_goals = 0
 					box1z = groundz_box
 				ENDIF	
 			ELSE
+				IF box1z = 0.0
+					GET_OBJECT_COORDINATES box1 box1x box1y box1z
+					GET_GROUND_Z_FOR_3D_COORD box1x box1y box1z groundz_box
+					IF groundz_box > 9.0
+						groundz_box += 1.0
+						box1z = groundz_box
+					ENDIF
+				ENDIF
 				CREATE_PICKUP python PICKUP_ONCE box1x box1y box1z gungun1
 				REMOVE_BLIP gun_blip1 
 				ADD_BLIP_FOR_PICKUP gungun1 gun_blip1 
@@ -925,6 +933,14 @@ IF gun_runner_goals = 0
 					box2z = groundz_box
 				ENDIF	
 			ELSE
+				IF box2z = 0.0
+					GET_OBJECT_COORDINATES box2 box2x box2y box2z
+					GET_GROUND_Z_FOR_3D_COORD box2x box2y box2z groundz_box
+					IF groundz_box > 9.0
+						groundz_box += 1.0
+						box2z = groundz_box
+					ENDIF
+				ENDIF
 				CREATE_PICKUP shotgspa PICKUP_ONCE box2x box2y box2z gungun2
 				REMOVE_BLIP gun_blip2 
 				ADD_BLIP_FOR_PICKUP gungun2 gun_blip2 
@@ -945,6 +961,14 @@ IF gun_runner_goals = 0
 					box3z = groundz_box
 				ENDIF	
 			ELSE
+				IF box3z = 0.0
+					GET_OBJECT_COORDINATES box3 box3x box3y box3z
+					GET_GROUND_Z_FOR_3D_COORD box3x box3y box3z groundz_box
+					IF groundz_box > 9.0
+						groundz_box += 1.0
+						box3z = groundz_box
+					ENDIF
+				ENDIF
 				CREATE_PICKUP M60 PICKUP_ONCE box3x box3y box3z gungun3
 				REMOVE_BLIP gun_blip3 
 				ADD_BLIP_FOR_PICKUP gungun3 gun_blip3 
@@ -965,6 +989,14 @@ IF gun_runner_goals = 0
 					box4z = groundz_box
 				ENDIF	
 			ELSE
+				IF box4z = 0.0
+					GET_OBJECT_COORDINATES box4 box4x box4y box4z
+					GET_GROUND_Z_FOR_3D_COORD box4x box4y box4z groundz_box
+					IF groundz_box > 9.0
+						groundz_box += 1.0
+						box4z = groundz_box
+					ENDIF
+				ENDIF
 				CREATE_PICKUP ingramsl PICKUP_ONCE box4x box4y box4z gungun4
 				REMOVE_BLIP gun_blip4 
 				ADD_BLIP_FOR_PICKUP gungun4 gun_blip4 

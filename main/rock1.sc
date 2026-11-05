@@ -600,9 +600,16 @@ WHILE NOT counter_number_drugs_collected = 1
 					PRINT_NOW ( HORN ) 5000 1 //"Press the horn!"
 					flag_had_horn_mess_rock1 = 1
 				ENDIF
+				GET_CONTROLLER_MODE control_result
+				IF control_result = 13
+					PRINT_HELP ( ROCK1HM )
+				ELSE
+					PRINT_HELP ( ROCK1HC )
+				ENDIF
 
 				IF IS_PLAYER_SITTING_IN_ANY_CAR player1
 				AND IS_PLAYER_PRESSING_HORN player1
+					CLEAR_HELP
 					STORE_CAR_PLAYER_IS_IN player1 cutcar_rock1
 
 					IF NOT IS_CAR_DEAD cutcar_rock1 

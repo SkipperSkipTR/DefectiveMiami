@@ -2561,7 +2561,7 @@ mobile_rings:
 		++ ring_a_ding_ding
 		
 		// if we're somehow on a mission here
-		IF flag_player_on_mission = 1
+		IF NOT flag_player_on_mission = 2
 			RETURN
 		ENDIF
 
@@ -2573,7 +2573,7 @@ mobile_rings:
 		GOSUB has_audio_finished
 		
 		// if we're somehow on a mission here
-		IF flag_player_on_mission = 1
+		IF NOT flag_player_on_mission = 2
 			RETURN
 		ENDIF
 
@@ -2587,7 +2587,7 @@ mobile_rings:
 			WAIT 0
 
 			// if we're somehow on a mission here
-			IF flag_player_on_mission = 1
+			IF NOT flag_player_on_mission = 2
 				RETURN
 			ENDIF
 
@@ -2603,7 +2603,7 @@ mobile_rings:
 	imploding_head:
 
 	// if we're somehow on a mission here
-	IF flag_player_on_mission = 1
+	IF NOT flag_player_on_mission = 2
 		RETURN
 	ENDIF
 
@@ -2661,7 +2661,7 @@ loading_and_playing_audio:
 		WAIT 0
 
 		// if we're somehow on a mission here
-		IF flag_player_on_mission = 1
+		IF NOT flag_player_on_mission = 2
 			RETURN
 		ENDIF
 
@@ -2696,7 +2696,7 @@ has_audio_finished:
 		WAIT 0
 			
 		// if we're somehow on a mission here
-		IF flag_player_on_mission = 1
+		IF NOT flag_player_on_mission = 2
 			RETURN
 		ENDIF
 
@@ -2727,7 +2727,7 @@ RETURN
 
 death_checker:
 	// if we're somehow on a mission here
-	IF flag_player_on_mission = 1
+	IF NOT flag_player_on_mission = 2
 		RETURN
 	ENDIF
 
@@ -2782,7 +2782,9 @@ mobile_message_cleanup:
 		flag_new_cont = 0
 	ENDIF
 	MARK_MODEL_AS_NO_LONGER_NEEDED cellphone
-	flag_player_on_mission = 0
+	IF flag_player_on_mission = 2
+		flag_player_on_mission = 0
+	ENDIF
 
 RETURN
 }

@@ -475,7 +475,7 @@ DO_FADE 1500 FADE_IN
 PRINT_NOW ( POR4_01 ) 5000 1 //Go Downtown and adjust the spotlight on top of the building.
 PRINT ( POR4_02 ) 5000 1 //A fast bike will be needed to jump from roof to roof.  The Security Guard usually drives a PCJ 600 to work...
 
-ADD_BLIP_FOR_COORD 6.8 953.5 9.4 bike_blip  
+ADD_BLIP_FOR_COORD -6.4 957.1 9.4 bike_blip
 
 
 
@@ -1164,17 +1164,31 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 			timera = 0
 			waiting_for_player_to_get_into_lift:
 			WAIT 0
-				IF NOT IS_CAR_DEAD players_lift_vehicle 
-					IF LOCATE_CAR_2D players_lift_vehicle -557.4 782.3 1.3 1.3 FALSE
+				IF NOT IS_CAR_DEAD players_lift_vehicle
+					IF IS_CAR_MODEL players_lift_vehicle freeway
+					OR IS_CAR_MODEL players_lift_vehicle angel
+						IF LOCATE_CAR_2D players_lift_vehicle -557.9 782.3 2.0 2.0 FALSE
+							GOTO player_in_lift
+						ENDIF
+					ELSE
+						IF LOCATE_CAR_2D players_lift_vehicle -557.4 782.3 1.3 1.3 FALSE
+							GOTO player_in_lift
+						ENDIF
+					ENDIF
+				ENDIF
+				IF IS_CAR_MODEL players_lift_vehicle faggio
+				OR IS_CAR_MODEL players_lift_vehicle pizzaboy
+					IF TIMERA > 1100
+						GOTO player_in_lift
+					ENDIF
+				ELSE
+					IF timera > 900
 						GOTO player_in_lift
 					ENDIF
 				ENDIF
-				IF timera > 900
-					GOTO player_in_lift
-				ENDIF
 			GOTO waiting_for_player_to_get_into_lift    
 			player_in_lift:
-			SET_CAR_TEMP_ACTION players_lift_vehicle TEMPACT_HANDBRAKESTRAIGHT 1
+			SET_CAR_TEMP_ACTION players_lift_vehicle TEMPACT_HANDBRAKESTRAIGHT 1000
 			
 			IF NOT IS_CHAR_DEAD lift_office1
 				STOP_CHAR_LOOKING lift_office1  
@@ -1187,6 +1201,7 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 			ENDIF
 			
 			WAIT 1000
+			SET_CAR_TEMP_ACTION players_lift_vehicle TEMPACT_WAIT 20000
 
 			//closing bottom doors
 			timera = 0
@@ -1326,7 +1341,7 @@ IF LOCATE_STOPPED_PLAYER_ANY_MEANS_3D player1 -562.5 782.3 21.8 2.0 2.0 2.0 TRUE
 				ENDIF
 			GOTO waiting_for_player_to_get_out_of_lift    
 			player_out_lift:
-			SET_CAR_TEMP_ACTION players_lift_vehicle TEMPACT_HANDBRAKESTRAIGHT 1
+			SET_CAR_TEMP_ACTION players_lift_vehicle TEMPACT_HANDBRAKESTRAIGHT 5000
 			IF NOT LOCATE_CAR_2D players_lift_vehicle -560.5 788.0 1.0 1.0 FALSE
 				SET_CAR_COORDINATES players_lift_vehicle -560.5 788.0 96.0
 				SET_CAR_HEADING players_lift_vehicle 186.0 
@@ -1577,9 +1592,6 @@ IF porn4_goals = 26
 		WAIT 5000
 		CLEAR_CUTSCENE
 
-		RESTORE_CAMERA_JUMPCUT
-		SET_PLAYER_CONTROL player1 ON
-		SWITCH_WIDESCREEN OFF
 	// ******************************************END OF CUTSCENE - PLAYER TURNING TITS ON*****************************************************
 	// ******************************************START OF ASSET AQUIRED CUTSCENE********************************
 					DO_FADE 500 FADE_OUT

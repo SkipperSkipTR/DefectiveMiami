@@ -326,7 +326,7 @@ ENDWHILE
 
 PRINT_NOW HAT2_B1 15000 1//"Get to the van that contains the flying bombs."
 
-CREATE_CAR TOPFUN -808.9448 -162.9215 8.9500 plane_carrier
+CREATE_CAR TOPFUN -808.9448 -162.9215 11.4575 plane_carrier
 SET_CAR_HEADING plane_carrier 0.0
 ADD_BLIP_FOR_CAR plane_carrier plane_carrier_blip
 //FREEZE_CAR_POSITION	plane_carrier TRUE
@@ -386,7 +386,7 @@ CLEAR_CHAR_THREAT_SEARCH cuban_dude01
 //ADD_BLIP_FOR_CHAR cuban_dude01 cuban_dude01_blip
 
 ////WORKING MINI CRANE - SPEEDER SHOOTER 2ND
-CREATE_CHAR PEDTYPE_CIVMALE CBA -538.0 -235.1073 7.2104 cuban_dude02
+CREATE_CHAR PEDTYPE_CIVMALE CBa -538.19 -235.3073 7.2104 cuban_dude02
 SET_CHAR_HEADING cuban_dude02 273.9880
 SET_CHAR_STAY_IN_SAME_PLACE	cuban_dude02 TRUE
 CLEAR_CHAR_THREAT_SEARCH cuban_dude02
@@ -506,7 +506,7 @@ POINT_CAMERA_AT_POINT -551.9008 -220.5808 21.6745 JUMP_CUT
 LOAD_SCENE -524.1709 -234.6104 8.1665
 
 PRINT_NOW HAT2_B2 4500 1//"Kill the Cubans..."
-SET_CAR_COORDINATES plane_carrier -808.9448 -162.9215 8.95000
+SET_CAR_COORDINATES plane_carrier -808.9448 -162.9215 11.4575
 GET_GAME_TIMER game_timer
 timer = game_timer + 4500
 
@@ -551,17 +551,25 @@ WHILE game_timer < timer
 ENDWHILE
 
 cutscene_skip:
+CLEAR_PRINTS
+DO_FADE 250 FADE_OUT
+WHILE GET_FADING_STATUS
+	WAIT 0
+ENDWHILE
 
 button_pressed = 0
 
 IF IS_CAR_DEAD plane_carrier
 	GOTO mission_haitian2_failed
 ENDIF
+LOAD_SCENE -812.0 -168.0 10.0457
 
 
 RESTORE_CAMERA_JUMPCUT   // WDTOM this has to come before giving the player control, or the camera never attaches to the rc plane.
 
 SET_PLAYER_CONTROL player1 ON
+WAIT 100
+DO_FADE 250 FADE_IN
 
 
 SET_POLICE_IGNORE_PLAYER player1 OFF
@@ -588,7 +596,7 @@ WHILE NOT IS_PLAYER_DEAD player1
 				IF NOT no_of_rc_planes_left = 0
 					IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -812.0 -168.0 10.0457 0.6 0.6 1.0
 						
-						GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER player1 -812.0 -168.0 8.04 180.0 rcbaron
+						GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER player1 -812.0 -168.0 11.4575 180.0 rcbaron
 						
 						-- no_of_rc_planes_left
 						IF no_of_rc_planes_left = 2
@@ -629,7 +637,12 @@ WHILE NOT IS_PLAYER_DEAD player1
 				IF help_counter_h2 = 0
 					CLEAR_HELP
 					
-					PRINT_HELP PLANE_H //plane help text
+					GET_CONTROLLER_MODE control_result
+					IF control_result = 13
+						PRINT_HELP ( PLANEHA )
+					ELSE
+						PRINT_HELP PLANE_H //plane help text
+					ENDIF
 
 					help_counter_h2 ++
 					help_timer_h2 = game_timer + 6000

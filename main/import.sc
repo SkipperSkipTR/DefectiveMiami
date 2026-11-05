@@ -91,7 +91,7 @@ import1_loop_inner:
 							WAIT 0
 						ENDWHILE
 
-						CREATE_CAR deluxo -1022.3 -868.2 12.0 deluxo_prize_car
+						CREATE_CAR deluxo -1022.6 -868.6 12.2 deluxo_prize_car
 						SET_CAR_HEADING deluxo_prize_car 175.0
 						deluxo_car_been_created = 1
 

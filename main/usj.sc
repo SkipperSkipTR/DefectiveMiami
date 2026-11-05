@@ -500,7 +500,7 @@ IF IS_PLAYER_IN_ZONE player1 BEACH3
 		camera_y = -125.6725 
 		camera_z = 13.7649
 		usj_start_x = 394.2590 
-		usj_start_y = -116.6847
+		usj_start_y = -121.6847
 		usj_start_z = 19.7462  
 		GOTO the_jump
 	ENDIF
@@ -570,8 +570,8 @@ OR collision_counter_usj < 70 //GS-SC: Increase for special case with unavoidabl
 	ENDIF
 
 	IF do_usj_reward = 0
-		IF LOCATE_PLAYER_IN_CAR_3D player1 usj_start_x usj_start_y usj_start_z 10.0 10.0 10.0 0
-		AND NOT IS_CAR_UPSIDEDOWN jump_car
+		IF LOCATE_PLAYER_IN_CAR_3D player1 usj_start_x usj_start_y usj_start_z 10.0 10.0 10.0 false
+		AND IS_CAR_UPRIGHT jump_car
 			do_usj_reward = 1
 		ENDIF
 	ENDIF

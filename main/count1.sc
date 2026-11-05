@@ -642,7 +642,7 @@ SET_PLAYER_MOOD player1 PLAYER_MOOD_CALM 60000
 //create some body armour for the player right by the corona location, for mobile version
 CREATE_PICKUP bodyarmour PICKUP_ONCE -689.33270 -1251.0626 31.156513 bodyarmour_am5
 
-SET_UP_TAXI_SHORTCUT -1047.664 -298.188 11.0 266.280 512.591 -74.900 9.573 189.24 // used to warp player from print works to Malibu
+SET_UP_TAXI_SHORTCUT -1047.664 -293.28 11.0 92.3 512.591 -74.9 9.573 189.24	// used to warp player from print works to Malibu
 
 IF flag_had_taxi_jump_help = 0
 	//SWITCH_WIDESCREEN ON

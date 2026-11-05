@@ -30,6 +30,8 @@ mission_start_4x4one:
 IF flag_4x4_mission1_passed = 0
 	REGISTER_MISSION_GIVEN
 ENDIF
+SET_PLAYER_CONTROL player1 OFF
+WAIT 0
 
 // collect in any order should be suppressed from pathing
 DISPLAY_RADAR 2 // PATHING OFF
@@ -200,7 +202,6 @@ IF NOT IS_CAR_DEAD player_4x4
 	LOCK_CAR_DOORS player_4x4 CARLOCK_UNLOCKED
 ENDIF
 
-SET_PLAYER_CONTROL player1 off
 SWITCH_WIDESCREEN on 
  
 		

@@ -674,7 +674,7 @@ IF flag_player_in_mall = 1
 		prot1_print_flag = 1
 	ENDIF
 
-	IF all_shops_rammed = 10  // GTA_MOBILE changed from 25 so it's not impossible (or boring) to finish this mission.
+	IF all_shops_rammed = 25	// GTA_MOBILE changed from 25 so it's not impossible (or boring) to finish this mission.
 		ram_raid_goals = 1
 	ELSE
 		//coffee shop

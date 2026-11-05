@@ -92,6 +92,8 @@ mission_start_carpark1:
 IF flag_carpark1_passed = 0
 	REGISTER_MISSION_GIVEN
 ENDIF
+SET_PLAYER_CONTROL player1 OFF
+WAIT 0
 SCRIPT_NAME CARPRK1 
 flag_player_on_mission = 1
 LOAD_MISSION_TEXT CARPAR1
@@ -352,7 +354,6 @@ ENDIF
 */
 //Mission Script 
 {
-SET_PLAYER_CONTROL player1 off
 SWITCH_WIDESCREEN on 
 
 STORE_WANTED_LEVEL player1 wanted_4x4

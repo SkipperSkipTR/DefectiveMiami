@@ -49,8 +49,6 @@ VAR_INT dyn2
 VAR_INT dyn3
 VAR_INT dyn4
 VAR_INT dyn5
-VAR_INT counted_once3
-VAR_INT counted_once4
 
 //blips
 VAR_INT bombplace
@@ -103,14 +101,14 @@ speech_played2 = 0
 speech_played3 = 0
 player_in_coffee_shop = 0
 prot3_print_flag = 0
+cop1 = -1
+cop2 = -1
 cop3_flag = 0
 cop4_flag = 0
 cop1_in_garage = 0
 cop2_in_garage = 0
 cop3_in_garage = 0
 cop4_in_garage = 0
-counted_once3 = 0
-counted_once4 = 0
 
 copland_in_mall = 0
 copland_blip_active = 0
@@ -588,184 +586,110 @@ IF disguise_goals = 0
 		ENDIF
 		
 		
+		gotpolice = 0
+		cop1_in_garage = 0
+		cop2_in_garage = 0
+		cop3_in_garage = 0
+		cop4_in_garage = 0
 		IF IS_PLAYER_IN_AREA_2D player1 466.1 325.5 448.1 335.2 FALSE
-			IF NOT gotpolice = 2
-				IF IS_WANTED_LEVEL_GREATER player1 1
-					IF cop3_flag = 0
-						IF NOT IS_POINT_ON_SCREEN 444.6 348.4 10.7 2.0
-							CREATE_CHAR PEDTYPE_CIVMALE cop 444.6 348.4 10.7 cop3
-							SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop3 player1  
-							SET_CHAR_THREAT_SEARCH cop3 THREAT_PLAYER1 
-							GIVE_WEAPON_TO_CHAR cop3 WEAPONTYPE_NIGHTSTICK 1
-							cop3_flag = 1
-						ENDIF
-					ENDIF  
-					   
-					IF cop4_flag = 0
-						IF NOT IS_POINT_ON_SCREEN 472.1 347.8 10.6 2.0
-							CREATE_CHAR PEDTYPE_CIVMALE cop 472.1 347.8 10.6 cop4
-							SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop4 player1 
-							SET_CHAR_THREAT_SEARCH cop4 THREAT_PLAYER1 
-							GIVE_WEAPON_TO_CHAR cop4 WEAPONTYPE_NIGHTSTICK 1
-							cop4_flag = 1
-						ENDIF
+			IF IS_WANTED_LEVEL_GREATER player1 1
+				IF cop3_flag = 0
+					IF NOT IS_POINT_ON_SCREEN 444.6 348.4 10.7 2.0
+						CREATE_CHAR PEDTYPE_CIVMALE cop 444.6 348.4 10.7 cop3
+						SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop3 player1
+						SET_CHAR_THREAT_SEARCH cop3 THREAT_PLAYER1
+						GIVE_WEAPON_TO_CHAR cop3 WEAPONTYPE_NIGHTSTICK 1
+						cop3_flag = 1
 					ENDIF
 				ENDIF
-			ENDIF     
+					   
+				IF cop4_flag = 0
+					IF NOT IS_POINT_ON_SCREEN 472.1 347.8 10.6 2.0
+						CREATE_CHAR PEDTYPE_CIVMALE cop 472.1 347.8 10.6 cop4
+						SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT cop4 player1
+						SET_CHAR_THREAT_SEARCH cop4 THREAT_PLAYER1
+						GIVE_WEAPON_TO_CHAR cop4 WEAPONTYPE_NIGHTSTICK 1
+						cop4_flag = 1
+					ENDIF
+				ENDIF
+			ENDIF
 			
 
 			IF IS_CHAR_IN_AREA_2D buddy 466.1 325.5 448.1 339.2 FALSE
-				IF gotpolice = 0 
-					
-					IF cop3_flag = 1 
-						IF NOT IS_CHAR_DEAD cop3  
-							IF IS_CHAR_IN_AREA_2D cop3 466.1 325.5 448.1 337.2 FALSE
-								IF cop3_in_garage = 0
-									IF cop4_in_garage = 0
-										gotpolice ++
-										cop3_in_garage = 1
-										counted_once3 = 1
-									ENDIF
-								ENDIF
-							ENDIF
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop3
-							cop3_flag = 0
-							counted_once3 = 0 
+				IF cop3_flag = 1
+					IF NOT IS_CHAR_DEAD cop3
+						IF IS_CHAR_IN_AREA_2D cop3 466.1 325.5 448.1 337.2 FALSE
+							cop3_in_garage = 1
+							gotpolice ++
 						ENDIF
-					ENDIF 
+					ELSE
+						MARK_CHAR_AS_NO_LONGER_NEEDED cop3
+						cop3_flag = 0
+					ENDIF
+				ENDIF
 
-					IF cop4_flag = 1 
-						IF NOT IS_CHAR_DEAD cop4  
-							IF IS_CHAR_IN_AREA_2D cop4 466.1 325.5 448.1 337.2 FALSE
-								IF cop3_in_garage = 0
-									IF cop4_in_garage = 0
-										gotpolice ++
-										cop4_in_garage = 1
-										counted_once4 = 1
-									ENDIF
-								ENDIF
-							ENDIF
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop4
-							cop4_flag = 0
-							counted_once4 = 0 
+				IF cop4_flag = 1
+					IF NOT IS_CHAR_DEAD cop4
+						IF IS_CHAR_IN_AREA_2D cop4 466.1 325.5 448.1 337.2 FALSE
+							cop4_in_garage = 1
+							gotpolice ++
 						ENDIF
-					ENDIF 
+					ELSE
+						MARK_CHAR_AS_NO_LONGER_NEEDED cop4
+						cop4_flag = 0
+					ENDIF
+				ENDIF
+				IF cop1 = -1
 
 					GET_RANDOM_COP_IN_AREA 466.1 325.5 448.1 339.2 1 0 0 0 0 cop1
-					IF NOT cop1 = -1
-						IF NOT IS_CHAR_DEAD cop1 
-							IF IS_CHAR_MODEL cop1 cop
-								IF cop1_in_garage = 0
-									gotpolice ++
-									cop1_in_garage = 1
-								ENDIF
-								IF IS_CHAR_IN_ANY_CAR cop1 
-									SET_CHAR_OBJ_LEAVE_ANY_CAR cop1
-								ENDIF
-							ENDIF
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop1
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop2
-							gotpolice = 0
-						ENDIF
-					ENDIF
-
 				ENDIF
-				
-				
-				IF gotpolice = 1 
-
-					IF cop3_flag = 1 
-						IF NOT IS_CHAR_DEAD cop3  
-							IF IS_CHAR_IN_AREA_2D cop3 466.1 325.5 448.1 337.2 FALSE
-								IF counted_once3 = 0
-									IF cop3_in_garage < 2
-										IF cop4_in_garage < 2
-											gotpolice ++
-											cop3_in_garage = 2
-										ENDIF
-									ENDIF
-								ENDIF
+				IF cop1 > -1
+					IF NOT IS_CHAR_DEAD cop1
+						SET_CHAR_HEED_THREATS cop1 TRUE
+						IF IS_CHAR_MODEL cop1 cop
+							cop1_in_garage = 1
+							gotpolice ++
+							IF IS_CHAR_IN_ANY_CAR cop1
+								SET_CHAR_OBJ_LEAVE_ANY_CAR cop1
 							ENDIF
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop3
-							cop3_flag = 0
-							counted_once3 = 0 
 						ENDIF
-					ENDIF 
-
-					IF cop4_flag = 1 
-						IF NOT IS_CHAR_DEAD cop4  
-							IF IS_CHAR_IN_AREA_2D cop4 466.1 325.5 448.1 337.2 FALSE
-								IF counted_once4 = 0
-									IF cop3_in_garage < 2
-										IF cop4_in_garage < 2
-											gotpolice ++
-											cop4_in_garage = 2
-										ENDIF
-									ENDIF
-								ENDIF
-							ENDIF
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop4
-							cop4_flag = 0
-							counted_once4 = 0 
-						ENDIF
-					ENDIF 
-
-					GET_RANDOM_COP_IN_AREA 466.1 325.5 448.1 339.2 1 0 0 0 0 cop2	
-					IF NOT cop2 = -1
-						IF NOT IS_CHAR_DEAD cop2
-							IF NOT IS_CHAR_DEAD buddy 
-								IF IS_CHAR_MODEL cop2 cop
-									IF cop2_in_garage = 0
-										gotpolice ++
-										cop2_in_garage = 1
-									ENDIF
-									IF IS_CHAR_IN_ANY_CAR cop2 
-										SET_CHAR_OBJ_LEAVE_ANY_CAR cop2
-									ENDIF
-								ENDIF
-							ELSE
-								PRINT_NOW ( PRO3_05 ) 5000 1 //You killed Lance!
-								GOTO mission_failed_protec3
-							ENDIF 
-						ELSE
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop1
-							MARK_CHAR_AS_NO_LONGER_NEEDED cop2
-							gotpolice = 0
-						ENDIF
+					ELSE
+						MARK_CHAR_AS_NO_LONGER_NEEDED cop1
+						cop1 = -1
 					ENDIF
 				ENDIF
-			ELSE
-				MARK_CHAR_AS_NO_LONGER_NEEDED cop1
-				MARK_CHAR_AS_NO_LONGER_NEEDED cop2
-				gotpolice = 0
-				cop1_in_garage = 0
-				cop2_in_garage = 0
-				cop3_in_garage = 0
-				cop4_in_garage = 0
-				counted_once3 = 0 
-				counted_once4 = 0 
+				IF cop2 = -1
+
+					GET_RANDOM_COP_IN_AREA 466.1 325.5 448.1 339.2 1 0 0 0 0 cop2
+				ENDIF
+				IF cop2 > -1
+					IF NOT IS_CHAR_DEAD cop2
+						SET_CHAR_HEED_THREATS cop2 TRUE
+						IF IS_CHAR_MODEL cop2 cop
+							cop2_in_garage = 1
+							gotpolice ++
+							IF IS_CHAR_IN_ANY_CAR cop2
+								SET_CHAR_OBJ_LEAVE_ANY_CAR cop2
+							ENDIF
+						ENDIF
+					ELSE
+						MARK_CHAR_AS_NO_LONGER_NEEDED cop2
+						cop2 = -1
+					ENDIF
+				ENDIF
 			ENDIF
-		ELSE
-			MARK_CHAR_AS_NO_LONGER_NEEDED cop1
-			MARK_CHAR_AS_NO_LONGER_NEEDED cop2
-			gotpolice = 0
-			cop1_in_garage = 0
-			cop2_in_garage = 0
-			cop3_in_garage = 0
-			cop4_in_garage = 0
-			counted_once3 = 0 
-			counted_once4 = 0 
 		ENDIF
+					
+
+				
+				
+
+
 	ENDIF
 
 
 // ****************************************START OF CUTSCENE********************************
-	IF gotpolice = 2
+	IF gotpolice >= 2
 		IF NOT IS_AREA_OCCUPIED 465.2 339.8 5.0 451.5 341.0 15.5 FALSE TRUE FALSE FALSE FALSE
 			IF NOT IS_CHAR_DEAD cop1 
 				CLEAR_CHAR_THREAT_SEARCH cop1
@@ -789,9 +713,20 @@ IF disguise_goals = 0
 			SET_MAX_WANTED_LEVEL 0
 			SET_PLAYER_CONTROL player1 OFF
 			SWITCH_WIDESCREEN ON
-			CLEAR_AREA_OF_CHARS 466.1 325.5 5.0 448.0 340.1 15.0
 			SET_FIXED_CAMERA_POSITION 460.00 350.5 14.1 0.0 0.0 0.0 
 			POINT_CAMERA_AT_POINT 458.85 342.56 11.7 JUMP_CUT
+			IF NOT IS_CHAR_DEAD cop3
+				IF NOT IS_CHAR_IN_AREA_2D cop3 466.1 325.5 448.1 336.2 FALSE
+					SET_CHAR_COORDINATES cop3 453.4 337.6 10.7
+					SET_CHAR_HEADING cop3 80.0
+				ENDIF
+			ENDIF
+			IF NOT IS_CHAR_DEAD cop4
+				IF NOT IS_CHAR_IN_AREA_2D cop4 466.1 325.5 448.1 336.2 FALSE
+					SET_CHAR_COORDINATES cop4 461.4 337.6 10.7
+					SET_CHAR_HEADING cop4 100.0
+				ENDIF
+			ENDIF
 
 			CLOSE_GARAGE bud3_garage
 			
@@ -937,8 +872,6 @@ IF disguise_goals = 0
 			speech_played = 0 
 			disguise_goals = 1
 		ELSE
-			MARK_CHAR_AS_NO_LONGER_NEEDED cop1
-			MARK_CHAR_AS_NO_LONGER_NEEDED cop2
 			PRINT_NOW ( PRO3_22 ) 5000 1 //The lock-up door is blocked!  You need to clear the door so it can close.
 		ENDIF
 	ENDIF
@@ -1390,10 +1323,36 @@ IF disguise_goals = 3
 				SET_PLAYER_CONTROL player1 OFF
 				SWITCH_WIDESCREEN ON
 
-				DO_FADE 600 FADE_OUT
+				SET_PLAYER_COORDINATES player1 -381.4 -532.3 16.1
+				CREATE_CHAR PEDTYPE_CIVMALE SPECIAL03 -378.2 -549.8 17.6 cop1
+				SET_CHAR_HEADING cop1 184.6
+				IF NOT IS_CHAR_DEAD cop1
+					SET_CHAR_OBJ_RUN_TO_COORD cop1 -378.4 -561.1
+				ENDIF
+				IF NOT IS_CHAR_DEAD buddy
+					SET_CHAR_COORDINATES buddy -377.4 -547.9 16.7
+					SET_CHAR_HEADING buddy 184.6
+					LEAVE_GROUP buddy
+					SET_CHAR_OBJ_RUN_TO_COORD buddy -378.4 -561.1
+				ENDIF
+				SET_FIXED_CAMERA_POSITION -378.5 -546.1 21.2 0.0 0.0 0.0
+				POINT_CAMERA_AT_POINT -378.7 -553.7 19.6 JUMP_CUT
+				WAIT 1000
+				IF NOT IS_CHAR_DEAD cop1
+					SET_CHAR_OBJ_RUN_TO_COORD cop1 -378.4 -561.1
+				ENDIF
+				TIMERA = 0
+				WHILE NOT LOCATE_CHAR_ON_FOOT_2D cop1 -378.4 -561.1 1.0 1.0 FALSE
+				AND NOT TIMERA > 7000
+					WAIT 0
+				ENDWHILE
+				DO_FADE 500 FADE_OUT
 				WHILE GET_FADING_STATUS
 					WAIT 0
 				ENDWHILE
+				IF NOT IS_CHAR_DEAD cop1
+					DELETE_CHAR cop1
+				ENDIF
 			
 
 				IF NOT IS_CHAR_DEAD scplayer
@@ -1406,12 +1365,36 @@ IF disguise_goals = 3
 				IF NOT IS_CHAR_DEAD buddy 
 					DELETE_CHAR buddy
 				ENDIF
+				WAIT 1000
+				DO_FADE 500 FADE_IN
+				WHILE GET_FADING_STATUS
+					WAIT 0
+				ENDWHILE
+				CREATE_CHAR PEDTYPE_CIVMALE null -378.4 -561.1 18.5 cop1
+				IF NOT IS_CHAR_DEAD cop1
+					SET_CHAR_OBJ_RUN_TO_COORD cop1 -378.2 -549.8
+				ENDIF
+				TIMERA = 0
+				WHILE NOT LOCATE_CHAR_ON_FOOT_2D cop1 -378.2 -549.8 1.0 1.0 FALSE
+				AND NOT TIMERA > 7000
+					WAIT 0
+					IF NOT IS_CHAR_DEAD cop1
+					ENDIF
+				ENDWHILE
 				WAIT 2000
+				DELETE_CHAR cop1
+				SET_PLAYER_COORDINATES player1 -378.5 -548.6 16.9
+				SET_PLAYER_HEADING player1 9.3
+				SET_CAMERA_BEHIND_PLAYER
 
 
 				
 	// **************************************(END) CHANGE OF CLOTHES CUT SCENE*********************************************
 				REMOVE_BLIP boutique1
+				DO_FADE 500 FADE_OUT
+				WHILE GET_FADING_STATUS
+					WAIT 0
+				ENDWHILE
 	// ******************************************START OF ASSET AQUIRED CUTSCENE********************************
 				
 
@@ -1420,8 +1403,6 @@ IF disguise_goals = 3
 				SET_FIXED_CAMERA_POSITION -369.1 -467.9 22.7 0.0 0.0 0.0 
 				POINT_CAMERA_AT_POINT -370.6 -533.8 18.0 JUMP_CUT
 
-				SET_PLAYER_COORDINATES player1 -378.2 -549.8 17.6 
-				SET_PLAYER_HEADING player1 9.3
 
 				DO_FADE 500 FADE_IN
 				WHILE GET_FADING_STATUS
@@ -1492,7 +1473,15 @@ IF NOT IS_CHAR_DEAD buddy
 	        	ADD_BLIP_FOR_COORD 457.4 335.28 9.4 cop_garage
 			ENDIF
 	        IF disguise_goals = 2
+	        AND flag_player_in_mall = 0
+	        AND timer_flag = 0
 	        	ADD_BLIP_FOR_COORD 477.24 1124.81 16.54 bombplace
+				copland_blip_active = 1
+			ENDIF
+			IF disguise_goals = 2
+			AND flag_player_in_mall = 1
+			AND timer_flag = 0
+				ADD_BLIP_FOR_COORD 468.0 1005.9 18.1 bombplace
 				copland_blip_active = 1
 			ENDIF
 	        IF disguise_goals = 3

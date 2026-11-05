@@ -511,7 +511,7 @@ buddy_z_kent1 = 10.59
 
 buddy_heading_kent1 = 280.723
 
-buddy_life_guage_kent1 = 110//100, mobile version has been increased by 10 percent
+buddy_life_guage_kent1 = 100	//100, mobile version has been increased by 10 percent
 
 buddys_health_kent1 = 110
 
@@ -1171,6 +1171,15 @@ CREATE_CHAR PEDTYPE_GANG_DIAZ CLa guard6_x_kent1 guard6_y_kent1 guard6_z_kent1 g
 CLEAR_CHAR_THREAT_SEARCH guard6_kent1
 
 SET_CHAR_MONEY guard6_kent1 200
+CREATE_CHAR PEDTYPE_CIVMALE CLa -1293.67 142.31 16.94 guard7_kent1
+CLEAR_CHAR_THREAT_SEARCH guard7_kent1
+SET_CHAR_MONEY guard7_kent1 200
+CREATE_CHAR PEDTYPE_CIVMALE CLa -1243.05 10.0 10.46 guard8_kent1
+CLEAR_CHAR_THREAT_SEARCH guard8_kent1
+SET_CHAR_MONEY guard8_kent1 200
+CREATE_CHAR PEDTYPE_CIVMALE CLa -1242.57 4.5 10.45 guard9_kent1
+CLEAR_CHAR_THREAT_SEARCH guard9_kent1
+SET_CHAR_MONEY guard9_kent1 200
 
 /*
 // Guard7 stands on top of digger
@@ -1365,6 +1374,9 @@ WHILE flag_buddy_home_kent1 = 0
 					MARK_CHAR_AS_NO_LONGER_NEEDED guard3_kent1
 					MARK_CHAR_AS_NO_LONGER_NEEDED guard4_kent1
 					MARK_CHAR_AS_NO_LONGER_NEEDED guard6_kent1 
+					MARK_CHAR_AS_NO_LONGER_NEEDED guard7_kent1
+					MARK_CHAR_AS_NO_LONGER_NEEDED guard8_kent1
+					MARK_CHAR_AS_NO_LONGER_NEEDED guard9_kent1
 					//MARK_CHAR_AS_NO_LONGER_NEEDED guard7_kent1
 					//MARK_CHAR_AS_NO_LONGER_NEEDED guard8_kent1
 					//MARK_CHAR_AS_NO_LONGER_NEEDED guard9_kent1
@@ -1414,6 +1426,7 @@ WHILE flag_buddy_home_kent1 = 0
 				IF flag_buddy_joined_player = 0
 				
 					IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D player1 buddy_x_kent1 buddy_y_kent1 buddy_z_kent1 4.0 4.0 4.0 FALSE
+					OR LOCATE_PLAYER_ON_FOOT_3D player1 buddy_x_kent1 buddy_y_kent1 buddy_z_kent1 1.0 1.0 1.0 FALSE
 
 						flag_buddy_free_kent1 = 1
 							
@@ -2189,6 +2202,53 @@ IF flag_guard6_dead_kent1 = 0
 						
 	ENDIF
 
+ENDIF
+IF flag_guard7_dead_kent1 = 0
+	IF IS_CHAR_DEAD guard7_kent1
+		++ counter_no_of_guys_dead_kent1
+		flag_guard7_dead_kent1 = 1
+	ELSE
+	ENDIF
+ENDIF
+IF flag_guard8_dead_kent1 = 0
+	IF IS_CHAR_DEAD guard8_kent1
+		++ counter_no_of_guys_dead_kent1
+		flag_guard8_dead_kent1 = 1
+	ELSE
+		IF flag_player_been_spotted_kent1 = 0
+			IF HAS_CHAR_SPOTTED_PLAYER guard8_kent1 player1
+				flag_player_been_spotted_kent1 = 1
+			ENDIF
+		ENDIF
+		IF flag_buddy_joined_player = 1
+		OR IS_PLAYER_IN_AREA_2D player1 -1234.15 -1.0 -1367.51 250.33 FALSE
+			IF flag_guard8_chase_kent1 = 0
+				SET_CHAR_STAY_IN_SAME_PLACE guard8_kent1 FALSE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard8_kent1 player1
+				flag_guard8_chase_kent1 = 1
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+IF flag_guard9_dead_kent1 = 0
+	IF IS_CHAR_DEAD guard9_kent1
+		++ counter_no_of_guys_dead_kent1
+		flag_guard9_dead_kent1 = 1
+	ELSE
+		IF flag_player_been_spotted_kent1 = 0
+			IF HAS_CHAR_SPOTTED_PLAYER guard9_kent1 player1
+				flag_player_been_spotted_kent1 = 1
+			ENDIF
+		ENDIF
+		IF flag_buddy_joined_player = 1
+		OR IS_PLAYER_IN_AREA_2D player1 -1234.15 -1.0 -1367.51 250.33 FALSE
+			IF flag_guard9_chase_kent1 = 0
+				SET_CHAR_STAY_IN_SAME_PLACE guard9_kent1 FALSE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard9_kent1 player1
+				flag_guard9_chase_kent1 = 1
+			ENDIF
+		ENDIF
+	ENDIF
 ENDIF
 
 /*
@@ -3304,6 +3364,53 @@ IF counter_guards_got_AI_kent1 < 9
 
 		ENDIF
 
+	ENDIF
+	IF flag_guard7_got_AI_kent1 = 0
+		IF NOT IS_CHAR_DEAD guard7_kent1
+			IF NOT IS_CHAR_WAITING_FOR_WORLD_COLLISION guard7_kent1
+				CLEAR_CHAR_THREAT_SEARCH guard7_kent1
+				SET_CHAR_THREAT_SEARCH guard7_kent1 THREAT_PLAYER1
+				SET_CHAR_PERSONALITY guard7_kent1 PEDSTAT_TOUGH_GUY
+				GIVE_WEAPON_TO_CHAR guard7_kent1 WEAPONTYPE_RUGER 30000
+				SET_CHAR_ACCURACY guard7_kent1 80
+				SET_CHAR_STAY_IN_SAME_PLACE guard7_kent1 TRUE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard7_kent1 player1
+				++ counter_guards_got_AI_kent1
+				flag_guard7_got_AI_kent1 = 1
+			ENDIF
+		ENDIF
+	ENDIF
+	IF flag_guard8_got_AI_kent1 = 0
+		IF NOT IS_CHAR_DEAD guard8_kent1
+			IF NOT IS_CHAR_WAITING_FOR_WORLD_COLLISION guard8_kent1
+				CLEAR_CHAR_THREAT_SEARCH guard8_kent1
+				SET_CHAR_HEADING guard8_kent1 289.74
+				SET_CHAR_THREAT_SEARCH guard8_kent1 THREAT_PLAYER1
+				SET_CHAR_PERSONALITY guard8_kent1 PEDSTAT_TOUGH_GUY
+				GIVE_WEAPON_TO_CHAR guard8_kent1 WEAPONTYPE_RUGER 30000
+				SET_CHAR_ACCURACY guard8_kent1 80
+				SET_CHAR_STAY_IN_SAME_PLACE guard8_kent1 TRUE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard8_kent1 player1
+				++ counter_guards_got_AI_kent1
+				flag_guard8_got_AI_kent1 = 1
+			ENDIF
+		ENDIF
+	ENDIF
+	IF flag_guard9_got_AI_kent1 = 0
+		IF NOT IS_CHAR_DEAD guard9_kent1
+			IF NOT IS_CHAR_WAITING_FOR_WORLD_COLLISION guard9_kent1
+				CLEAR_CHAR_THREAT_SEARCH guard9_kent1
+				SET_CHAR_HEADING guard9_kent1 289.74
+				SET_CHAR_THREAT_SEARCH guard9_kent1 THREAT_PLAYER1
+				SET_CHAR_PERSONALITY guard9_kent1 PEDSTAT_TOUGH_GUY
+				GIVE_WEAPON_TO_CHAR guard9_kent1 WEAPONTYPE_RUGER 30000
+				SET_CHAR_ACCURACY guard9_kent1 80
+				SET_CHAR_STAY_IN_SAME_PLACE guard9_kent1 TRUE
+				SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT guard9_kent1 player1
+				++ counter_guards_got_AI_kent1
+				flag_guard9_got_AI_kent1 = 1
+			ENDIF
+		ENDIF
 	ENDIF
 	
 /*

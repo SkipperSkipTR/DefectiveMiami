@@ -1508,10 +1508,10 @@ do_collectors_stuff:////////////////////////////////////////////////////////
 			SET_CAR_CRUISE_SPEED collector_car	8.0
 			IF collector_counter = 0
 				// increasing the stop range here, collector can get stuck
-				IF LOCATE_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 10.0 10.0 10.0 0
+				IF LOCATE_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 20.0 20.0 20.0 FALSE
 					SET_CAR_TEMP_ACTION collector_car TEMPACT_WAIT 400
 				ENDIF
-				IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 10.0 10.0 10.0 0
+				IF LOCATE_STOPPED_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 20.0 20.0 20.0 FALSE
 					SET_CAR_TEMP_ACTION	collector_car TEMPACT_WAIT 200
 					IF icecream_done = 1
 						IF collector_goto_x = -852.5533//ICECREAM
@@ -1627,8 +1627,8 @@ do_collectors_stuff:////////////////////////////////////////////////////////
 		IF collector_counter = 0
 		OR collector_counter = 100
 			IF collector_in_car = 0
-				IF LOCATE_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 10.0 10.0 10.0 0
-				AND	collector_counter = 0
+				IF LOCATE_CHAR_ANY_MEANS_3D collector collector_goto_x collector_goto_y collector_goto_z 20.0 20.0 20.0 FALSE
+				AND collector_counter = 0
 					//SET_CAR_TEMP_ACTION	collector_car TEMPACT_WAIT 200
 					IF icecream_done = 1
 						IF collector_goto_x = -852.5533//ICECREAM

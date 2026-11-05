@@ -196,6 +196,7 @@ wanted_star_help = 0
 flag_played_rock3_before = 0
 player_had_reload_award = 0 // used to give the player the fast reload award form the Range oddjob
 flag_played_bank2_before = 0 // used for a skip for the shooting range
+flag_cokerun_passed = 0
 
 heli1X = -569.1451  
 heli1Y = 851.0923 
@@ -1092,7 +1093,7 @@ DONT_REMOVE_OBJECT cabmagedon_gate
 
 // Cam Jones Door for Bank Van Robbing
 VAR_INT cams_door
-CREATE_OBJECT_NO_OFFSET hav_garagedoor1 -837.134 -901.672 12.03 cams_door
+CREATE_OBJECT_NO_OFFSET dk_camjonesdoor -837.134 -901.672 12.03 cams_door
 DONT_REMOVE_OBJECT cams_door
 SET_OBJECT_HEADING cams_door 0.0
 

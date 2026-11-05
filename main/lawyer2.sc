@@ -284,9 +284,16 @@ ADD_BLIP_FOR_COORD kentX kentY kentZ kent_paul1
 
 WAIT 4000
 
-PRINT_HELP HELP2_A  // "Hold ~h~::SPRINT::~w~ when running to sprint. Double tap ::SPRINT:: to jump."
+GET_CONTROLLER_MODE control_result
+IF control_result = 13
+	PRINT_HELP ( HELP2AA )
+ELSE
+	PRINT_HELP HELP2_A  // "Hold ~h~::SPRINT::~w~ when running to sprint. Double tap ::SPRINT:: to jump."
+ENDIF
 
 PRINT_HELP HELP3  // "You can only sprint for short periods before becoming tired."
+WAIT 4000
+PRINT_HELP ( CROUCH )
 
 WHILE NOT LOCATE_PLAYER_ON_FOOT_3D player1 491.0 -77.7 10.4 2.0 2.0 3.0 TRUE
 	WAIT 0
@@ -688,59 +695,63 @@ WHILE NOT IS_CHAR_DEAD ambush_bloke1
 				ENDIF
 			IF LOCATE_PLAYER_ANY_MEANS_CHAR_3D player1 ambush_bloke1 8.0 8.0 3.0 FALSE
 			//AND NOT IS_PLAYER_IN_ANY_CAR player1
-				CLEAR_AREA_OF_CARS 376.6 -631.9 9.0 478.8 -539.7 15.0
-				IF first_part_of_chef_cut = 0
+				IF IS_CHAR_HEALTH_GREATER ambush_bloke1 99
+					CLEAR_AREA_OF_CARS 376.6 -631.9 9.0 478.8 -539.7 15.0
+					IF first_part_of_chef_cut = 0
 
-					SET_PLAYER_CONTROL player1 OFF
-					SWITCH_WIDESCREEN ON
+						SET_PLAYER_CONTROL player1 OFF
+						SWITCH_WIDESCREEN ON
 					
-					SET_FIXED_CAMERA_POSITION 434.913 -575.577 11.245 0.0 0.0 0.0
-					POINT_CAMERA_AT_POINT 433.925 -575.730 11.256 JUMP_CUT	//Shot of Chef
+						SET_FIXED_CAMERA_POSITION 434.913 -575.577 11.245 0.0 0.0 0.0
+						POINT_CAMERA_AT_POINT 433.925 -575.730 11.256 JUMP_CUT	//Shot of Chef
 
-					IF IS_PLAYER_IN_ANY_CAR player1
-						STORE_CAR_PLAYER_IS_IN player1 any_car_2
-						GET_CAR_COORDINATES any_car_2 any_car_2_x any_car_2_y any_car_2_z
+						IF IS_PLAYER_IN_ANY_CAR player1
+							STORE_CAR_PLAYER_IS_IN player1 any_car_2
+							GET_CAR_COORDINATES any_car_2 any_car_2_x any_car_2_y any_car_2_z
 						//IF any_car_2_x > blokex									//GS-SC: Is car approaching from east or west?
 							SET_CAR_COORDINATES any_car_2 471.0 -570.6 10.9
 							SET_CHAR_OBJ_LEAVE_CAR scplayer any_car_2
-							WHILE IS_PLAYER_IN_CAR Player1 any_car_2 
+							WHILE IS_PLAYER_IN_CAR Player1 any_car_2
 								WAIT 0
 							ENDWHILE
 							SET_PLAYER_COORDINATES Player1 436.8 -566.7 10.7
 							FREEZE_CAR_POSITION_AND_DONT_LOAD_COLLISION any_car_2 TRUE
+						ELSE
+							SET_PLAYER_COORDINATES player1 436.8 -566.7 10.7
+						ENDIF
+
+						IF NOT IS_CAR_DEAD any_car_2
+							IF LOCATE_PLAYER_ANY_MEANS_CAR_2D player1 any_car_2 100.0 100.0 FALSE
+								FREEZE_CAR_POSITION_AND_DONT_LOAD_COLLISION any_car_2 FALSE
+							ENDIF
+						ENDIF
+
+						TIMERB = 0
+						WAIT 2000
+
+						IF NOT IS_CHAR_DEAD	ambush_bloke1
+							SET_FIXED_CAMERA_POSITION 431.418 -566.374 16.361 0.0 0.0 0.0
+							POINT_CAMERA_AT_POINT 431.554 -567.186 15.795 JUMP_CUT	//High shot of Chef
+
+							IF NOT IS_CHAR_DEAD	ambush_bloke1
+								CHAR_LOOK_AT_CHAR_ALWAYS ambush_bloke1 scplayer
+								CHAR_LOOK_AT_CHAR_ALWAYS scplayer ambush_bloke1
+								TURN_CHAR_TO_FACE_CHAR ambush_bloke1 scplayer
+								TURN_CHAR_TO_FACE_CHAR scplayer ambush_bloke1
+							ENDIF
+							SET_CHAR_OBJ_WALK_TO_CHAR scplayer ambush_bloke1
+							WAIT 2000
+							first_part_of_chef_cut = 1
+						ENDIF
+					ENDIF
+				ENDIF
 						//ELSE 
 						//	SET_CAR_COORDINATES any_car_2 421.3 -604.7 10.3
 						//	WARP_PLAYER_FROM_CAR_TO_COORD Player1 430.8 -583.3 10.7
 						//ENDIF
-					ENDIF
-
-					IF NOT IS_CAR_DEAD any_car_2
-						IF LOCATE_PLAYER_ANY_MEANS_CAR_2D player1 any_car_2 100.0 100.0 FALSE
-							FREEZE_CAR_POSITION_AND_DONT_LOAD_COLLISION any_car_2 FALSE
-						ENDIF
-					ENDIF
-
-					TIMERB = 0
-					WAIT 2000
-
-					IF NOT IS_CHAR_DEAD	ambush_bloke1
-						SET_FIXED_CAMERA_POSITION 431.418 -566.374 16.361 0.0 0.0 0.0
-						POINT_CAMERA_AT_POINT 431.554 -567.186 15.795 JUMP_CUT	//High shot of Chef
-
-						IF NOT IS_CHAR_DEAD	ambush_bloke1
-							CHAR_LOOK_AT_CHAR_ALWAYS ambush_bloke1 scplayer
-							CHAR_LOOK_AT_CHAR_ALWAYS scplayer ambush_bloke1
-							TURN_CHAR_TO_FACE_CHAR ambush_bloke1 scplayer
-							TURN_CHAR_TO_FACE_CHAR scplayer ambush_bloke1
-						ENDIF
 
 						
 
-						SET_CHAR_OBJ_GOTO_COORD_ON_FOOT scplayer blokeX blokeY //433.0 -575.9
-						WAIT 2000
-						first_part_of_chef_cut = 1
-					ENDIF
-				ENDIF
 			ENDIF
 			ENDIF
 
@@ -871,7 +882,6 @@ ENDWHILE
 SET_PLAYER_CONTROL player1 ON
 SWITCH_WIDESCREEN OFF
 RESTORE_CAMERA_JUMPCUT
-SET_CAMERA_BEHIND_PLAYER
 STOP_CHAR_LOOKING scplayer
 
 REMOVE_BLIP lawyer_blip1
@@ -979,6 +989,13 @@ IF IS_PLAYER_IN_ANY_CAR player1
 ELSE
 	SET_PLAYER_COORDINATES player1 433.0 -574.5 9.6
 ENDIF
+IF NOT IS_CAR_DEAD law2_player_vehicle_cache
+	MARK_CAR_AS_NO_LONGER_NEEDED law2_player_vehicle_cache
+ENDIF
+IF NOT IS_CAR_DEAD any_bike_lawyer2
+	MARK_CAR_AS_NO_LONGER_NEEDED any_bike_lawyer2
+ENDIF
+CLEAR_AREA 434.1 -573.6 10.7 50.0 FALSE
 
 
 
@@ -1217,7 +1234,13 @@ ENDIF
 PRINT_NOW ( LAW2_4 ) 2000 2	 // This way!
 
                        // Redirects for modern/classic and free aim. 
-PRINT_HELP ( TARGET )  // Hold ~h~::LOCKON::~w~ to ~h~aim~w~. Press ~h~::FIRE::~w~ to fire. 
+GET_CONTROLLER_MODE control_result
+IF control_result = 12
+OR control_result = 13
+	PRINT_HELP ( TARGETM )
+ELSE
+	PRINT_HELP ( TARGET )  // Hold ~h~::LOCKON::~w~ to ~h~aim~w~. Press ~h~::FIRE::~w~ to fire.
+ENDIF
 
 WAIT 500
 
@@ -1615,7 +1638,13 @@ SET_FIXED_CAMERA_POSITION -63.091 -1483.060 12.398 0.0 0.0 0.0 //
 POINT_CAMERA_AT_POINT -63.189 -1484.055 12.396 JUMP_CUT
 
 CLEAR_HELP
-PRINT_HELP LAW3_12 //You can select weapons using ~h~left~w~ or ~h~right~w~ on the ~h~directional button~w~
+GET_CONTROLLER_MODE control_result
+IF control_result = 12
+OR control_result = 13
+	PRINT_HELP ( LAW3ADP )
+ELSE
+	PRINT_HELP LAW3_12 //You can select weapons using ~h~left~w~ or ~h~right~w~ on the ~h~directional button~w~
+ENDIF
 
 TIMERA = 0
 

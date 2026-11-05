@@ -65,6 +65,7 @@ VAR_FLOAT mafia_6_stuck_x mafia_6_stuck_y mafia_6_stuck_z
 VAR_FLOAT mafia_7_stuck_x mafia_7_stuck_y mafia_7_stuck_z
 VAR_FLOAT mafia_8_stuck_x mafia_8_stuck_y mafia_8_stuck_z
 VAR_FLOAT mafia_9_stuck_x mafia_9_stuck_y mafia_9_stuck_z
+VAR_INT playercurrenthealth
 
 //LOAD_AND_LAUNCH_MISSION_EXCLUSIVE stuff
 //VAR_INT game_timer temp_int
@@ -88,6 +89,9 @@ LVAR_FLOAT mafia_4_stuck_x mafia_4_stuck_y mafia_4_stuck_z
 LVAR_FLOAT mafia_5_stuck_x mafia_5_stuck_y mafia_5_stuck_z
 
 DELETE_OBJECT mansion_closed//DEBUG!!!!!!!!!!
+IF DOES_OBJECT_EXIST mansion_open
+	SET_OBJECT_COLLISION mansion_open FALSE
+ENDIF
 
 LOAD_MISSION_TEXT FINALE
 SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION -288.2 -487.5 9.8 275.0
@@ -1524,6 +1528,9 @@ ENDIF
 
 IF boss_guard7_flag > 1
 OR boss_guard7_flag = -1
+	IF DOES_OBJECT_EXIST mansion_open
+		SET_OBJECT_COLLISION mansion_open TRUE
+	ENDIF
 	IF boss_guard9_flag = 0
 		CREATE_CHAR	PEDTYPE_GANG_STREET SPECIAL04 -358.5610 -560.1335 26.5396 boss_guard9//GOONS UPPER CORRIDOR
 		SET_CHAR_STAY_IN_SAME_PLACE	boss_guard9 TRUE
@@ -1557,6 +1564,9 @@ ENDIF
 
 IF boss_guard9_flag > 0
 OR boss_guard9_flag = -1
+	IF DOES_OBJECT_EXIST mansion_open
+		SET_OBJECT_COLLISION mansion_open TRUE
+	ENDIF
 	IF boss_guard10_flag = 0
 		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -358.5610 -560.1335 26.5396 1.0 1.0 2.0
 			CREATE_CHAR	PEDTYPE_GANG_STREET SPECIAL03 -358.5610 -560.1335 26.5396 boss_guard10//GOONS UPPER CORRIDOR
@@ -1935,7 +1945,6 @@ IF sonni_flag > 0
 			MARK_CHAR_AS_NO_LONGER_NEEDED boss_guard9
 			MARK_CHAR_AS_NO_LONGER_NEEDED boss_guard10
 			MARK_CHAR_AS_NO_LONGER_NEEDED boss_guard11
-			sonni_timer = game_timer + 3000
 			sonni_flag = -11
 		ENDIF
 	ENDIF
@@ -1954,6 +1963,9 @@ ENDIF
 
 IF NOT IS_CHAR_DEAD	boss_guard1
 	IF boss_guard1_flag = 1
+		IF DOES_OBJECT_EXIST mansion_open
+			SET_OBJECT_COLLISION mansion_open FALSE
+		ENDIF
 		IF boss_guard1_timer < game_timer
 			SET_CHAR_OBJ_RUN_TO_COORD boss_guard1 -376.9825 -559.1848//CROUCH BY SONNI
 			SET_CHAR_USE_PEDNODE_SEEK boss_guard1 FALSE
@@ -2268,11 +2280,12 @@ ENDIF
 //	ENDIF
 //ENDIF
 
-IF sonni_flag = -11
-AND vance_flag = -11
-	IF game_timer > sonni_timer
-	AND game_timer > vance_timer
-		GOTO final_cutscene
+IF NOT IS_PLAYER_DEAD player1
+	IF sonni_flag = -11
+	AND vance_flag = -11
+		IF NOT IS_PLAYER_DEAD player1
+			GOTO final_cutscene
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -2523,10 +2536,14 @@ IF random_mafia_counter	= 2
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 3
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -354.0382 -527.9669 11.7155 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -354.0382 -527.9669 11.7155 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -354.0382 -527.9669 11.7155 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -354.0382 -527.9669 11.7155 -354.0382 -527.9669 12.7155 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -354.0382 -527.9669 11.7155 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -354.0382 -527.9669 11.7155 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -354.0382 -527.9669 11.7155 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2535,10 +2552,14 @@ IF random_mafia_counter	= 3
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 4
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -390.1438 -541.0243 16.2431 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -390.1438 -541.0243 16.2431 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -390.1438 -541.0243 16.2431 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -390.1438 -541.0243 16.2431 -390.1438 -541.0243 17.0 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -390.1438 -541.0243 16.2431 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -390.1438 -541.0243 16.2431 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -390.1438 -541.0243 16.2431 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2547,10 +2568,14 @@ IF random_mafia_counter	= 4
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 5
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -458.3071 -606.5378 11.7988 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -458.3071 -606.5378 11.7988 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -458.3071 -606.5378 11.7988 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED 458.3071 -606.5378 11.7988 458.3071 -606.5378 12.7988 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -458.3071 -606.5378 11.7988 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -458.3071 -606.5378 11.7988 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -458.3071 -606.5378 11.7988 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2559,10 +2584,14 @@ IF random_mafia_counter	= 5
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 6
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -455.4113 -561.6190 11.7620 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -455.4113 -561.6190 11.7620 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -455.4113 -561.6190 11.7620 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -455.4113 -561.619 11.762 -455.4113 -561.619 12.762 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -455.4113 -561.6190 11.7620 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -455.4113 -561.6190 11.7620 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -455.4113 -561.6190 11.7620 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2571,10 +2600,14 @@ IF random_mafia_counter	= 6
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 7
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -412.1893 -605.7213 16.2433 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -412.1893 -605.7213 16.2433 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -412.1893 -605.7213 16.2433 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -412.1893 -605.7213 16.2433 -412.1893 -605.7213 17.2433 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -412.1893 -605.7213 16.2433 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -412.1893 -605.7213 16.2433 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -412.1893 -605.7213 16.2433 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2583,10 +2616,14 @@ IF random_mafia_counter	= 7
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 8
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -370.0882 -615.1937 9.3386 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -370.0882 -615.1937 9.3386 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -370.0882 -615.1937 9.3386 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -370.0882 -615.1937 9.3386 -370.0882 -615.1937 10.3386 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -370.0882 -615.1937 9.3386 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -370.0882 -615.1937 9.3386 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -370.0882 -615.1937 9.3386 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2607,10 +2644,14 @@ ENDIF
 //	ENDIF
 //ENDIF
 IF random_mafia_counter	= 9
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -335.9248 -579.0020 18.5231 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -335.9248 -579.0020 18.5231 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -335.9248 -579.0020 18.5231 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -335.9248 -579.002 18.5231 -335.9248 -579.002 19.5231 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -335.9248 -579.0020 18.5231 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -335.9248 -579.0020 18.5231 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL03 -335.9248 -579.0020 18.5231 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2619,10 +2660,14 @@ IF random_mafia_counter	= 9
 	ENDIF
 ENDIF
 IF random_mafia_counter	= 10
-	IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -329.9831 -582.3398 34.5103 1.0 1.0 2.0
-		IF NOT IS_POINT_ON_SCREEN -329.9831 -582.3398 34.5103 2.0
-	    	CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -329.9831 -582.3398 34.5103 random_mafia
-			random_mafia_counter = -1
+	IF NOT IS_AREA_OCCUPIED -329.9831 -582.3398 34.5103 -329.9831 -582.3398 35.5103 FALSE 0 TRUE FALSE FALSE
+		IF NOT IS_POINT_OBSCURED_BY_A_MISSION_ENTITY -329.9831 -582.3398 34.5103 1.0 1.0 2.0
+			IF NOT IS_POINT_ON_SCREEN -329.9831 -582.3398 34.5103 2.0
+				CREATE_CHAR PEDTYPE_GANG_STREET SPECIAL04 -329.9831 -582.3398 34.5103 random_mafia
+				random_mafia_counter = -1
+			ELSE
+				RETURN
+			ENDIF
 		ELSE
 			RETURN
 		ENDIF
@@ -2982,562 +3027,566 @@ RETURN
 
 final_cutscene:
 
-MAKE_PLAYER_SAFE_FOR_CUTSCENE Player1
-SET_FADING_COLOUR 0 0 1
-DO_FADE 1500 FADE_OUT
-SWITCH_RUBBISH OFF
-SWITCH_STREAMING OFF
+GET_PLAYER_HEALTH player1 playercurrenthealth
+IF playercurrenthealth >= 1
+	IF NOT IS_PLAYER_DEAD player1
+		MAKE_PLAYER_SAFE_FOR_CUTSCENE Player1
+		SET_FADING_COLOUR 0 0 1
+		DO_FADE 1500 FADE_OUT
+		SWITCH_RUBBISH OFF
+		SWITCH_STREAMING OFF
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+		WHILE GET_FADING_STATUS
+			WAIT 0
+		ENDWHILE
 
-SET_PED_DENSITY_MULTIPLIER 0.0
-CLEAR_AREA -354.419 -569.529 30.0 200.0 0 
+		SET_PED_DENSITY_MULTIPLIER 0.0
+		CLEAR_AREA -354.419 -569.529 30.0 200.0 0
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-DELETE_CHAR mafia_1
-DELETE_CHAR mafia_2
-DELETE_CHAR mafia_3
-DELETE_CHAR mafia_4
-DELETE_CHAR mafia_5
-DELETE_CHAR mafia_6
-DELETE_CHAR mafia_7
-DELETE_CHAR mafia_8
-DELETE_CHAR mafia_9
-DELETE_CHAR sonni
-DELETE_CHAR vance
-DELETE_CHAR boss_guard1
-DELETE_CHAR boss_guard2
-DELETE_CHAR boss_guard3
-DELETE_CHAR boss_guard4
-DELETE_CHAR boss_guard5
-DELETE_CHAR boss_guard6
-DELETE_CHAR boss_guard7
-DELETE_CHAR boss_guard8
-DELETE_CHAR boss_guard9
-DELETE_CHAR boss_guard10
-DELETE_CHAR boss_guard11
+		DELETE_CHAR mafia_1
+		DELETE_CHAR mafia_2
+		DELETE_CHAR mafia_3
+		DELETE_CHAR mafia_4
+		DELETE_CHAR mafia_5
+		DELETE_CHAR mafia_6
+		DELETE_CHAR mafia_7
+		DELETE_CHAR mafia_8
+		DELETE_CHAR mafia_9
+		DELETE_CHAR sonni
+		DELETE_CHAR vance
+		DELETE_CHAR boss_guard1
+		DELETE_CHAR boss_guard2
+		DELETE_CHAR boss_guard3
+		DELETE_CHAR boss_guard4
+		DELETE_CHAR boss_guard5
+		DELETE_CHAR boss_guard6
+		DELETE_CHAR boss_guard7
+		DELETE_CHAR boss_guard8
+		DELETE_CHAR boss_guard9
+		DELETE_CHAR boss_guard10
+		DELETE_CHAR boss_guard11
 
-UNLOAD_SPECIAL_CHARACTER 1
-UNLOAD_SPECIAL_CHARACTER 2
-UNLOAD_SPECIAL_CHARACTER 3
-UNLOAD_SPECIAL_CHARACTER 4
+		UNLOAD_SPECIAL_CHARACTER 1
+		UNLOAD_SPECIAL_CHARACTER 2
+		UNLOAD_SPECIAL_CHARACTER 3
+		UNLOAD_SPECIAL_CHARACTER 4
 
-LOAD_SPECIAL_CHARACTER 1 csplay
-LOAD_SPECIAL_CHARACTER 2 csken
+		LOAD_SPECIAL_CHARACTER 1 csplay
+		LOAD_SPECIAL_CHARACTER 2 csken
 
-LOAD_SPECIAL_MODEL CUTOBJ01 mfour
+		LOAD_SPECIAL_MODEL CUTOBJ01 mfour
 
-LOAD_ALL_MODELS_NOW
+		LOAD_ALL_MODELS_NOW
 						 
-WHILE NOT HAS_SPECIAL_CHARACTER_LOADED 1
-OR NOT HAS_SPECIAL_CHARACTER_LOADED 2
-OR NOT HAS_MODEL_LOADED CUTOBJ01
-	WAIT 0
-ENDWHILE
+		WHILE NOT HAS_SPECIAL_CHARACTER_LOADED 1
+		OR NOT HAS_SPECIAL_CHARACTER_LOADED 2
+		OR NOT HAS_MODEL_LOADED CUTOBJ01
+			WAIT 0
+		ENDWHILE
 
-LOAD_CUTSCENE FINALE
-LOAD_END_OF_GAME_TUNE
+		LOAD_CUTSCENE FINALE
+		LOAD_END_OF_GAME_TUNE
 
-SET_NEAR_CLIP 0.1
-SET_CUTSCENE_OFFSET -378.62 -552.676 18.534
+		SET_NEAR_CLIP 0.1
+		SET_CUTSCENE_OFFSET -378.62 -552.676 18.534
 
-SET_AREA_VISIBLE VIS_MANSION
-flag_player_in_mansion = 1
-SWITCH_RUBBISH OFF
-SET_EXTRA_COLOURS 7 FALSE
-LOAD_SCENE -378.4660 -596.1799 24.7818
+		SET_AREA_VISIBLE VIS_MANSION
+		SWITCH_RUBBISH OFF
+		SET_EXTRA_COLOURS 7 FALSE
+		LOAD_SCENE -378.4660 -596.1799 24.7818
 				
-CREATE_CUTSCENE_OBJECT SPECIAL01 cs_player
-SET_CUTSCENE_ANIM cs_player csplay
+		CREATE_CUTSCENE_OBJECT SPECIAL01 cs_player
+		SET_CUTSCENE_ANIM cs_player csplay
 
-CREATE_CUTSCENE_OBJECT SPECIAL02 cs_ken
-SET_CUTSCENE_ANIM cs_ken csken
+		CREATE_CUTSCENE_OBJECT SPECIAL02 cs_ken
+		SET_CUTSCENE_ANIM cs_ken csken
 
-CREATE_CUTSCENE_OBJECT CUTOBJ01 cs_lwchara
-SET_CUTSCENE_ANIM cs_lwchara mfour01
+		CREATE_CUTSCENE_OBJECT CUTOBJ01 cs_lwchara
+		SET_CUTSCENE_ANIM cs_lwchara mfour01
 
-SET_PLAYER_HEADING player1 270.0
+		SET_PLAYER_HEADING player1 270.0
 
-SET_FADING_COLOUR 0 0 1
-DO_FADE 1500 FADE_IN
+		SET_FADING_COLOUR 0 0 1
+		DO_FADE 1500 FADE_IN
 
-SWITCH_RUBBISH OFF
-SWITCH_STREAMING ON
-START_CUTSCENE
-PLAY_END_OF_GAME_TUNE
-SET_MUSIC_DOES_FADE FALSE
+		SWITCH_RUBBISH OFF
+		SWITCH_STREAMING ON
+		START_CUTSCENE
+		PLAY_END_OF_GAME_TUNE
+		SET_MUSIC_DOES_FADE FALSE
 
-GET_CUTSCENE_TIME cs_time
+		GET_CUTSCENE_TIME cs_time
 
-WHILE cs_time < 12797
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_01 10000 1 //Tommy? 
+		WHILE cs_time < 12797
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_01 10000 1 //Tommy?
  
-WHILE cs_time < 14715
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_02 10000 1 //Oh my god, Tommy! What happened?
+		WHILE cs_time < 14715
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_02 10000 1 //Oh my god, Tommy! What happened?
  
-WHILE cs_time < 17875
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_03 10000 1 //What does it look like?
+		WHILE cs_time < 17875
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_03 10000 1 //What does it look like?
  
-WHILE cs_time < 19401
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_04 10000 1 //It looks like you ruined your suit! 
+		WHILE cs_time < 19401
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_04 10000 1 //It looks like you ruined your suit!
  
-WHILE cs_time < 21176
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_05 10000 1 //and Tommy, that was a beautiful suit! Tommy, what happened?
+		WHILE cs_time < 21176
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_05 10000 1 //and Tommy, that was a beautiful suit! Tommy, what happened?
  
-WHILE cs_time < 26212
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_06 10000 1 //I had a disagreement with a business associate, you know how it is.
+		WHILE cs_time < 26212
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_06 10000 1 //I had a disagreement with a business associate, you know how it is.
  
-WHILE cs_time < 29463
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_07 10000 1 //Tommy, I have a disagreement with a business associate, I send them an angry letter. 
+		WHILE cs_time < 29463
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_07 10000 1 //Tommy, I have a disagreement with a business associate, I send them an angry letter.
  
-WHILE cs_time < 32477
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_08 10000 1 //Maybe I pee in their mailbox. I don't start world war three. 
+		WHILE cs_time < 32477
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_08 10000 1 //Maybe I pee in their mailbox. I don't start world war three.
  
-WHILE cs_time < 36719
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_09 10000 1 //You know, maybe you should speak to my shrink...
+		WHILE cs_time < 36719
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_09 10000 1 //You know, maybe you should speak to my shrink...
  
-WHILE cs_time < 39025
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_10 10000 1 //That stupid prick, Lance...
+		WHILE cs_time < 39025
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_10 10000 1 //That stupid prick, Lance...
  
-WHILE cs_time < 41031
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_11 10000 1 //Tommy. I never liked that guy, okay?
+		WHILE cs_time < 41031
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_11 10000 1 //Tommy. I never liked that guy, okay?
  
-WHILE cs_time < 43337
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_12 10000 1 //He's neurotic, he's insecure, he's self-centered- that guy's an asshole! 
+		WHILE cs_time < 43337
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_12 10000 1 //He's neurotic, he's insecure, he's self-centered- that guy's an asshole!
  
-WHILE cs_time < 47738
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_13 10000 1 //I'm glad that you took him out!
+		WHILE cs_time < 47738
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_13 10000 1 //I'm glad that you took him out!
  
-WHILE cs_time < 49016
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_14 10000 1 //I don't think we're gonna be getting any more heat from up north either...
+		WHILE cs_time < 49016
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_14 10000 1 //I don't think we're gonna be getting any more heat from up north either...
  
-WHILE cs_time < 54048
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_15 10000 1 //...'cause there ain't no 'up north', anymore. 
+		WHILE cs_time < 54048
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_15 10000 1 //...'cause there ain't no 'up north', anymore.
  
-WHILE cs_time < 57610
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_16 10000 1 //It's all down south now.
+		WHILE cs_time < 57610
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_16 10000 1 //It's all down south now.
  
-WHILE cs_time < 59960
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_17 10000 1 //Wait, does that mean what I think it means, Tommy baby?
+		WHILE cs_time < 59960
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_17 10000 1 //Wait, does that mean what I think it means, Tommy baby?
  
-WHILE cs_time < 62722
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_18 10000 1 //What do you think it means? 
+		WHILE cs_time < 62722
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_18 10000 1 //What do you think it means?
  
-WHILE cs_time < 64406
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_19 10000 1 //That we're in charge...  I mean, that you're in charge. Oh, Tommy...
+		WHILE cs_time < 64406
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_19 10000 1 //That we're in charge...  I mean, that you're in charge. Oh, Tommy...
  
-WHILE cs_time < 69535
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_20 10000 1 //You know, Ken, this could be the beginning of a beautiful business relationship....
+		WHILE cs_time < 69535
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_20 10000 1 //You know, Ken, this could be the beginning of a beautiful business relationship....
  
-WHILE cs_time < 74550
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_21 10000 1 //After all, you're a conniving, backstabbing, two-bit thief 
+		WHILE cs_time < 74550
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_21 10000 1 //After all, you're a conniving, backstabbing, two-bit thief
  
-WHILE cs_time < 77761
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_22 10000 1 //and I'm a convicted psychotic killer and drug dealer.
+		WHILE cs_time < 77761
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_22 10000 1 //and I'm a convicted psychotic killer and drug dealer.
  
-WHILE cs_time < 81486
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-PRINT_NOW FIN3_23 10000 1 //I know. Ain't it beautiful?
+		WHILE cs_time < 81486
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		PRINT_NOW FIN3_23 10000 1 //I know. Ain't it beautiful?
 
-WHILE cs_time < 86784//83552
-	WAIT 0
-	GET_CUTSCENE_TIME cs_time
-ENDWHILE
-SET_FADING_COLOUR 0 0 1
-DO_FADE 1500 FADE_OUT
+		WHILE cs_time < 86784//83552
+			WAIT 0
+			GET_CUTSCENE_TIME cs_time
+		ENDWHILE
+		SET_FADING_COLOUR 0 0 1
+		DO_FADE 1500 FADE_OUT
 
-CLEAR_PRINTS
+		CLEAR_PRINTS
 
-WHILE GET_FADING_STATUS
-	WAIT 0
-ENDWHILE
+		WHILE GET_FADING_STATUS
+			WAIT 0
+		ENDWHILE
 
-WHILE NOT HAS_CUTSCENE_FINISHED
-	WAIT 0
-ENDWHILE
+		WHILE NOT HAS_CUTSCENE_FINISHED
+			WAIT 0
+		ENDWHILE
 
-SWITCH_RUBBISH ON
-CLEAR_CUTSCENE
-SET_CAMERA_BEHIND_PLAYER
+		SWITCH_RUBBISH ON
+		CLEAR_CUTSCENE
+		SET_CAMERA_BEHIND_PLAYER
 
-UNLOAD_SPECIAL_CHARACTER 1
-UNLOAD_SPECIAL_CHARACTER 2
-MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
+		UNLOAD_SPECIAL_CHARACTER 1
+		UNLOAD_SPECIAL_CHARACTER 2
+		MARK_MODEL_AS_NO_LONGER_NEEDED CUTOBJ01
 
-SET_PLAYER_CONTROL player1 OFF
-SWITCH_WIDESCREEN ON
-SET_EVERYONE_IGNORE_PLAYER player1 TRUE
-SET_ALL_CARS_CAN_BE_DAMAGED FALSE
-SET_AREA_VISIBLE VIS_MAIN_MAP
-flag_player_in_mansion = 0
-SWITCH_RUBBISH ON
-CLEAR_EXTRA_COLOURS FALSE
-SET_PLAYER_COORDINATES player1 198.4252 -434.6284 9.5332
+		SET_PLAYER_CONTROL player1 OFF
+		SWITCH_WIDESCREEN ON
+		SET_EVERYONE_IGNORE_PLAYER player1 TRUE
+		SET_ALL_CARS_CAN_BE_DAMAGED FALSE
+		SET_AREA_VISIBLE VIS_MAIN_MAP
+		flag_player_in_mansion = 0
+		SWITCH_RUBBISH ON
+		CLEAR_EXTRA_COLOURS FALSE
+		SET_PLAYER_COORDINATES player1 198.4252 -434.6284 9.5332
 
-START_CREDITS
-button_pressed = 0
+		START_CREDITS
+		button_pressed = 0
 
-SET_GENERATE_CARS_AROUND_CAMERA TRUE
-GET_GAME_TIMER game_timer
-WAIT 0
-WAIT 0
-SWITCH_WIDESCREEN ON
-GET_GAME_TIMER game_timer
-credits_shot_timer = game_timer
-FORCE_WEATHER_NOW WEATHER_SUNNY
+		SET_GENERATE_CARS_AROUND_CAMERA TRUE
+		GET_GAME_TIMER game_timer
+		WAIT 0
+		WAIT 0
+		SWITCH_WIDESCREEN ON
+		GET_GAME_TIMER game_timer
+		credits_shot_timer = game_timer
+		FORCE_WEATHER_NOW WEATHER_SUNNY
 
-WHILE NOT ARE_CREDITS_FINISHED
-	WAIT 0
+		WHILE NOT ARE_CREDITS_FINISHED
+			WAIT 0
 
-	GET_GAME_TIMER game_timer
+			GET_GAME_TIMER game_timer
 
-	IF IS_BUTTON_PRESSED PAD1 CROSS
-		IF button_pressed = 1
-			STOP_CREDITS
-		ENDIF
-	ELSE
-		button_pressed = 1
-	ENDIF
+			IF IS_BUTTON_PRESSED PAD1 CROSS
+				IF button_pressed = 1
+					STOP_CREDITS
+				ENDIF
+			ELSE
+				button_pressed = 1
+			ENDIF
 
-	IF credits_shot_counter = 0
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION 315.4413 -606.3295 10.9994 0.0 0.0 0.0//BASKETBALL COURTS
-			POINT_CAMERA_AT_POINT 315.8044 -605.4032 11.1004 JUMP_CUT
-			SET_TIME_OF_DAY 18 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 315.4413 -606.3295 10.9994 random_mafia
+			IF credits_shot_counter = 0
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION 315.4413 -606.3295 10.9994 0.0 0.0 0.0//BASKETBALL COURTS
+					POINT_CAMERA_AT_POINT 315.8044 -605.4032 11.1004 JUMP_CUT
+					SET_TIME_OF_DAY 18 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 315.4413 -606.3295 10.9994 random_mafia
 //			GET_GROUND_Z_FOR_3D_COORD 315.4413 -606.3295 10.9994 ground_z
 //			SET_PLAYER_COORDINATES player1 315.4413 -606.3295 10.9994
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 1
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 1
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 0
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 1
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 2
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 2
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 3
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION -57.0090 -1579.4728 11.6604 0.0 0.0 0.0//washington south daytime
-			POINT_CAMERA_AT_POINT -57.1214 -1578.4846 11.7650 JUMP_CUT
-			SET_TIME_OF_DAY 14 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 -57.0090 -1579.4728 11.6604 random_mafia
+			IF credits_shot_counter = 3
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION -57.0090 -1579.4728 11.6604 0.0 0.0 0.0//washington south daytime
+					POINT_CAMERA_AT_POINT -57.1214 -1578.4846 11.7650 JUMP_CUT
+					SET_TIME_OF_DAY 14 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 -57.0090 -1579.4728 11.6604 random_mafia
 //			SET_PLAYER_COORDINATES player1 -57.0090 -1579.4728 11.6604
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 1
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 4
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 0
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 4
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 5
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 5
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 6
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION -31.4477 -942.5128 11.2897 0.0 0.0 0.0//small mall
-			POINT_CAMERA_AT_POINT -30.4814 -942.2845 11.4088 JUMP_CUT
-			SET_TIME_OF_DAY 15 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 -31.4477 -942.5128 11.2897 random_mafia
+			IF credits_shot_counter = 6
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION -31.4477 -942.5128 11.2897 0.0 0.0 0.0//small mall
+					POINT_CAMERA_AT_POINT -30.4814 -942.2845 11.4088 JUMP_CUT
+					SET_TIME_OF_DAY 15 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 -31.4477 -942.5128 11.2897 random_mafia
 //			SET_PLAYER_COORDINATES player1 -31.4477 -942.5128 11.2897
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 1
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 7
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-			//flag_faded_out = 0
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 7
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 8
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 8
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 9
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION 527.1948 -1101.6581 12.3979 0.0 0.0 0.0//BEACH DAYTIME
-			POINT_CAMERA_AT_POINT 526.1959 -1101.6124 12.4088 JUMP_CUT
-			SET_TIME_OF_DAY 12 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 527.1948 -1101.6581 12.3979 random_mafia
+			IF credits_shot_counter = 9
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION 527.1948 -1101.6581 12.3979 0.0 0.0 0.0//BEACH DAYTIME
+					POINT_CAMERA_AT_POINT 526.1959 -1101.6124 12.4088 JUMP_CUT
+					SET_TIME_OF_DAY 12 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 527.1948 -1101.6581 12.3979 random_mafia
 //			SET_PLAYER_COORDINATES player1 527.1948 -1101.6581 12.3979
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 10
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 10
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 11
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 11
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 12
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION 329.8244 -1123.4187 29.4180 0.0 0.0 0.0//ocean drive nighttime
-			POINT_CAMERA_AT_POINT 329.5483 -1122.4576 29.4027 JUMP_CUT
-			SET_TIME_OF_DAY 02 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 329.8244 -1123.4187 29.4180 random_mafia
+			IF credits_shot_counter = 12
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION 329.8244 -1123.4187 29.4180 0.0 0.0 0.0//ocean drive nighttime
+					POINT_CAMERA_AT_POINT 329.5483 -1122.4576 29.4027 JUMP_CUT
+					SET_TIME_OF_DAY 02 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 329.8244 -1123.4187 29.4180 random_mafia
 //			SET_PLAYER_COORDINATES player1 329.8244 -1123.4187 29.4180
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 13
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 13
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 14
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 14
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 15
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION 420.3749 -179.7319 12.2077 0.0 0.0 0.0//RIVER MIDDAY
-			POINT_CAMERA_AT_POINT 420.3214 -178.7335 12.1930 JUMP_CUT
-			SET_TIME_OF_DAY 11 00
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 420.3749 -179.7319 12.2077 random_mafia
+			IF credits_shot_counter = 15
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION 420.3749 -179.7319 12.2077 0.0 0.0 0.0//RIVER MIDDAY
+					POINT_CAMERA_AT_POINT 420.3214 -178.7335 12.1930 JUMP_CUT
+					SET_TIME_OF_DAY 11 00
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 420.3749 -179.7319 12.2077 random_mafia
 //			SET_PLAYER_COORDINATES player1 420.3749 -179.7319 12.2077
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 16
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 16
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 17
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 17
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 18
-		IF credits_shot_timer < game_timer
-			SET_FIXED_CAMERA_POSITION -397.3825 22.9746 47.9553 0.0 0.0 0.0//RIVER MIDDAY
-			POINT_CAMERA_AT_POINT -396.5451 23.4814 47.7505 JUMP_CUT
-			SET_TIME_OF_DAY 05 45
-			DELETE_CHAR	random_mafia
-			CREATE_CHAR PEDTYPE_CIVMALE MALE01 -391.2471 26.5135 25.2721 random_mafia
+			IF credits_shot_counter = 18
+				IF credits_shot_timer < game_timer
+					SET_FIXED_CAMERA_POSITION -397.3825 22.9746 47.9553 0.0 0.0 0.0//RIVER MIDDAY
+					POINT_CAMERA_AT_POINT -396.5451 23.4814 47.7505 JUMP_CUT
+					SET_TIME_OF_DAY 05 45
+					DELETE_CHAR	random_mafia
+					CREATE_CHAR PEDTYPE_CIVMALE MALE01 -391.2471 26.5135 25.2721 random_mafia
 //			SET_PLAYER_COORDINATES player1 420.3749 -179.7319 12.2077
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 19
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_IN
-			credits_shot_timer = game_timer + 20000
-			++ credits_shot_counter
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 19
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_IN
+					credits_shot_timer = game_timer + 20000
+					++ credits_shot_counter
+				ENDIF
+			ENDIF
 
-	IF credits_shot_counter = 20
-		IF credits_shot_timer < game_timer
-			SET_FADING_COLOUR 0 0 1
-			DO_FADE 3000 FADE_OUT
-			credits_shot_timer = game_timer + 3500
-			credits_shot_counter = 21
-		ENDIF
-	ENDIF
+			IF credits_shot_counter = 20
+				IF credits_shot_timer < game_timer
+					SET_FADING_COLOUR 0 0 1
+					DO_FADE 3000 FADE_OUT
+					credits_shot_timer = game_timer + 3500
+					credits_shot_counter = 21
+				ENDIF
+			ENDIF
+		ENDWHILE
 
-
-ENDWHILE
-
-SET_MUSIC_DOES_FADE TRUE
+		SET_MUSIC_DOES_FADE TRUE
 //DO_FADE 1500 FADE_OUT
 //WAIT 1500
 //WHILE GET_FADING_STATUS
 //	WAIT 0
 //ENDWHILE
 
-STOP_END_OF_GAME_TUNE
-DELETE_CHAR	random_mafia
-SWITCH_WIDESCREEN OFF
-SET_GENERATE_CARS_AROUND_CAMERA FALSE
-RELEASE_WEATHER
+		STOP_END_OF_GAME_TUNE
+		DELETE_CHAR	random_mafia
+		SWITCH_WIDESCREEN OFF
+		SET_GENERATE_CARS_AROUND_CAMERA FALSE
+		RELEASE_WEATHER
 
-CLEAR_AREA -379.2 -536.4 16.2 1.0 TRUE
-SET_PLAYER_COORDINATES player1 -379.2 -536.4 16.2
-SET_PLAYER_HEADING player1 0.0
-SET_CAMERA_BEHIND_PLAYER
-SET_AREA_VISIBLE VIS_MAIN_MAP
-flag_player_in_mansion = 0
-SWITCH_RUBBISH ON
-CLEAR_EXTRA_COLOURS FALSE
-LOAD_SCENE -379.2 -536.4 16.2
-SET_FADING_COLOUR 0 0 1
-DO_FADE 1500 FADE_IN
-SET_PLAYER_CONTROL player1 ON
-SWITCH_WIDESCREEN OFF
-SET_EVERYONE_IGNORE_PLAYER player1 FALSE
-SET_ALL_CARS_CAN_BE_DAMAGED TRUE
-SET_CAMERA_BEHIND_PLAYER
-RESTORE_CAMERA_JUMPCUT
-SET_PED_DENSITY_MULTIPLIER 1.0
-CLEAR_AREA -354.419 -569.529 30.0 200.0 0 
+		CLEAR_AREA -379.2 -536.4 16.2 1.0 TRUE
+		SET_PLAYER_COORDINATES player1 -379.2 -536.4 16.2
+		SET_PLAYER_HEADING player1 0.0
+		SET_CAMERA_BEHIND_PLAYER
+		SET_AREA_VISIBLE VIS_MAIN_MAP
+		flag_player_in_mansion = 0
+		SWITCH_RUBBISH ON
+		CLEAR_EXTRA_COLOURS FALSE
+		LOAD_SCENE -379.2 -536.4 16.2
+		SET_FADING_COLOUR 0 0 1
+		DO_FADE 1500 FADE_IN
+		SET_PLAYER_CONTROL player1 ON
+		SWITCH_WIDESCREEN OFF
+		SET_EVERYONE_IGNORE_PLAYER player1 FALSE
+		SET_ALL_CARS_CAN_BE_DAMAGED TRUE
+		SET_CAMERA_BEHIND_PLAYER
+		RESTORE_CAMERA_JUMPCUT
+		SET_PED_DENSITY_MULTIPLIER 1.0
+		CLEAR_AREA -354.419 -569.529 30.0 200.0 0
 
-SET_PLAYER_MOOD player1 PLAYER_MOOD_CALM 60000
+		SET_PLAYER_MOOD player1 PLAYER_MOOD_CALM 60000
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-GOTO mission_finale2_passed
+		GOTO mission_finale2_passed
+	ENDIF
+ENDIF
+			//flag_faded_out = 1
+			//flag_faded_out = 0
+			//flag_faded_out = 1
+			//flag_faded_out = 0
+			//flag_faded_out = 1
+			//flag_faded_out = 0
+
+
 	
 //////////////////////////////////////////////////////////////////////////////////////////
 mission_finale2_failed:///////////////////////////////////////////////////////////////////

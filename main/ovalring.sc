@@ -1818,50 +1818,50 @@ IF do_winning_text_shite > 1
 		seconds = nascar_time - temp_int
 		IF seconds > 9
 			SET_TEXT_COLOUR	0 0 0 255
-			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 232.0 HOTR_15 mins seconds //Time: ~1~:~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 22.0 HOTR_15 mins seconds	//Time: ~1~:~1~
 			GOSUB setup_text_shite_hot
 			SET_TEXT_SCALE 0.8 2.0
-			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 230.0 HOTR_15 mins seconds //Time: ~1~:~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 20.0 HOTR_15 mins seconds	//Time: ~1~:~1~
 		ELSE
 			SET_TEXT_COLOUR	0 0 0 255
-			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 232.0 HOTR_16 mins seconds //Time: ~1~:0~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 22.0 HOTR_16 mins seconds	//Time: ~1~:0~1~
 			GOSUB setup_text_shite_hot
 			SET_TEXT_SCALE 0.8 2.0
-			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 230.0 HOTR_16 mins seconds //Time: ~1~:0~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 20.0 HOTR_16 mins seconds	//Time: ~1~:0~1~
 		ENDIF
 	ENDIF
 	
 	GOSUB setup_text_shite_hot
 	SET_TEXT_COLOUR	0 0 0 255
 	IF nascar_best_time = 999999
-		DISPLAY_TEXT 32.0 302.0 HOTR_19 //Best Time: N/A
+		DISPLAY_TEXT 32.0 82.0 HOTR_19	//Best Time: N/A
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 300.0 HOTR_19 //Best Time: N/A
+		DISPLAY_TEXT 30.0 80.0 HOTR_19	//Best Time: N/A
 	ELSE
 		mins = nascar_best_time / 60
 		temp_int = mins * 60
 		seconds = nascar_best_time - temp_int
 		IF nascar_best_time	> nascar_best_time_last
 			IF seconds > 9
-				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 302.0 HOTR_17 mins seconds //Best Time: ~1~:~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 82.0 HOTR_17 mins seconds	//Best Time: ~1~:~1~
 				GOSUB setup_text_shite_hot
-				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 300.0 HOTR_17 mins seconds //Best Time: ~1~:~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 80.0 HOTR_17 mins seconds	//Best Time: ~1~:~1~
 			ELSE
-				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 302.0 HOTR_18 mins seconds //Best Time: ~1~:0~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 82.0 HOTR_18 mins seconds	//Best Time: ~1~:0~1~
 				GOSUB setup_text_shite_hot
-				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 300.0 HOTR_18 mins seconds //Best Time: ~1~:0~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 80.0 HOTR_18 mins seconds	//Best Time: ~1~:0~1~
 			ENDIF
 		ELSE
 			IF seconds > 9
-				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 302.0 HOTR_20 mins seconds //NEW Best Time: ~1~:~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 82.0 HOTR_20 mins seconds	//NEW Best Time: ~1~:~1~
 				GOSUB setup_text_shite_hot
 				SET_TEXT_COLOUR 255 128 0 255
-				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 300.0 HOTR_20 mins seconds //NEW Best Time: ~1~:~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 80.0 HOTR_20 mins seconds	//NEW Best Time: ~1~:~1~
 			ELSE
-				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 302.0 HOTR_21 mins seconds //NEW Best Time: ~1~:0~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 32.0 82.0 HOTR_21 mins seconds	//NEW Best Time: ~1~:0~1~
 				GOSUB setup_text_shite_hot
 				SET_TEXT_COLOUR 255 128 0 255
-				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 300.0 HOTR_21 mins seconds //NEW Best Time: ~1~:0~1~
+				DISPLAY_TEXT_WITH_2_NUMBERS 30.0 80.0 HOTR_21 mins seconds	//NEW Best Time: ~1~:0~1~
 			ENDIF
 		ENDIF
 	ENDIF
@@ -1869,51 +1869,51 @@ IF do_winning_text_shite > 1
 	GOSUB setup_text_shite_hot
 	SET_TEXT_COLOUR	0 0 0 255
 	IF best_nascar_result = 999999
-		DISPLAY_TEXT 32.0 317.0 HOTR_22//Best Result: N/A
+		DISPLAY_TEXT 32.0 97.0 HOTR_22	//Best Result: N/A
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 315.0 HOTR_22//Best Result: N/A
+		DISPLAY_TEXT 30.0 95.0 HOTR_22	//Best Result: N/A
 	ENDIF
 	IF best_nascar_result = 1
-		DISPLAY_TEXT 32.0 317.0 HOTR_23//Best Result: 1ST
+		DISPLAY_TEXT 32.0 97.0 HOTR_23	//Best Result: 1ST
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 315.0 HOTR_23//Best Result: 1ST
+		DISPLAY_TEXT 30.0 95.0 HOTR_23	//Best Result: 1ST
 	ENDIF
 	IF best_nascar_result = 2
-		DISPLAY_TEXT 32.0 317.0 HOTR_24//Best Result: 2ND
+		DISPLAY_TEXT 32.0 97.0 HOTR_24	//Best Result: 2ND
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 315.0 HOTR_24//Best Result: 2ND
+		DISPLAY_TEXT 30.0 95.0 HOTR_24	//Best Result: 2ND
 	ENDIF
 	IF best_nascar_result = 3
-		DISPLAY_TEXT 32.0 317.0 HOTR_25//Best Result: 3RD
+		DISPLAY_TEXT 32.0 97.0 HOTR_25	//Best Result: 3RD
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 315.0 HOTR_25//Best Result: 3RD
+		DISPLAY_TEXT 30.0 95.0 HOTR_25	//Best Result: 3RD
 	ENDIF
 	IF best_nascar_result > 3
 	AND	best_nascar_result < 17
-		DISPLAY_TEXT_WITH_NUMBER 32.0 317.0 HOTR_26 best_nascar_result//Best Result: ~1~TH
+		DISPLAY_TEXT_WITH_NUMBER 32.0 97.0 HOTR_26 best_nascar_result	//Best Result: ~1~TH
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT_WITH_NUMBER 30.0 315.0 HOTR_26 best_nascar_result//Best Result: ~1~TH
+		DISPLAY_TEXT_WITH_NUMBER 30.0 95.0 HOTR_26 best_nascar_result	//Best Result: ~1~TH
 	ENDIF
 
 	GOSUB setup_text_shite_hot
 	SET_TEXT_COLOUR	0 0 0 255
 	IF nascar_best_lap_time = 999999
-		DISPLAY_TEXT 32.0 332.0 HOTR_33 //Best LAP Time: N/A
+		DISPLAY_TEXT 32.0 112.0 HOTR_33	//Best LAP Time: N/A
 		GOSUB setup_text_shite_hot
-		DISPLAY_TEXT 30.0 330.0 HOTR_33 //Best LAP Time: N/A
+		DISPLAY_TEXT 30.0 110.0 HOTR_33	//Best LAP Time: N/A
 	ELSE
 		seconds = nascar_best_lap_time / 1000
 		miliseconds = seconds * 1000
 		temp_int = nascar_best_lap_time - miliseconds
 		miliseconds = temp_int / 10
 		IF miliseconds > 9
-			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 332.0 HOTR_27 seconds miliseconds //Best LAP Time: ~1~:~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 112.0 HOTR_27 seconds miliseconds	//Best LAP Time: ~1~:~1~
 			GOSUB setup_text_shite_hot
-			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 330.0 HOTR_27 seconds miliseconds //Best LAP Time: ~1~:~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 110.0 HOTR_27 seconds miliseconds	//Best LAP Time: ~1~:~1~
 		ELSE
-			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 332.0 HOTR_28 seconds miliseconds //Best LAP Time: ~1~:0~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 32.0 112.0 HOTR_28 seconds miliseconds	//Best LAP Time: ~1~:0~1~
 			GOSUB setup_text_shite_hot
-			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 330.0 HOTR_28 seconds miliseconds //Best LAP Time: ~1~:0~1~
+			DISPLAY_TEXT_WITH_2_NUMBERS 30.0 110.0 HOTR_28 seconds miliseconds	//Best LAP Time: ~1~:0~1~
 		ENDIF
 	ENDIF
 ENDIF

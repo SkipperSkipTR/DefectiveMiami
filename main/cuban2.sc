@@ -610,6 +610,7 @@ IF NOT IS_CAR_DEAD cuban_carry_car
 ENDIF
 
 WAIT 500
+CLEAR_AREA -1175.9 -608.1 11.4 5.0 TRUE
 
 // ****************************************START OF CUTSCENE -getting cubans into car********************************
 SET_PLAYER_CONTROL player1 OFF
@@ -2630,7 +2631,7 @@ IF number_of_haitians_dead < 12  // GS-SC: Don't indefinitely spawn enemies
 	ELSE
 		IF NOT haitians_doubled_flag = 0
 			//SET_CHAR_STOP_SHOOT_DONT_SEEK_ENTITY haitian_defender3 FALSE
-			SET_CHAR_OBJ_RUN_TO_COORD haitian_defender3 -1173.1 79.6 
+			SET_CHAR_OBJ_RUN_TO_COORD haitian_defender3 -1171.9 80.8
 			SET_CHAR_ACCURACY haitian_defender3 50 
 		ENDIF
 	ENDIF
@@ -2684,7 +2685,7 @@ IF number_of_haitians_dead < 12  // GS-SC: Don't indefinitely spawn enemies
 	ELSE
 		IF NOT haitians_doubled_flag = 0
 			//SET_CHAR_STOP_SHOOT_DONT_SEEK_ENTITY haitian_defender5 FALSE
-			SET_CHAR_OBJ_RUN_TO_COORD haitian_defender5 -1172.6 91.6 
+			SET_CHAR_OBJ_RUN_TO_COORD haitian_defender5 -1171.1 90.1
 		ENDIF
 	ENDIF
 

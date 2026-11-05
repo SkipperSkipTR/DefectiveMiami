@@ -481,7 +481,12 @@ IF NOT IS_CAR_DEAD dildodo
 	IF IS_PLAYER_IN_CAR player1 dildodo
 		IF plane_help_done = 0
 			
-			PRINT_HELP ( PLANE_H ) //plane help text
+			GET_CONTROLLER_MODE control_result
+			IF control_result = 13
+				PRINT_HELP ( PLANEHA )
+			ELSE
+				PRINT_HELP ( PLANE_H ) //plane help text
+			ENDIF
 
 			plane_help_done = 1	
 		ENDIF

@@ -34,7 +34,8 @@ VAR_FLOAT random_x random_y	hospital_x hospital_y hospital_z
 VAR_FLOAT player1_a_x	player1_a_y player1_a_z	hospital_door_x	hospital_door_y
 VAR_FLOAT ped_coord_x ped_coord_y	ped_coord_z	sound_x sound_y sound_z
 VAR_FLOAT difference_x_float_a difference_y_float_a	sum_difference_a_xy	
-VAR_FLOAT players_distance_from_ped peds_distance_from_hospital ped_time_limit_float random_ped_heading	time_chunk_divider
+VAR_FLOAT players_distance_from_ped peds_distance_from_hospital ped_time_limit_float random_ped_heading time_chunk_divider
+VAR_INT injured_peds_diff
 
 
 // ****************************************Mission Start************************************
@@ -97,7 +98,8 @@ saved_peds_this_go = 0
 player_failed_mission = 0
 ped_coord_x = 0.0
 ped_coord_y = 0.0
-ped_coord_z = 0.0
+ped_coord_z = 0.001
+injured_peds_diff = 0
 
 PRINT_NOW ATUTOR2 3000 1 // Take the injured people to the Hospital
 
@@ -1163,6 +1165,13 @@ injured_ped_checks:
 	IF ped_var_for_gosub_flag = 3
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player1 hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
 			SET_CHAR_OBJ_RUN_TO_COORD ped_var_for_gosub hospital_door_x hospital_door_y
+			injured_peds_diff = number_of_injured_peds
+			-- injured_peds_diff
+			IF saved_peds = injured_peds_diff
+			AND ambulance_level = 12
+				CLEAR_ONSCREEN_TIMER ped_time_limit
+				ped_time_limit += 100000
+			ENDIF
 			ped_var_for_gosub_flag = 4
 		ENDIF	
 	ENDIF

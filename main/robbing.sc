@@ -698,7 +698,6 @@ cleanup_shop_robbing:
 	create_shop_keeper2 = 0
 	create_shop_keeper3 = 0
 	shop_bloke_hide = 0
-	shop_alarm_played = 0
 	robbed_money1_created = 0
 	robbed_money2_created = 0
 	robbed_money3_created = 0
@@ -709,7 +708,10 @@ cleanup_shop_robbing:
 	REMOVE_PICKUP robbed_money4
 	UNLOAD_SPECIAL_CHARACTER 16
 	DELETE_CHAR	shop_bloke1
-	REMOVE_SOUND shop_alarm
+	IF shop_alarm_played = 1
+		shop_alarm_played = 0
+		REMOVE_SOUND shop_alarm
+	ENDIF
 
 	IF NOT IS_PLAYER_PLAYING player1
 		time_since_murdering_shopkeeper3 = -60000
